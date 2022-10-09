@@ -13,6 +13,10 @@ import { store } from "./redux/configStore";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./assets/scss/styles.scss";
 import Index from "./pages/Index/Index";
+import UserTemplate from "./templates/User/UserTemplate";
+import JobDetail from "./pages/JobDetail/JobDetail";
+import JobTitle from "./pages/JobTitle/JobTitle";
+import HomeTemplate from "./templates/Home/HomeTemplate";
 //
 
 const root = ReactDOM.createRoot(
@@ -22,11 +26,20 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<Index />}>
+        <Route path="" element={<HomeTemplate />}>
           <Route index element={<Index />} />
-
-          <Route path="*" element={<Navigate to="" />} />
+          <Route path="home" element={<Index />} />
+          <Route path="detail" element={<JobDetail />} />
+          <Route path="title" element={<JobTitle />} />
         </Route>
+
+        {/* <Route path="job" element={<UserTemplate />}>
+          
+          <Route path="detail" element={<JobDetail />} />
+          <Route path="title" element={<JobTitle />} />
+        </Route> */}
+
+        <Route path="*" element={<Navigate to="" />} />
       </Routes>
     </BrowserRouter>
   </Provider>
