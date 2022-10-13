@@ -17,6 +17,7 @@ import UserTemplate from "./templates/User/UserTemplate";
 import JobDetail from "./pages/JobDetail/JobDetail";
 import JobTitle from "./pages/JobTitle/JobTitle";
 import HomeTemplate from "./templates/Home/HomeTemplate";
+import Login from "./pages/Login/Login";
 //
 
 const root = ReactDOM.createRoot(
@@ -31,6 +32,7 @@ root.render(
           <Route path="home" element={<Index />} />
           <Route path="detail" element={<JobDetail />} />
           <Route path="title" element={<JobTitle />} />
+          <Route path="login" element={<Login/>} />
         </Route>
 
         {/* <Route path="job" element={<UserTemplate />}>
