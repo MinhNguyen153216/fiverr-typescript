@@ -1,29 +1,32 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 export default function Login({}: Props) {
+
+  const handleSubmit =(e:any)=>{
+    e.preventDefault()
+    
+  }
+
+
   return (
-    <div className='container'>
-      <div>
-      
-          <h3>Sign In to Fiverr</h3>
-          <form className='form-group'>
-            <div className="form-control">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" id="email" />
-            </div>
-            <div className="form-control">
-              <label htmlFor="password">Password</label>
-              <input type="password" name="password" id="password" />
-            </div>
-            <div className="form-control">
-              <button>Register</button>
-              <button>Sign in</button>
-            </div>
-          </form>
-       
-      </div>
+    <div className="login-content ">
+      <form className="form-group " onSubmit={handleSubmit}>
+        <h3>Sign In to Fiverr</h3>
+        <div className="form-input mb-3">
+          <p>Email</p>
+          <input type="email" name="email" id="email" placeholder="Email" />
+        </div>
+        <div className="form-input">
+          <p>Password</p>
+          <input type="password" name="password" id="password" placeholder="Password"/>
+        </div>
+        <div className="form-button">
+          <button>Register</button>
+          <button type="submit">Sign in</button>
+        </div>
+      </form>
     </div>
-  )
+  );
 }

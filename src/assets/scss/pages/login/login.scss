@@ -1,2 +1,54 @@
 @import "../../base/base";
 @import "../../themes/variables";
+
+
+.login-content{   
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 50px ;
+    .form-group{
+    // text-align: center;
+    width: 30vw;
+    background-color: #fff;
+    padding: 50px 100px ;
+        h3{
+            text-align: center;
+            color: #404145;
+            font-size: 24px;
+
+        }
+       .form-input{
+        p{
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        input{
+            width: 100%;
+            border: 1px solid #c5c6c9;
+            border-radius: 4px;
+            padding: 8px 12px;
+            &:focus{
+                outline: none;
+            }
+        }
+       }
+       .form-button{
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+        button{
+            padding: 10px 60px;
+            border: none;
+            border-radius: 5%;
+            color: white;
+            background-color: #1dbf73;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+
+        }
+       }
+    }
+}
