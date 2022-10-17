@@ -32,17 +32,17 @@ export default userReducer.reducer
 //action Api
 
 
-export const loginApi = ()=>{
+export const loginApi = (values:any)=>{
     return async (dispatch:AppDispatch)=>{
         try{
-            const result = await http.post('/auth/signin')
+            const result = await http.post('/auth/signin',values)
             console.log(result);
             setCookie(ACCESS_TOKEN,result.data.content.accessToken,30)
             setStore(ACCESS_TOKEN,result.data.content.accessToken)
-            
+            alert('Đăng nhập thành công')  
         }
-        catch(err){
-        alert('Đăng nhập thất bại')
+        catch(err:any){
+        alert('Đăng nhập thất bại vui lòng thử lại !')
         }
     }
 }
