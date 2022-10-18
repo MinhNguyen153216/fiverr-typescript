@@ -19,6 +19,10 @@ import JobTitle from "./pages/JobTitle/JobTitle";
 import HomeTemplate from "./templates/Home/HomeTemplate";
 import Login from "./pages/Login/Login";
 import AdminTemplate from "./templates/Admin/AdminTemplate";
+import AdminService from "./pages/Admin/AdminService/AdminService";
+import AdminTask from "./pages/Admin/AdminTask/AdminTask";
+import AdminTaskType from "./pages/Admin/AdminTaskType/AdminTaskType";
+import AdminUser from "./pages/Admin/AdminUser/AdminUser";
 //
 
 const root = ReactDOM.createRoot(
@@ -35,10 +39,16 @@ root.render(
           <Route path="title" element={<JobTitle />} />
           <Route path="login" element={<Login/>} />
         </Route>
-        <Route path="admin" element={<AdminTemplate/>}>
+        <Route path="admin" element={<AdminTemplate/>}/>
+        <Route path="adminuser" element={<AdminUser/>}/> 
+        <Route path="admintask" element={<AdminTask/>}/>
+        <Route path="admintasktype" element={<AdminTaskType/>}/>
+        <Route path="adminservice" element={<AdminService/>}/>
 
-        </Route>
+       
+        
 
+      
         {/* <Route path="job" element={<UserTemplate />}>
           
           <Route path="detail" element={<JobDetail />} />
