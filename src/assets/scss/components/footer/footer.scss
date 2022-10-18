@@ -58,12 +58,43 @@
             border: 1px solid black;
             position: relative;
             top: -6px;
-            svg{
+            svg {
               position: absolute;
               top: 3px;
               left: 50%;
               transform: translateX(-50%);
               padding: 0;
+            }
+          }
+        }
+        @media screen and (max-width: 576px) {
+          display: block !important;
+          text-align: center;
+          .p-2 {
+            display: block !important;
+            svg {
+              padding-left: 12px;
+              padding-right: 12px;
+            }
+            span {
+              display: block;
+              margin-top: 10px;
+            }
+            .setting {
+              margin-top: 15px;
+              display: block !important;
+              .align-top {
+                margin: 0;
+                vertical-align: 15px !important;
+                display: inline-block;
+              }
+              .align-middle {
+                vertical-align: 15px !important;
+                display: inline-block;
+              }
+              span {
+                display: inline-block;
+              }
             }
           }
         }
