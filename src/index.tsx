@@ -25,6 +25,7 @@ import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Result from "./pages/Result/Result";
+import UserDetail from "./pages/UserDetail/UserDetail";
 //
 
 export const history = createBrowserHistory({ window });
@@ -57,6 +58,7 @@ root.render(
 
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path="userdetail" element={<UserDetail />} />
         </Route>
 
         {/* Admin Route */}

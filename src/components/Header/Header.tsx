@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -11,12 +11,16 @@ import {
   DsNhomChiTietLoai,
   DsChiTietLoai,
 } from "../../redux/models/congViecModel";
+import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
 library.add(fas);
 
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
 type Props = {};
 
 export default function Header({}: Props) {
+  const { userLogin } = useSelector(
+    (state: RootState) => state.nguoiDungReducer
+  );
   const { menuCongViec } = useSelector(
     (state: RootState) => state.congViecReducer
   );
@@ -62,12 +66,50 @@ export default function Header({}: Props) {
     });
   };
 
+  const renderLogin = () => {
+    if (!userLogin) {
+      return (
+        <>
+          <li className="nav-item">
+            <NavLink className="nav-link" to={"/register"}>
+              Sign In
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to={"/login"}>
+              <button className="btn btn-outline-success">Join</button>
+            </NavLink>
+          </li>
+        </>
+      );
+    }
+    return (
+      <>
+        <li className="nav-item">
+          <NavLink className="nav-link" to={"/userdetail"}>
+            {userLogin.name}
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to={""} onClick={handleLogout}>
+            <button className="btn btn-outline-success">LogOut</button>
+          </NavLink>
+        </li>
+      </>
+    );
+  };
+
   const handleSearch = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const value: string | undefined = document.querySelector<HTMLInputElement>(
       'input[name="searchInput"]'
     )?.value;
     console.log(value);
+  };
+
+  const handleLogout = () => {
+    console.log("logout");
+    dispatch(logOutUserAction(userLogin));
   };
   return (
     <>
@@ -130,16 +172,7 @@ export default function Header({}: Props) {
                       Become a Seller
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to={"/register"}>
-                      Sign In
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink to={"/login"}>
-                      <button className="btn btn-outline-success">Join</button>
-                    </NavLink>
-                  </li>
+                  <>{renderLogin()}</>
                 </ul>
               </div>
             </div>

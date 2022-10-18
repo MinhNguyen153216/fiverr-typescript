@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import congViecReducer from "./reducers/congViecReducer";
+import nguoiDungReducer from "./reducers/nguoiDungReducer";
 
 export const store = configureStore({
   reducer: {
     congViecReducer: congViecReducer,
+    nguoiDungReducer: nguoiDungReducer,
   },
 });
 
