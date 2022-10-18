@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import congViecReducer from "./reducers/congViecReducer";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    congViecReducer: congViecReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

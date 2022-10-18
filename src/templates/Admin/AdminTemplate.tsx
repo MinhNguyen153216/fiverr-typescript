@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {
+  title?: string;
+};
 
-export default function AdminTemplate({}: Props) {
+export default function AdminTemplate({ title }: Props) {
   return (
-    <div>AdminTemplate</div>
-  )
+    <div className="container">
+      <h3>AdminTemplate</h3>
+    </div>
+  );
 }
