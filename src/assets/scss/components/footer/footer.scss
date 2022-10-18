@@ -67,7 +67,10 @@
             }
           }
         }
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 991px) {
+          display: block !important;
+        }
+        @media screen and (max-width: 576px) {
           display: block !important;
           text-align: center;
           .p-2 {
