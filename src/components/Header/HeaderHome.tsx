@@ -4,6 +4,12 @@ type Props = {}
 
 export default function HeaderHome({}: Props) {
   return (
-    <div>HeaderHome</div>
+    <>
+      <section className='headerHome'>
+        <div className="container">
+          asd
+        </div>
+      </section>
+    </>
   )
 }
