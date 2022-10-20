@@ -1,10 +1,14 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-type Props = {}
+type Props = {};
 
 export default function Index({}: Props) {
   return (
-    <><NavLink to={"/detail/1"}>detail1</NavLink></>
-  )
+    <>
+      <div className="index">
+        <NavLink to={"/detail/1"}>detail1</NavLink>
+      </div>
+    </>
+  );
 }
