@@ -37,41 +37,31 @@
     flex-direction: row;
     align-items: center;
     .sidebarNav {
-      width: 25vw;
+      // width: 25vw;
       height: 100%;
       background-color: #1dbf72;
       transition: all 0.2s;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      // align-items: center;
 
-      // .closesidebar{
-      //     font-size: 25px;
-      //     color: black;
-      //    position: relative;
-      //    margin-top: 7%;
-      //    &:hover{
-      //     cursor: pointer;
-      //    }
-
-      //    i{
-      //     position: absolute;
-      //     top: 2%;
-      //     left: 30%;
-      //     width: 100%;
-      //    }
-      //     // padding-top: 25%;
-
-      //     margin-bottom: 20%;
-      // }
+      
       .menu {
         .menuItem {
+          padding: 0 5%;
           display: flex;
           flex-direction: row;
           align-items: center;
           height: 70px;
           justify-content: flex-start;
           align-items: center;
+          width: 100%;
+          &:hover {
+            background-color: #188652;
+            cursor: pointer;
+            border-left:3px solid #fff ;
+          }
+
           .icon {
             font-size: 20px;
             color: #fff;
@@ -85,18 +75,17 @@
         }
       }
     }
-    .adminuser {
-        width: 85vw;
-        height: 100%;
+    .admindata {
+      width: 85vw;
+      height: 100%;
       margin: 3% auto;
-      
+
       display: flex;
       flex-direction: row;
-    justify-content: center;
+      justify-content: center;
       table {
         width: 80%;
-        tr {
-        }
+        
       }
     }
   }

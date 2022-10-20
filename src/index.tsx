@@ -45,10 +45,6 @@ root.render(
         <Route path="admintasktype" element={<AdminTaskType/>}/>
         <Route path="adminservice" element={<AdminService/>}/>
 
-       
-        
-
-      
         {/* <Route path="job" element={<UserTemplate />}>
           
           <Route path="detail" element={<JobDetail />} />
