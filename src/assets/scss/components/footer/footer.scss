@@ -1,2 +1,107 @@
 @import "../../base/base";
 @import "../../themes/variables";
+
+.footer {
+  border-top: 1px solid #e4e5e7;
+  .container {
+    .top-footer {
+      .row {
+        .col {
+          .section {
+            @include text-config(600, 16px, 1.2, #404145);
+            margin-bottom: 20px;
+          }
+          .list {
+            @include text-config(500, 16px, 1.2, #74767e);
+            margin-bottom: 16px;
+            span {
+              @include text-config(500, 14px, 1.2, #b5b6ba);
+            }
+          }
+        }
+      }
+    }
+    .bottom-footer {
+      border-top: 1px solid #e4e5e7;
+      .container {
+        img {
+          width: 78px;
+          height: 22px;
+        }
+        span {
+          padding-left: 24px;
+          @include text-config(500, 14px, 1.2, #b5b6ba);
+        }
+        svg {
+          color: #74767e;
+          width: 20px;
+          height: 20px;
+          padding-right: 24px;
+        }
+        .setting {
+          p {
+            padding: 0 12px;
+            svg {
+              width: 16px;
+              height: 16px;
+              padding: 0;
+              padding-right: 8px;
+            }
+            font-weight: 600;
+            color: #74767e;
+            font-size: 14px;
+          }
+          span {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid black;
+            position: relative;
+            top: -6px;
+            svg {
+              position: absolute;
+              top: 3px;
+              left: 50%;
+              transform: translateX(-50%);
+              padding: 0;
+            }
+          }
+        }
+        @media screen and (max-width: 991px) {
+          display: block !important;
+        }
+        @media screen and (max-width: 576px) {
+          display: block !important;
+          text-align: center;
+          .p-2 {
+            display: block !important;
+            svg {
+              padding-left: 12px;
+              padding-right: 12px;
+            }
+            span {
+              display: block;
+              margin-top: 10px;
+            }
+            .setting {
+              margin-top: 15px;
+              display: block !important;
+              .align-top {
+                margin: 0;
+                vertical-align: 15px !important;
+                display: inline-block;
+              }
+              .align-middle {
+                vertical-align: 15px !important;
+                display: inline-block;
+              }
+              span {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

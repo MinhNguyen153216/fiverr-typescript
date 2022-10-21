@@ -8,6 +8,8 @@ import {
   NavLink,
   Outlet,
 } from "react-router-dom";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import { Provider } from "react-redux";
 import { store } from "./redux/configStore";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
@@ -17,43 +19,64 @@ import UserTemplate from "./templates/User/UserTemplate";
 import JobDetail from "./pages/JobDetail/JobDetail";
 import JobTitle from "./pages/JobTitle/JobTitle";
 import HomeTemplate from "./templates/Home/HomeTemplate";
-import Login from "./pages/Login/Login";
 import AdminTemplate from "./templates/Admin/AdminTemplate";
-import AdminService from "./pages/Admin/AdminService/AdminService";
-import AdminTask from "./pages/Admin/AdminTask/AdminTask";
-import AdminTaskType from "./pages/Admin/AdminTaskType/AdminTaskType";
-import AdminUser from "./pages/Admin/AdminUser/AdminUser";
+import ResponsiveItem from "./HOC/Responsive/ResponsiveItem";
+import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import Result from "./pages/Result/Result";
+import UserDetail from "./pages/UserDetail/UserDetail";
 //
 
+export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Routes>
+        {/* User Route */}
         <Route path="" element={<HomeTemplate />}>
           <Route index element={<Index />} />
           <Route path="home" element={<Index />} />
-          <Route path="detail" element={<JobDetail />} />
-          <Route path="title" element={<JobTitle />} />
-          <Route path="login" element={<Login/>} />
+
+          {/* <Route path="detail" element={<JobDetail />} /> */}
+          <Route path="detail">
+            <Route path=":id" element={<JobDetail />} />
+          </Route>
+
+          {/* <Route path="title" element={<JobTitle />} /> */}
+          <Route path="title">
+            <Route path=":id" element={<JobTitle />} />
+          </Route>
+
+          <Route path="result" element={<Result />} />
+          <Route path="result">
+            <Route path=":id" element={<Result />} />
+          </Route>
+
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="userdetail" element={<UserDetail />} />
         </Route>
-        <Route path="admin" element={<AdminTemplate/>}/>
-        <Route path="adminuser" element={<AdminUser/>}/> 
-        <Route path="admintask" element={<AdminTask/>}/>
-        <Route path="admintasktype" element={<AdminTaskType/>}/>
-        <Route path="adminservice" element={<AdminService/>}/>
+       
 
-        {/* <Route path="job" element={<UserTemplate />}>
-          
-          <Route path="detail" element={<JobDetail />} />
-          <Route path="title" element={<JobTitle />} />
-        </Route> */}
+        {/* Admin Route */}
+        <Route
+          path="admin"
+          element={
+            <ResponsiveItem
+              Component={AdminTemplate}
+              ComponentMobile={AdminTemplateMobile}
+            />
+          }
+        ></Route>
 
-        <Route path="*" element={<Navigate to="" />} />
+        {/* 404 Route */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   </Provider>
 );
 

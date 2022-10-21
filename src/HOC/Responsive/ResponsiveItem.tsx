@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 type Props = {
   Component: React.FC;
   ComponentMobile?: React.FC;
-  ComponentJSX?: JSX.Element;
+  // ComponentJSX?: JSX.Element;
 };
 
 type Screen = {
@@ -11,16 +11,12 @@ type Screen = {
   height: number;
 };
 
-export default function ResponsiveItem({
-  Component,
-  ComponentMobile,
-  ComponentJSX,
-}: Props) {
+export default function ResponsiveItem({ Component, ComponentMobile }: Props) {
   const [screen, setScreen] = useState<Screen>({
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  
+
   useEffect(() => {
     //khi người dùng resize
     let resizeFunction = () => {
