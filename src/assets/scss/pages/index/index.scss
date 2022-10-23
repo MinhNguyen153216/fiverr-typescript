@@ -130,7 +130,7 @@
 }
 
 .professional {
-  background-color: green;
+  padding-bottom: 100px;
   .container {
     justify-content: center;
     h1 {
@@ -138,7 +138,7 @@
       margin-bottom: 24px;
     }
     .row {
-      //   margin-right: -25px;
+      position: relative;
       .col {
         .item {
           display: flex;
@@ -151,39 +151,75 @@
           }
         }
       }
-      //   @media screen and(max-width: 1060px) {
-      //     margin-right: -70px;
-      //   }
-      //   @media screen and(max-width: 1060px) {
-      //     margin-right: -70px;
-      //   }
+      @media screen and (max-width: 600px) {
+        --bs-gutter-x: 0;
+      }
     }
   }
 }
 
-.slick-prev-custom {
+.slick-prev {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 2;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+  border-radius: 50%;
   &::before {
     content: "";
     display: inline-block;
-    border-radius: 24px;
     background-color: white;
+    color: #808080;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #808080;
+    border-radius: 24px;
     font-size: 24px;
     width: 48px;
     height: 48px;
-    transform: translateY(-50%);
   }
-}
-.slick-prev {
-  left: -30px;
   &:hover {
     background: none;
   }
+  @media screen and (max-width: 600px) {
+    left: 10%;
+  }
 }
+
+.slick-next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 2;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+  border-radius: 50%;
+  &::before {
+    content: "";
+    display: inline-block;
+    background-color: white;
+    color: #808080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    font-size: 24px;
+    width: 48px;
+    height: 48px;
+  }
+  &:hover {
+    background: none;
+  }
+  @media screen and (max-width: 600px) {
+    right: 10%;
+  }
+}
+
 .arrow {
+  position: absolute;
+  top: 40%;
+  left: 40%;
   border: solid black;
   border-width: 0 3px 3px 0;
   display: inline-block;
@@ -192,4 +228,8 @@
 .right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+}
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }

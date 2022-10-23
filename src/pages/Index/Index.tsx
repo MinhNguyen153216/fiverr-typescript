@@ -21,10 +21,12 @@ const NextArrow = (props: any) => {
   const { className, style, onClick } = props;
   return (
     <div
-      className={className}
-      style={{ ...style, display: "block"}}
+      className={`${className}`}
+      style={{ ...style,}}
       onClick={onClick}
-    />
+    >
+      <div className="arrow right"></div>
+    </div>
   );
 };
 
@@ -32,11 +34,11 @@ const PrevArrow = (props: any) => {
   const { className, style, onClick } = props;
   return (
     <div
-      className={`${className} slick-prev-custom`}
-      style={{ ...style, display: "block"}}
+      className={`${className}`}
+      style={{ ...style,}}
       onClick={onClick}
     >
-      <i className="arrow right"></i>
+      <div className="arrow left"></div>
     </div>
   );
 };
