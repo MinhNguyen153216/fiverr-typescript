@@ -28,6 +28,7 @@ import Result from "./pages/Result/Result";
 import UserDetail from "./pages/UserDetail/UserDetail";
 //
 
+
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
