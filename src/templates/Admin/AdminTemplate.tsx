@@ -9,7 +9,7 @@ type Props = {};
 
 export default function AdminTemplate({}: Props) {
   const [sidebar, setSidebar] = useState(false);
-  const [active,setActive] = useState(false)
+  const [active, setActive] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const navigate = useNavigate();
 
@@ -52,73 +52,83 @@ export default function AdminTemplate({}: Props) {
 
   return (
     <>
-    <div className="admin-page ">
-      <div className="top ">
-        <div className="nav-left">
-          <h3>Dashboard</h3>
-          <div className="opensidebar" onClick={showSidebar}>
-            <i className="fa-solid fa-bars"></i>
+      <div className="admin-page ">
+        <div className="top ">
+          <div className="nav-left">
+            <h3>Dashboard</h3>
+            <div className="opensidebar" onClick={showSidebar}>
+              <i className="fa-solid fa-bars"></i>
+            </div>
           </div>
-        </div>
-        <div className="nav-right ">
-          <div className="face">
-          <span>Admin</span>
-          <img src="https://i.pravatar.cc/50" alt="avatar" />
-          </div>
-          <div className="arrow">
-          <i className="fa-solid fa-caret-down fs-2 text-white" ></i>
-          <div className="status ">
-            <p>Cập nhật thông tin</p>
-            <p>Đăng xuất</p>
-          </div>
+          <div className="nav-right ">
+            <div className="face">
+              <span>Admin</span>
+              <img src="https://i.pravatar.cc/50" alt="avatar" />
+            </div>
+            <div
+              className="showlogout"
+             
+            >
+              <div className="arrow"  onClick={() => {
+                setActive(!active);
+              }}>
+                <i className="fa-solid fa-caret-down fs-2 text-white"></i>
+              </div>
 
+              {active ? (
+                <div className="status ">
+                  <p>Cập nhật thông tin</p>
+                  <p>Đăng xuất</p>
+                </div>
+              ) : (
+                null
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bottom">
-        <div
-          className="sidebarNav"
-          style={sidebar ? { width: "14%" } : { width: "5%" }}
-        >
-          {/* <div className="closesidebar"  onClick={showSidebar}>
+        <div className="bottom">
+          <div
+            className="sidebarNav"
+            style={sidebar ? { width: "14%" } : { width: "5%" }}
+          >
+            {/* <div className="closesidebar"  onClick={showSidebar}>
           <i className="fa-solid fa-xmark"></i>
         </div> */}
-          <div className="menu">
-            {menuItem.map((item, index) => {
-              return (
-                <div key={index}>
-                  <div
-                    className="menuItem"
-                    onClick={() => {
-                      navigate(`${item.path}`);
-                    }}
-                  >
-                    <span
-                      className="icon"
-                      style={sidebar ? { margin: "" } : { margin: "0 auto" }}
+            <div className="menu">
+              {menuItem.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <div
+                      className="menuItem"
+                      onClick={() => {
+                        navigate(`${item.path}`);
+                      }}
                     >
-                      {item.icon}
-                    </span>
-                    <span
-                      className="link_text"
-                      style={
-                        sidebar ? { display: "block" } : { display: "none" }
-                      }
-                    >
-                      {item.title}
-                    </span>
+                      <span
+                        className="icon"
+                        style={sidebar ? { margin: "" } : { margin: "0 auto" }}
+                      >
+                        {item.icon}
+                      </span>
+                      <span
+                        className="link_text"
+                        style={
+                          sidebar ? { display: "block" } : { display: "none" }
+                        }
+                      >
+                        {item.title}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+          </div>
+          <div className="admindata">
+            <Outlet />
           </div>
         </div>
-        <div className="admindata">
-        <Outlet/>
-        </div>
-
       </div>
-    </div>
     </>
   );
 }
