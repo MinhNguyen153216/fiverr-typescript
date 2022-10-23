@@ -102,7 +102,7 @@ export default function Index({}: Props) {
   return (
     <>
       <section className="carousel">
-        <Carousel fade>
+        <Carousel autoplay fade>
           <div>
             <div className="carousel1" style={contentStyle}>
               <div className="row">
@@ -220,26 +220,46 @@ export default function Index({}: Props) {
               <div className="col">
                 <div className="item">
                   <img src="./img/logo-design-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Build your brand</p>
+                    <h3>Logo Design</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/wordpress-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Customize your site</p>
+                    <h3>WordPress</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/voiceover-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Share your message</p>
+                    <h3>Voice Over</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/animated-explainer-2x.jfif" alt="" />
+                  <div className="label">
+                    <p>Engage your audience</p>
+                    <h3>Video Explainer</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/social-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Reach more customers</p>
+                    <h3>Social Media</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">

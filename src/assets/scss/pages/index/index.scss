@@ -57,7 +57,24 @@
               color: black;
             }
           }
+          @media screen and(max-width:767px) {
+            flex-wrap: wrap;
+            justify-content: center;
+            .btn {
+              margin-bottom: 10px;
+            }
+          }
         }
+        @media screen and(max-width:767px) {
+          max-width: 90%;
+        }
+      }
+      @media screen and(max-width:767px) {
+        margin-right: 15px;
+        margin-left: 15px;
+      }
+      @media screen and(max-width:576px) {
+        width: 90%;
       }
     }
   }
@@ -66,30 +83,45 @@
     background-image: url("../../../../../public/img/bg-hero-1.webp");
     background-position: 50% 100%;
     background-repeat: no-repeat;
+    @media screen and (max-width: 768px) {
+      background-position: 75% 100%;
+    }
   }
   .carousel2 {
     background-color: #023a15;
     background-image: url("../../../../../public/img/bg-hero-2.webp");
     background-position: 50% 100%;
     background-repeat: no-repeat;
+    @media screen and (max-width: 768px) {
+      background-position: 75% 100%;
+    }
   }
   .carousel3 {
     background-color: #540e1f;
     background-image: url("../../../../../public/img/bg-hero-3.webp");
     background-position: 50% 100%;
     background-repeat: no-repeat;
+    @media screen and (max-width: 768px) {
+      background-position: 75% 100%;
+    }
   }
   .carousel4 {
     background-color: #b54660;
     background-image: url("../../../../../public/img/bg-hero-4.webp");
     background-position: 50% 100%;
     background-repeat: no-repeat;
+    @media screen and (max-width: 768px) {
+      background-position: 75% 100%;
+    }
   }
   .carousel5 {
     background-color: #003a15;
     background-image: url("../../../../../public/img/bg-hero-5.webp");
     background-position: 50% 100%;
     background-repeat: no-repeat;
+    @media screen and (max-width: 768px) {
+      background-position: 75% 100%;
+    }
   }
   .row {
     height: 100%;
@@ -138,21 +170,53 @@
       margin-bottom: 24px;
     }
     .row {
+      margin-left: -22px;
+      margin-right: -22px;
       position: relative;
       .col {
         .item {
           display: flex;
           justify-content: center;
-
           height: 345px;
           margin: 0;
+          position: relative;
           img {
             max-width: 100%;
           }
+          .label {
+            position: absolute;
+            top: 0;
+            left: 5%;
+            width: 100%;
+            margin: 16px 16px;
+            p {
+              @include text-config(500, 14px, 1.2, white);
+              margin: 0;
+            }
+            h3 {
+              @include text-config(600, 24px, 1.2, white);
+            }
+            @media screen and (max-width: 1200px) {
+              left: 15%;
+            }
+            @media screen and (max-width: 768px) {
+              left: 5%;
+            }
+            @media screen and (max-width: 600px) {
+              left: 30%;
+            }
+          }
         }
+      }
+      @media screen and (max-width: 1024px) {
+        --bs-gutter-x: 0;
+        margin-left: 5px;
+        margin-right: 5px;
       }
       @media screen and (max-width: 600px) {
         --bs-gutter-x: 0;
+        margin-left: 0;
+        margin-right: 0;
       }
     }
   }
@@ -164,7 +228,7 @@
   left: 0;
   transform: translateY(-50%);
   z-index: 2;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   &::before {
     content: "";
@@ -181,6 +245,9 @@
   }
   &:hover {
     background: none;
+  }
+  @media screen and (max-width: 1024px) {
+    left: 5%;
   }
   @media screen and (max-width: 600px) {
     left: 10%;
@@ -193,7 +260,7 @@
   right: 0;
   transform: translateY(-50%);
   z-index: 2;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   &::before {
     content: "";
@@ -210,6 +277,9 @@
   }
   &:hover {
     background: none;
+  }
+  @media screen and (max-width: 1024px) {
+    right: 5%;
   }
   @media screen and (max-width: 600px) {
     right: 10%;
