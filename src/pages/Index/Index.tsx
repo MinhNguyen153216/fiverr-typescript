@@ -20,11 +20,7 @@ const contentStyle: React.CSSProperties = {
 const NextArrow = (props: any) => {
   const { className, style, onClick } = props;
   return (
-    <div
-      className={`${className}`}
-      style={{ ...style,}}
-      onClick={onClick}
-    >
+    <div className={`${className}`} style={{ ...style }} onClick={onClick}>
       <div className="arrow right"></div>
     </div>
   );
@@ -33,11 +29,7 @@ const NextArrow = (props: any) => {
 const PrevArrow = (props: any) => {
   const { className, style, onClick } = props;
   return (
-    <div
-      className={`${className}`}
-      style={{ ...style,}}
-      onClick={onClick}
-    >
+    <div className={`${className}`} style={{ ...style }} onClick={onClick}>
       <div className="arrow left"></div>
     </div>
   );
@@ -264,22 +256,47 @@ export default function Index({}: Props) {
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/seo-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Unlock growth online</p>
+                    <h3>Seo</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/illustration-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Color your dream</p>
+                    <h3>Illustration</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/translation-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Go global</p>
+                    <h3>Translation</h3>
+                  </div>
                 </div>
               </div>
               <div className="col">
                 <div className="item">
-                  <img src="./img/logo-design-2x.webp" alt="" />
+                  <img src="./img/data-entry-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Learn your business</p>
+                    <h3>Data Entry</h3>
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className="item">
+                  <img src="./img/book-covers-2x.webp" alt="" />
+                  <div className="label">
+                    <p>Showcase your story</p>
+                    <h3>Book Covers</h3>
+                  </div>
                 </div>
               </div>
             </Slider>
