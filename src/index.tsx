@@ -26,6 +26,10 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Result from "./pages/Result/Result";
 import UserDetail from "./pages/UserDetail/UserDetail";
+import AdminUser from "./pages/Admin/AdminUser/AdminUser";
+import AdminTask from "./pages/Admin/AdminTask/AdminTask";
+import AdminTaskType from "./pages/Admin/AdminTaskType/AdminTaskType";
+import AdminService from "./pages/Admin/AdminService/AdminService";
 //
 
 export const history = createBrowserHistory({ window });
@@ -60,7 +64,6 @@ root.render(
           <Route path="login" element={<Login />} />
           <Route path="userdetail" element={<UserDetail />} />
         </Route>
-       
 
         {/* Admin Route */}
         <Route
@@ -71,7 +74,12 @@ root.render(
               ComponentMobile={AdminTemplateMobile}
             />
           }
-        ></Route>
+        >
+          <Route path="adminuser" element={<AdminUser />}></Route>
+          <Route path="admintask" element={<AdminTask />}></Route>
+          <Route path="admintasktype" element={<AdminTaskType />}></Route>
+          <Route path="adminservice" element={<AdminService />}></Route>
+        </Route>
 
         {/* 404 Route */}
         <Route path="*" element={<Navigate to="/" />} />
