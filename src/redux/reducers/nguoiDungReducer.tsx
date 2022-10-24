@@ -10,10 +10,12 @@ import {
   http,
   setCookie,
 } from "../../util/setting";
+import { AppDispatch } from "../configStore";
 import { nguoiDungModel } from "../models/nguoiDungModel";
 
 const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
+  arrUser:[]
 };
 
 const nguoiDungReducer = createSlice({
@@ -25,9 +27,35 @@ const nguoiDungReducer = createSlice({
       localStorage.clear();
       state.userLogin = null;
     },
+    getAllUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
+      state.arrUser = action.payload
+    }
+    
   },
 });
 
-export const { logOutUserAction } = nguoiDungReducer.actions;
+export const { logOutUserAction,getAllUserAction } = nguoiDungReducer.actions;
 
 export default nguoiDungReducer.reducer;
+
+
+
+//-------action api------------
+
+export const getUserApi = ()=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      const result = await http.get('/users')
+      let arrUser:nguoiDungModel[]=result.data.content
+      const action = getAllUserAction(arrUser)
+      console.log(result);
+      
+      dispatch(action)
+      console.log(action);
+      
+    }catch(err){
+      console.log(err);
+      
+    }
+  }
+}
