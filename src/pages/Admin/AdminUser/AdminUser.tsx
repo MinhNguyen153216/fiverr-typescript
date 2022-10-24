@@ -1,5 +1,7 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { number } from 'yup/lib/locale'
+import Pagination from '../../../components/Pagination/Pagination'
 import { AppDispatch, RootState } from '../../../redux/configStore'
 import { nguoiDungModel } from '../../../redux/models/nguoiDungModel'
 import { getUserApi } from '../../../redux/reducers/nguoiDungReducer'
@@ -9,18 +11,24 @@ type Props = {}
 export default function AdminUser({}: Props) {
   const {arrUser} = useSelector((state:RootState)=>state.nguoiDungReducer)
   const dispatch:AppDispatch = useDispatch()
+  const [currentPage,setCurrentPage] = useState(1)
+  const [userPerPage] = useState(10)
 
   useEffect(()=>{
     const actionApi = getUserApi()
     dispatch(actionApi)
   },[])
 
-  console.log(arrUser);
+   // Get current users
+   const indexOfLastUser = currentPage * userPerPage;
+   const indexOfFirstUser = indexOfLastUser - userPerPage;
+   const currentUsers = arrUser.slice(indexOfFirstUser, indexOfLastUser);
+
 
   const renderUser=()=>{
-    return  arrUser.map((user:nguoiDungModel,index:number)=>{
+    return  currentUsers.map((user:nguoiDungModel,index:number)=>{
       return (
-        <tr>
+        <tr key={index}>
         <td>{user.id}</td>
          <td>{user.name}</td>
          <td>{user.role}</td>
@@ -37,6 +45,11 @@ export default function AdminUser({}: Props) {
     })
    
   }
+
+  // Change page
+  const paginate = (pageNumber:any) => setCurrentPage(pageNumber);
+
+
   return (
     <div className='adminuser'>
       <h1>Thêm quản trị viên</h1>
@@ -60,6 +73,11 @@ export default function AdminUser({}: Props) {
         
         </tbody>
       </table>
+      <Pagination 
+        userPerPage={userPerPage}
+        totalUsers={arrUser.length}
+        paginate={paginate}
+      />
     </div>
   )
 }
