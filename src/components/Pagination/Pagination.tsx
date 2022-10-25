@@ -3,7 +3,8 @@ import React from 'react'
 type Props = {
     userPerPage:number,
     totalUsers:number,
-    paginate:any
+    paginate:any,
+    className:string
 }
 
 export default function Pagination({userPerPage,totalUsers,paginate}: Props) {
@@ -16,12 +17,12 @@ export default function Pagination({userPerPage,totalUsers,paginate}: Props) {
 
   return (
     <nav>
-    <ul className='pagination'>
+    <ul className='pagination '>
       {pageNumbers.map(number => (
         <li key={number} className='page-item'>
-          <a onClick={() => paginate(number)} href='!#' className='page-link'>
+          <span onClick={() => paginate(number)}  className='page-link'>
             {number}
-          </a>
+          </span>
         </li>
       ))}
     </ul>
