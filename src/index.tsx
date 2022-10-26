@@ -23,6 +23,7 @@ import Categories from "./pages/Categories/Catagories";
 import ResponsiveItem from "./HOC/Responsive/ResponsiveItem";
 import AdminTemplate from "./templates/Admin/AdminTemplate";
 import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
+import Login from "./pages/Login/Login";
 //
 
 
@@ -37,6 +38,7 @@ root.render(
         <Route path="" element={<HeaderTemplate />}>
           <Route index element={<Index />}></Route>
           <Route path="/register"  element={<Register />}></Route>
+          <Route path="/login"  element={<Login />}></Route>
           <Route path="/result">
             <Route path=":name" element={<Result />}></Route>
           </Route>

@@ -72,7 +72,7 @@ export const getMenuCongViecApi = () => {
   };
 };
 
-export const getDetailJobApi = (id: string) => {
+export const getDetailJobApi = (id: string | number) => {
   return async (dispatch: AppDispatch) => {
     try {
       const result = await http.get(`/cong-viec/lay-cong-viec-chi-tiet/${id}`);
