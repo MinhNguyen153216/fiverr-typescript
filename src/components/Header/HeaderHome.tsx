@@ -215,7 +215,9 @@ export default function HeaderHome({}: Props) {
       </section>
 
       <section
-        className={`nav-title navbar bg-white navTitle ${small ? "navTitleScroll" : ""}`}
+        className={`nav-title navbar bg-white navTitle ${
+          small ? "navTitleScroll" : ""
+        }`}
       >
         <div className="container">{renderTitle()}</div>
       </section>

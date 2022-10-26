@@ -15,22 +15,22 @@ import { store } from "./redux/configStore";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./assets/scss/styles.scss";
 import Index from "./pages/Index/Index";
-import UserTemplate from "./templates/User/UserTemplate";
-import JobDetail from "./pages/JobDetail/JobDetail";
-import JobTitle from "./pages/JobTitle/JobTitle";
-import HomeTemplate from "./templates/Home/HomeTemplate";
-import AdminTemplate from "./templates/Admin/AdminTemplate";
-import ResponsiveItem from "./HOC/Responsive/ResponsiveItem";
-import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
 import Register from "./pages/Register/Register";
-import Login from "./pages/Login/Login";
+import HeaderTemplate from "./templates/HeaderTemplate";
+import JobDetail from "./pages/JobDetail/JobDetail";
 import Result from "./pages/Result/Result";
 import UserDetail from "./pages/UserDetail/UserDetail";
 import AdminUser from "./pages/Admin/AdminUser/AdminUser";
 import AdminTask from "./pages/Admin/AdminTask/AdminTask";
 import AdminTaskType from "./pages/Admin/AdminTaskType/AdminTaskType";
 import AdminService from "./pages/Admin/AdminService/AdminService";
+import Categories from "./pages/Categories/Catagories";
+import ResponsiveItem from "./HOC/Responsive/ResponsiveItem";
+import AdminTemplate from "./templates/Admin/AdminTemplate";
+import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
+import Login from "./pages/Login/Login";
 //
+
 
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
@@ -40,29 +40,20 @@ root.render(
   <Provider store={store}>
     <HistoryRouter history={history}>
       <Routes>
-        {/* User Route */}
-        <Route path="" element={<HomeTemplate />}>
-          <Route index element={<Index />} />
-          <Route path="home" element={<Index />} />
-
-          {/* <Route path="detail" element={<JobDetail />} /> */}
-          <Route path="detail">
-            <Route path=":id" element={<JobDetail />} />
+        <Route path="" element={<HeaderTemplate />}>
+          <Route index element={<Index />}></Route>
+          <Route path="/register"  element={<Register />}></Route>
+          <Route path="/login"  element={<Login />}></Route>
+          <Route path="/result">
+            <Route path=":name" element={<Result />}></Route>
           </Route>
-
-          {/* <Route path="title" element={<JobTitle />} /> */}
-          <Route path="title">
-            <Route path=":id" element={<JobTitle />} />
+          <Route path="/categories">
+            <Route path=":id" element={<Categories />}></Route>
           </Route>
-
-          <Route path="result" element={<Result />} />
-          <Route path="result">
-            <Route path=":id" element={<Result />} />
+          <Route path="/jobdetail">
+            <Route path=":id" element={<JobDetail />}></Route>
           </Route>
-
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="userdetail" element={<UserDetail />} />
+          <Route path="*" element={<Navigate to="" />}></Route>
         </Route>
 
         {/* Admin Route */}

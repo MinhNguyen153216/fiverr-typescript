@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 // import { history } from "../index";
 
 export const config = {
@@ -47,6 +48,9 @@ export const config = {
   },
   ACCESS_TOKEN: "access_token",
   USER_LOGIN: "userLogin",
+  timeout: (delay: number) => {
+    return new Promise((res) => setTimeout(res, delay));
+  },
 };
 
 export const {
@@ -56,6 +60,7 @@ export const {
   getStore,
   setStoreJson,
   getStoreJson,
+  timeout,
   ACCESS_TOKEN,
   USER_LOGIN,
 } = config;
@@ -75,7 +80,7 @@ http.interceptors.request.use(
     const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,
-      ["Authorization"]: `Bearer ${token}`,
+      ["Authorization"]: `${token}`,
       ["TokenCybersoft"]: TOKEN_CYBERSOFT,
     };
     // config.headers['Content-Type'] = 'application/json';
@@ -101,8 +106,11 @@ http.interceptors.response.use(
       return Promise.reject(err);
     }
     if (err.response.status === 401 || err.response.status === 403) {
-      alert("Token không hợp lệ ! vui lòng đăng nhập lại. ");
-    //   history.push("/login");
+      Swal.fire({
+        icon: "error",
+        title: "Token không hợp lệ ! vui lòng đăng nhập lại.",
+      });
+      //   history.push("/login");
       return Promise.reject(err);
     }
   }

@@ -126,7 +126,7 @@ export default function AdminUser({}: Props) {
             <th>Role</th>
             <th>Skills</th>
             <th>Certification</th>
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>{renderUser()}</tbody>

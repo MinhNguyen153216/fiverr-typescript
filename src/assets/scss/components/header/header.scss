@@ -103,6 +103,7 @@
                 cursor: default;
               }
               .job-group-detail {
+                display: block;
                 padding-top: 5px;
                 padding-bottom: 5px;
                 @include text-config(400, 16px, 24px, #62646a);

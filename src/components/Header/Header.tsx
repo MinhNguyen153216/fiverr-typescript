@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -12,12 +12,14 @@ import {
   DsChiTietLoai,
 } from "../../redux/models/congViecModel";
 import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+import { timeout } from "../../util/setting";
 library.add(fas);
 
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
 type Props = {};
 
 export default function Header({}: Props) {
+  const logo = require("../../assets/img/Fiverr-Logo.png");
   const { userLogin } = useSelector(
     (state: RootState) => state.nguoiDungReducer
   );
@@ -25,6 +27,7 @@ export default function Header({}: Props) {
     (state: RootState) => state.congViecReducer
   );
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getMenuCongViecApi());
@@ -48,9 +51,13 @@ export default function Header({}: Props) {
                         {dsNhom.dsChiTietLoai.map(
                           (dsChiTiet: DsChiTietLoai, index: number) => {
                             return (
-                              <p className="job-group-detail" key={index}>
+                              <NavLink
+                                to={`/categories/${dsChiTiet.id}`}
+                                className="job-group-detail"
+                                key={index}
+                              >
                                 {dsChiTiet.tenChiTiet}
-                              </p>
+                              </NavLink>
                             );
                           }
                         )}
@@ -71,12 +78,12 @@ export default function Header({}: Props) {
       return (
         <>
           <li className="nav-item">
-            <NavLink className="nav-link" to={"/register"}>
+            <NavLink className="nav-link" to={"/login"}>
               Sign In
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to={"/login"}>
+            <NavLink to={"/register"}>
               <button className="btn btn-outline-success">Join</button>
             </NavLink>
           </li>
@@ -99,12 +106,14 @@ export default function Header({}: Props) {
     );
   };
 
-  const handleSearch = (e: React.SyntheticEvent) => {
+  const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const value: string | undefined = document.querySelector<HTMLInputElement>(
       'input[name="searchInput"]'
     )?.value;
     console.log(value);
+    await timeout(1000);
+    navigate(`/result/${value}`);
   };
 
   const handleLogout = () => {
@@ -116,12 +125,7 @@ export default function Header({}: Props) {
       <nav className="header navbar navbar-expand-sm navbar-light bg-light">
         <div className="container">
           <NavLink className="navbar-brand" to={""}>
-            <img
-              src="./img/Fiverr-Logo.png"
-              alt="fiverrLogo"
-              width={89}
-              height={49}
-            />
+            <img src={logo} alt="fiverrLogo" width={89} height={49} />
           </NavLink>
 
           <div className="collapse navbar-collapse" id="collapsibleNavId">
