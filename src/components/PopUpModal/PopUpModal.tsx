@@ -20,10 +20,8 @@ export default function PopUpModal({}: Props) {
         initialValues: {
           email: "",
           password: "",
-          passwordConfirm: "",
           name: "",
           phone: "",
-          radio:boolean
         },
         //check validation
         validationSchema: Yup.object().shape({
@@ -32,8 +30,8 @@ export default function PopUpModal({}: Props) {
           name:Yup.string().required('Tên không được để trống').matches(regexName,'Tên không đúng định dạng'),
           phone:Yup.string().required('Số điện thoại không được để trống').matches(regexPhone,"Số điện thoại không đúng")
         }),
-        onSubmit: (values,{resetForm}) => {
-        //   dispatch(signupApi(values));
+        onSubmit: (values) => {
+          // dispatch(signupApi(values));
         },
     
       });

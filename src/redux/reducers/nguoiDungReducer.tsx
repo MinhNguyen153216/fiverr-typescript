@@ -27,14 +27,28 @@ const nguoiDungReducer = createSlice({
       localStorage.clear();
       state.userLogin = null;
     },
+  
+    deleteUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
+      // console.log(action);
+      let arrUserAction:nguoiDungModel[] = action.payload
+      console.log(state.arrUser.indexOf(arrUserAction));
+      state.arrUser=state.arrUser
+      
+      // let arrUserUpdate = state.arrUser.filter(user=>user.id!==arrUserAction.id)
+      
+
+      // state.arrUser.filter(user)
+      
+      
+    },
     getAllUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
       state.arrUser = action.payload
-    }
+    },
     
   },
 });
 
-export const { logOutUserAction,getAllUserAction } = nguoiDungReducer.actions;
+export const { logOutUserAction,getAllUserAction,deleteUserAction } = nguoiDungReducer.actions;
 
 export default nguoiDungReducer.reducer;
 
@@ -50,6 +64,23 @@ export const getUserApi = ()=>{
       const action = getAllUserAction(arrUser)
       console.log(result);
       
+      dispatch(action)
+      console.log(action);
+      
+    }catch(err){
+      console.log(err);
+      
+    }
+  }
+}
+
+export const deleteUserApi=(id:number,user:any)=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      const result=await http.delete(`/users?id=${id}`)
+      console.log(result);
+      // let arrUser:nguoiDungModel[]=result.data.content
+      const action = deleteUserAction(user)
       dispatch(action)
       console.log(action);
       

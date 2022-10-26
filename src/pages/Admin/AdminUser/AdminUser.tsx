@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { number } from "yup/lib/locale";
+import { NavLink, useParams, useSearchParams } from "react-router-dom";
+import { number, string } from "yup/lib/locale";
 import Pagination from "../../../components/Pagination/Pagination";
 import PopUpModal from "../../../components/PopUpModal/PopUpModal";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { nguoiDungModel } from "../../../redux/models/nguoiDungModel";
-import { getUserApi } from "../../../redux/reducers/nguoiDungReducer";
+import { deleteUserApi, getUserApi } from "../../../redux/reducers/nguoiDungReducer";
 import { http } from "../../../util/setting";
 
 type Props = {
@@ -22,6 +22,20 @@ export default function AdminUser({}: Props) {
   let [searchParams, setSearchParams] = useSearchParams();
   let keywordRef = useRef("");
   let timeoutRef = useRef({});
+  const params = useParams()
+  
+
+// useEffect(()=>{
+//   let id:any = params.id
+//   const actionThunk = deleteUserApi(id)
+//   dispatch(actionThunk)
+// console.log(id);
+
+// },[params.id])
+
+
+    
+ 
 
   const getUserByKeyWord = async () => {
     try {
@@ -40,7 +54,7 @@ export default function AdminUser({}: Props) {
     }
   };
 
-  console.log(arrUserSearch);
+  // console.log(arrUserSearch);
 
   useEffect(() => {
     //call api
@@ -59,6 +73,14 @@ export default function AdminUser({}: Props) {
     // setSearchParams({ keyword: keywordRef.current });
   };
 
+  const handleDelete=(id:number,user:any)=>{
+    const actionThunk = deleteUserApi(id,user)
+    console.log(id);
+
+    
+    dispatch(actionThunk)
+  }
+
   useEffect(() => {
     const actionApi = getUserApi();
     dispatch(actionApi);
@@ -69,19 +91,24 @@ export default function AdminUser({}: Props) {
   const indexOfFirstUser = indexOfLastUser - userPerPage;
   const currentUsers = arrUserSearch.slice(indexOfFirstUser, indexOfLastUser);
 
+
   const renderUser = () => {
     return currentUsers.map((user: nguoiDungModel, index: number) => {
+      // console.log(user.certification);
+      
       return (
-        <tr key={index}>
+        <tr key={user.id}>
           <td>{user.id}</td>
           <td>{user.name}</td>
           <td>{user.role}</td>
           <td>{user.skill}</td>
           <td>{user.certification}</td>
+          {/* <td>{user.certification.length>4?user.certification.slice(4,10):user.certification}</td> */}
           <td className="text-center px-5">
             <button className="btn btn-success me-2">Xem thông tin</button>
             <button className="btn btn-primary me-2">Sửa</button>
-            <button className="btn btn-danger">Xóa</button>
+            <button className="btn btn-danger" onClick={()=>{handleDelete(user.id,user)}
+            }>Xóa</button>
           </td>
         </tr>
       );
@@ -93,7 +120,7 @@ export default function AdminUser({}: Props) {
 
   return (
     <div className="adminuser">
-      <h1 data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm quản trị viên</h1>
+      <h1><span  data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm quản trị viên</span></h1>
       <form className="search" onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
@@ -105,7 +132,7 @@ export default function AdminUser({}: Props) {
       </form>
       <table className="table table-striped">
         <thead>
-          <tr style={{ width: "80px" }}>
+          <tr >
             <th>Id</th>
             <th>Name</th>
             <th>Role</th>
