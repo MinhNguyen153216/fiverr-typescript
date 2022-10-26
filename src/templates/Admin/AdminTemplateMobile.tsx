@@ -4,6 +4,6 @@ type Props = {}
 
 export default function AdminTemplateMobile({}: Props) {
   return (
-    <div>AdminTemplateMobile</div>
+    <>AdminTemplateMobile</>
   )
 }

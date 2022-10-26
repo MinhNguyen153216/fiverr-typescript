@@ -140,12 +140,30 @@ export default function HeaderHome({}: Props) {
         <div className="navbar navbar-expand-sm navbar-light">
           <div className="container">
             <NavLink className="navbar-brand" to={""}>
+<<<<<<< HEAD
               <img
                 src="./img/Fiverr-Logo.png"
                 alt="fiverrLogo"
                 width={89}
                 height={49}
               />
+=======
+              {small ? (
+                <img
+                  src="./img/Fiverr-Logo.png"
+                  alt="fiverrLogo"
+                  width={89}
+                  height={49}
+                />
+              ) : (
+                <img
+                  src="./img/Fiverr-Logo-small.png"
+                  alt="fiverrLogo"
+                  width={97}
+                  height={28}
+                />
+              )}
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
             </NavLink>
 
             <div

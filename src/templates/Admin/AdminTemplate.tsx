@@ -1,9 +1,106 @@
-import React from 'react'
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import AdminService from "../../pages/Admin/AdminService/AdminService";
+import AdminTask from "../../pages/Admin/AdminTask/AdminTask";
+import AdminTaskType from "../../pages/Admin/AdminTaskType/AdminTaskType";
+import AdminUser from "../../pages/Admin/AdminUser/AdminUser";
 
-type Props = {}
+type Props = {};
 
 export default function AdminTemplate({}: Props) {
+  const [sidebar, setSidebar] = useState(false);
+  const showSidebar = () => setSidebar(!sidebar);
+
+  interface menuItem {
+    title: "string";
+    path: "string";
+    icon: any;
+  }
+
+  const menuItem = [
+    {
+      path: "/adminuser",
+      title: "Quản lí người dùng",
+      icon: <i className="fa-solid fa-user"></i>,
+      component:<AdminUser/>,
+      className:'adminuser'
+    },
+    {
+      path: "/admintask",
+      title: "Quản lí công việc",
+      icon: <i className="fa-solid fa-briefcase"></i>,
+      component:<AdminTask/>,
+      className:'admintask'
+
+
+    },
+    {
+      path: "/admintasktype",
+      title: "Quản lí loại công việc",
+      icon: <i className="fa-solid fa-filter"></i>,
+      component:<AdminTaskType/>,
+      className:'admintasktype'
+
+
+    },
+    {
+      path: "/adminservice",
+      title: "Quản lí dịch vụ",
+      icon: <i className="fa-solid fa-list"></i>,
+      component:<AdminService/>,
+      className:'adminservice'
+
+
+    },
+  ];
+
   return (
-    <div>AdminTemplate</div>
-  )
+    <div className="admin-page ">
+     
+      <div className="top ">
+        <div className="nav-left">
+          <h3>Dashboard</h3>
+          <div className="opensidebar" onClick={showSidebar}>
+            <i className="fa-solid fa-bars"></i>
+          </div>
+        </div>
+        <div className="nav-right"></div>
+      </div>
+      <div className="bottom">
+      <div
+        className="sidebarNav"
+        style={
+          sidebar
+            ? {width:'14%'}
+            : { width:'5%' }   
+        }
+      >
+        {/* <div className="closesidebar"  onClick={showSidebar}>
+          <i className="fa-solid fa-xmark"></i>
+        </div> */}
+        <div className="menu">
+          {menuItem.map((item, index) => {
+            return (
+              <NavLink to={item.path} key={index} >
+                <div className="menuItem">
+                  <span className="icon" style={sidebar?{margin:''}:{margin:'0 auto'}}>{item.icon}</span>
+                  <span className="link_text" style={sidebar?{display:"block"}:{display:'none'}}>{item.title}</span>
+                </div>
+              </NavLink>
+              
+            );
+          })}
+        </div>
+      </div>
+      <div className="admindata">
+        {menuItem.map((data,index)=>{
+          return(
+            <div key={index} className={data.className}>{data.component}</div>
+          )
+        })}
+      </div>
+
+      </div>
+    </div>
+  );
 }

@@ -16,9 +16,16 @@
         }
         input {
           border-radius: 0.375rem 0 0 0.375rem;
+<<<<<<< HEAD
           height: 40px;
         }
         button {
+=======
+          height: 42px;
+        }
+        button {
+          padding: 8px 16px;
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
           border-radius: 0 0.375rem 0.375rem 0;
         }
       }
@@ -103,7 +110,10 @@
                 cursor: default;
               }
               .job-group-detail {
+<<<<<<< HEAD
                 display: block;
+=======
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
                 padding-top: 5px;
                 padding-bottom: 5px;
                 @include text-config(400, 16px, 24px, #62646a);
@@ -120,4 +130,8 @@
       }
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15

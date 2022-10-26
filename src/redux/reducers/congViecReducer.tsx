@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { http } from "../../util/setting";
 import { AppDispatch } from "../configStore";
+<<<<<<< HEAD
 import { CongViecChiTiet, congViecModel } from "../models/congViecModel";
 
 type InitialState = {
@@ -34,6 +35,13 @@ const initialState: InitialState = {
   },
   arrResult: [],
   arrCategory: [],
+=======
+import { congViecModel } from "../models/congViecModel";
+import { history } from "../../index";
+
+const initialState: any = {
+  menuCongViec: [],
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
 };
 
 const congViecReducer = createSlice({
@@ -43,6 +51,7 @@ const congViecReducer = createSlice({
     getMenuCongViecAction: (state, action: PayloadAction<congViecModel[]>) => {
       state.menuCongViec = action.payload;
     },
+<<<<<<< HEAD
     getDetailJob: (state, action: PayloadAction<CongViecChiTiet>) => {
       state.detailJob = action.payload;
     },
@@ -60,6 +69,16 @@ export const { getMenuCongViecAction, getDetailJob, getResult, getCategory } =
 
 export default congViecReducer.reducer;
 //---------------------API--------------------------
+=======
+  },
+});
+
+export const { getMenuCongViecAction } = congViecReducer.actions;
+
+export default congViecReducer.reducer;
+
+// ---------------------thunk API---------------------
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
 export const getMenuCongViecApi = () => {
   return async (dispatch: AppDispatch) => {
     try {
@@ -71,6 +90,7 @@ export const getMenuCongViecApi = () => {
     }
   };
 };
+<<<<<<< HEAD
 
 export const getDetailJobApi = (id: string) => {
   return async (dispatch: AppDispatch) => {
@@ -112,3 +132,5 @@ export const getCategoryApi = (id: String | number) => {
     }
   };
 };
+=======
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15

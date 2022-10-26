@@ -31,8 +31,14 @@ $bg-input: rgba(33, 33, 33, 0.08);
 $bg-light-1: #ffffff;
 $bg-gradient-label: linear-gradient(180deg, #f21299 0%, #1b02b5 100%);
 
-//
-
+// Container
+.container{
+  padding-right: 0;
+  padding-left: 0;
+  @media screen and (min-width: 1500px) {
+    max-width: 1400px;
+  }
+}
 // ----------------Mixin-----------------------
 //
 @mixin text-config($fw, $fs, $line-h, $color) {

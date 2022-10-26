@@ -31,6 +31,7 @@ export default function Result({}: Props) {
   };
 
   return (
+<<<<<<< HEAD
     <section className="result">
       <div className="container">
         <div className="result-title">
@@ -240,4 +241,8 @@ export default function Result({}: Props) {
       </div>
     </section>
   );
+=======
+    <div>Result</div>
+  )
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
 }

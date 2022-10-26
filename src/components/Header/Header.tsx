@@ -1,5 +1,9 @@
 import React, { ReactNode, useEffect } from "react";
+<<<<<<< HEAD
 import { NavLink, useNavigate } from "react-router-dom";
+=======
+import { NavLink } from "react-router-dom";
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -12,14 +16,20 @@ import {
   DsChiTietLoai,
 } from "../../redux/models/congViecModel";
 import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+<<<<<<< HEAD
 import { timeout } from "../../util/setting";
+=======
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
 library.add(fas);
 
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
 type Props = {};
 
 export default function Header({}: Props) {
+<<<<<<< HEAD
   const logo = require("../../assets/img/Fiverr-Logo.png");
+=======
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
   const { userLogin } = useSelector(
     (state: RootState) => state.nguoiDungReducer
   );
@@ -27,7 +37,10 @@ export default function Header({}: Props) {
     (state: RootState) => state.congViecReducer
   );
   const dispatch: AppDispatch = useDispatch();
+<<<<<<< HEAD
   const navigate = useNavigate();
+=======
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
 
   useEffect(() => {
     dispatch(getMenuCongViecApi());
@@ -51,6 +64,7 @@ export default function Header({}: Props) {
                         {dsNhom.dsChiTietLoai.map(
                           (dsChiTiet: DsChiTietLoai, index: number) => {
                             return (
+<<<<<<< HEAD
                               <NavLink
                                 to={`/categories/${dsChiTiet.id}`}
                                 className="job-group-detail"
@@ -58,6 +72,11 @@ export default function Header({}: Props) {
                               >
                                 {dsChiTiet.tenChiTiet}
                               </NavLink>
+=======
+                              <p className="job-group-detail" key={index}>
+                                {dsChiTiet.tenChiTiet}
+                              </p>
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
                             );
                           }
                         )}
@@ -78,12 +97,20 @@ export default function Header({}: Props) {
       return (
         <>
           <li className="nav-item">
+<<<<<<< HEAD
             <NavLink className="nav-link" to={"/login"}>
+=======
+            <NavLink className="nav-link" to={"/register"}>
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
               Sign In
             </NavLink>
           </li>
           <li className="nav-item">
+<<<<<<< HEAD
             <NavLink to={"/register"}>
+=======
+            <NavLink to={"/login"}>
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
               <button className="btn btn-outline-success">Join</button>
             </NavLink>
           </li>
@@ -106,14 +133,21 @@ export default function Header({}: Props) {
     );
   };
 
+<<<<<<< HEAD
   const handleSearch = async (e: React.SyntheticEvent) => {
+=======
+  const handleSearch = (e: React.SyntheticEvent) => {
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
     e.preventDefault();
     const value: string | undefined = document.querySelector<HTMLInputElement>(
       'input[name="searchInput"]'
     )?.value;
     console.log(value);
+<<<<<<< HEAD
     await timeout(1000);
     navigate(`/result/${value}`);
+=======
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
   };
 
   const handleLogout = () => {
@@ -125,7 +159,16 @@ export default function Header({}: Props) {
       <nav className="header navbar navbar-expand-sm navbar-light bg-light">
         <div className="container">
           <NavLink className="navbar-brand" to={""}>
+<<<<<<< HEAD
             <img src={logo} alt="fiverrLogo" width={89} height={49} />
+=======
+            <img
+              src="./img/Fiverr-Logo.png"
+              alt="fiverrLogo"
+              width={89}
+              height={49}
+            />
+>>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
           </NavLink>
 
           <div className="collapse navbar-collapse" id="collapsibleNavId">
