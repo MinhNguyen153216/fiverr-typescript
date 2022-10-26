@@ -1,13 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-
-import Header from "../../components/Header/Header";
-import JobDetail from "../JobDetail/JobDetail";
-import Register from "../Register/Register";
-import Result from "../Result/Result";
-
-type Props = {};
-=======
 import { NavLink } from "react-router-dom";
 import { Carousel } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -90,7 +81,6 @@ const settings = {
     },
   ],
 };
->>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
 
 export default function Index({}: Props) {
   const handleSearch = (e: React.SyntheticEvent) => {
@@ -102,10 +92,6 @@ export default function Index({}: Props) {
   };
 
   return (
-<<<<<<< HEAD
-    <div>
-    </div>
-=======
     <>
       <section className="carousel">
         <Carousel autoplay fade>
@@ -318,6 +304,5 @@ export default function Index({}: Props) {
         </div>
       </section>
     </>
->>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15
   );
 }

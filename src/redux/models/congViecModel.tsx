@@ -1,5 +1,4 @@
 export interface congViecModel {
-<<<<<<< HEAD
   id: number;
   tenLoaiCongViec: string;
   dsNhomChiTietLoai: DsNhomChiTietLoai[];
@@ -47,22 +46,3 @@ export interface ThueCongViec {
   ngayThue: string;
   hoanThanh: boolean;
 }
-=======
-    id:                number;
-    tenLoaiCongViec:   string;
-    dsNhomChiTietLoai: DsNhomChiTietLoai[];
-}
-
-export interface DsNhomChiTietLoai {
-    id:             number;
-    tenNhom:        string;
-    hinhAnh:        string;
-    maLoaiCongviec: number;
-    dsChiTietLoai:  DsChiTietLoai[];
-}
-
-export interface DsChiTietLoai {
-    id:         number;
-    tenChiTiet: string;
-}
->>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15

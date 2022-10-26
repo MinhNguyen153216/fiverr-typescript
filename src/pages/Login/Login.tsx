@@ -72,8 +72,4 @@ export default function Login({}: Props) {
       </form>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 28c9845fc11f082efd7760aa8a44e42e496a2b15

@@ -101,7 +101,7 @@ http.interceptors.response.use(
     console.log(err.response.status);
     //bắt lỗi không hợp lệ
     if (err.response.status === 400 || err.response.status === 404) {
-      alert("Sản phẩm không tồn tại");
+      // alert("Sản phẩm không tồn tại");
     //   history.push("/");
       return Promise.reject(err);
     }
