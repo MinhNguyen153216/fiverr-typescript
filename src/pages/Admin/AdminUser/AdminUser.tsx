@@ -25,22 +25,10 @@ export default function AdminUser({}: Props) {
   const params = useParams()
   
 
-// useEffect(()=>{
-//   let id:any = params.id
-//   const actionThunk = deleteUserApi(id)
-//   dispatch(actionThunk)
-// console.log(id);
-
-// },[params.id])
-
-
-    
- 
-
   const getUserByKeyWord = async () => {
     try {
       let keyword: any = searchParams.get("keyword");
-      if (keyword.toLowerCase().trim() !== "" && keyword !== null) {
+      if (keyword !== "" && keyword !== null) {
         const result = await http.get("/users/search/" + keyword);
         console.log(result.data.content);
         setArrUserSearch(result.data.content);

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
 import { history } from "../../index";
 import {
   ACCESS_TOKEN,
@@ -30,9 +31,13 @@ const nguoiDungReducer = createSlice({
   
     deleteUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
       // console.log(action);
-      let arrUserAction:nguoiDungModel[] = action.payload
-      console.log(state.arrUser.indexOf(arrUserAction));
-      state.arrUser=state.arrUser
+      // let arrUserAction:nguoiDungModel[] = action.payload
+      // let arrUserUpdate={...state.arrUser}
+      // console.log(arrUserUpdate);
+      // arrUserUpdate = arrUserUpdate.filter((user:any)=>user!==arrUserAction)
+      // state.arrUser=arrUserUpdate
+
+            
       
       // let arrUserUpdate = state.arrUser.filter(user=>user.id!==arrUserAction.id)
       
@@ -83,6 +88,9 @@ export const deleteUserApi=(id:number,user:any)=>{
       const action = deleteUserAction(user)
       dispatch(action)
       console.log(action);
+      alert(result.data.message)
+      // history.push('/admin')
+      window.location.reload()
       
     }catch(err){
       console.log(err);
