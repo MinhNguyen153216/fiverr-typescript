@@ -1,14 +1,18 @@
 @import "../../base/base";
 @import "../../themes/variables";
 
-.header {
+.headerHome {
+  position: fixed;
+  background: transparent;
+  width: 100%;
   height: 80px;
-  border-bottom: 1px solid #e4e5e7;
+  transition: all 0.5s;
   .container {
     .navbar-brand {
       margin-right: 32px;
     }
-    .navbar-collapse {
+    .navbar-search {
+      display: none !important;
       form {
         .form-control:focus {
           border: 1px solid #62646a;
@@ -31,7 +35,7 @@
             .nav-item {
               .nav-link {
                 white-space: nowrap;
-                @include text-config(600, 16px, 1.2, #74767e);
+                @include text-config(600, 16px, 1.2, #ffffff);
                 .fa {
                   margin-right: 8px;
                 }
@@ -40,7 +44,7 @@
                 }
               }
               .primary-color {
-                color: #1e1692;
+                color: #ffffff;
               }
               .btn {
                 margin-left: 16px;
@@ -57,11 +61,15 @@
     }
   }
 }
-
-.nav-title {
-  min-height: 41px;
+.navTitle {
+  display: none;
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  min-height: 1px;
   padding: 0;
   border-bottom: 1px solid #e4e5e7;
+  transition: all 10s;
   .container {
     @media screen and(max-width: 991px) {
       justify-content: space-evenly;
@@ -103,7 +111,6 @@
                 cursor: default;
               }
               .job-group-detail {
-                display: block;
                 padding-top: 5px;
                 padding-bottom: 5px;
                 @include text-config(400, 16px, 24px, #62646a);
@@ -120,4 +127,43 @@
       }
     }
   }
+}
+
+.headerHomeScroll {
+  border-bottom: 1px solid #e4e5e7;
+  background: white;
+  .container {
+    .navbar-search {
+      display: flex !important;
+    }
+    .navbar-signin {
+      .container-fluid {
+        .collapse {
+          .navbar-nav {
+            .nav-item {
+              .nav-link {
+                @include text-config(600, 16px, 1.2, #74767e);
+              }
+              .primary-color {
+                color: #1e1692;
+              }
+              .btn {
+                margin-left: 16px;
+              }
+            }
+            @media screen and (max-width: 1160px) {
+              .link-desktop {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.navTitleScroll {
+  display: block;
+  min-height: 41px;
 }

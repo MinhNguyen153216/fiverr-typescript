@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 // import { history } from "../index";
 
 export const config = {
@@ -47,6 +48,9 @@ export const config = {
   },
   ACCESS_TOKEN: "access_token",
   USER_LOGIN: "userLogin",
+  timeout: (delay: number) => {
+    return new Promise((res) => setTimeout(res, delay));
+  },
 };
 
 export const {
@@ -56,13 +60,14 @@ export const {
   getStore,
   setStoreJson,
   getStoreJson,
+  timeout,
   ACCESS_TOKEN,
   USER_LOGIN,
 } = config;
 
 /**Cấu hình request cho tất cả api cũng như response cho tất cả kết quả từ api trả về */
 //cấu hình domain gửi đi:
-const DOMAIN = "https://shop.cyberlearn.vn/api";
+const DOMAIN = "https://fiverrnew.cybersoft.edu.vn/api";
 const TOKEN_CYBERSOFT =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMCIsIkhldEhhblN0cmluZyI6IjE3LzAyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY3NjU5MjAwMDAwMCIsIm5iZiI6MTY0ODIyNzYwMCwiZXhwIjoxNjc2NzM5NjAwfQ.aK-3RvHXQyu6H2-FFiafeSKR4UMCcRmnuDbTT-XIcUU";
 export const http = axios.create({
@@ -75,7 +80,7 @@ http.interceptors.request.use(
     const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,
-      ["Authorization"]: `Bearer ${token}`,
+      ["Authorization"]: `${token}`,
       ["TokenCybersoft"]: TOKEN_CYBERSOFT,
     };
     // config.headers['Content-Type'] = 'application/json';
@@ -96,13 +101,20 @@ http.interceptors.response.use(
     console.log(err.response.status);
     //bắt lỗi không hợp lệ
     if (err.response.status === 400 || err.response.status === 404) {
-      alert("Sản phẩm không tồn tại");
-    //   history.push("/");
+      Swal.fire({
+        icon: "error",
+        title: err.response.message,
+        text: err.respone.content,
+      });
+      //   history.push("/");
       return Promise.reject(err);
     }
     if (err.response.status === 401 || err.response.status === 403) {
-      alert("Token không hợp lệ ! vui lòng đăng nhập lại. ");
-    //   history.push("/login");
+      Swal.fire({
+        icon: "error",
+        title: "Token không hợp lệ ! vui lòng đăng nhập lại.",
+      });
+      //   history.push("/login");
       return Promise.reject(err);
     }
   }

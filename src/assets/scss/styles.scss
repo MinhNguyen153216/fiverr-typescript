@@ -16,14 +16,18 @@
 /// result
 @import "./pages/result/result.scss";
 @import "./pages/result/resultMobile.scss";
+// categories
+@import "./pages/catagories/catagories.scss";
 /// userDetail
 @import "./pages/userDetail/userDetail.scss";
 @import "./pages/userDetail/userDetailMobile.scss";
 
 //---components---
 @import "./components/header/header.scss";
+@import "./components/header/headerHome.scss";
 @import "./components/footer/footer.scss";
-
+@import "./components/navbar/navbar.scss";
+@import "./components/serviceCard/serviceCard.scss";
 //---templates---
 @import "./templates/headerTemplateMobile.scss";
 @import "./templates/admin/adminTemplate.scss";

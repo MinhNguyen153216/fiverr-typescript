@@ -13,6 +13,11 @@ import { store } from "./redux/configStore";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./assets/scss/styles.scss";
 import Index from "./pages/Index/Index";
+import Register from "./pages/Register/Register";
+import HeaderTemplate from "./templates/HeaderTemplate";
+import JobDetail from "./pages/JobDetail/JobDetail";
+import Result from "./pages/Result/Result";
+import Categories from "./pages/Categories/Catagories";
 //
 
 const root = ReactDOM.createRoot(
@@ -22,10 +27,19 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<Index />}>
-          <Route index element={<Index />} />
-
-          <Route path="*" element={<Navigate to="" />} />
+        <Route path="" element={<HeaderTemplate />}>
+          <Route index element={<Index />}></Route>
+          <Route path="/register"  element={<Register />}></Route>
+          <Route path="/result">
+            <Route path=":name" element={<Result />}></Route>
+          </Route>
+          <Route path="/categories">
+            <Route path=":id" element={<Categories />}></Route>
+          </Route>
+          <Route path="/jobdetail">
+            <Route path=":id" element={<JobDetail />}></Route>
+          </Route>
+          <Route path="*" element={<Navigate to="" />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
