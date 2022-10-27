@@ -13,6 +13,7 @@ import {
 import Swal from "sweetalert2";
 import { nguoiDungModel } from "../models/nguoiDungModel";
 import { ThueCongViec } from "../models/congViecModel";
+import { getUserApi, paginationApi } from "./nguoiDungReducer";
 
 type InitialState = {
   userLogin: nguoiDungModel;
@@ -36,12 +37,17 @@ export default userReducer.reducer;
 export const registerApi = (userRegister: Signup) => {
   return async (dispatch: AppDispatch) => {
     try {
+      console.log(userRegister);
+      
       const result = await http.post("/auth/signup", userRegister);
 
       Swal.fire({
         icon: "success",
         title: "Đăng kí tài khoản thành công",
       });
+      dispatch(getUserApi())
+      dispatch(paginationApi(1))
+
     } catch (err) {
       console.log(err);
       Swal.fire({
@@ -83,3 +89,4 @@ export const rentJobApi = (rentJob: ThueCongViec) => {
     }
   };
 };
+

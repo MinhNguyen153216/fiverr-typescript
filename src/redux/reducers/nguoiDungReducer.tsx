@@ -16,7 +16,8 @@ import { nguoiDungModel } from "../models/nguoiDungModel";
 
 const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
-  arrUser:[]
+  arrUser:[],
+  arrUserPaginated:[]
 };
 
 const nguoiDungReducer = createSlice({
@@ -29,31 +30,21 @@ const nguoiDungReducer = createSlice({
       state.userLogin = null;
     },
   
-    deleteUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
-      // console.log(action);
-      // let arrUserAction:nguoiDungModel[] = action.payload
-      // let arrUserUpdate={...state.arrUser}
-      // console.log(arrUserUpdate);
-      // arrUserUpdate = arrUserUpdate.filter((user:any)=>user!==arrUserAction)
-      // state.arrUser=arrUserUpdate
-
-            
-      
-      // let arrUserUpdate = state.arrUser.filter(user=>user.id!==arrUserAction.id)
-      
-
-      // state.arrUser.filter(user)
-      
-      
-    },
+    // deleteUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{     
+    // },
     getAllUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
       state.arrUser = action.payload
     },
+    getUserPaginatedAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
+      state.arrUserPaginated = action.payload
+    },
+
+
     
   },
 });
 
-export const { logOutUserAction,getAllUserAction,deleteUserAction } = nguoiDungReducer.actions;
+export const { logOutUserAction,getAllUserAction,getUserPaginatedAction } = nguoiDungReducer.actions;
 
 export default nguoiDungReducer.reducer;
 
@@ -67,10 +58,9 @@ export const getUserApi = ()=>{
       const result = await http.get('/users')
       let arrUser:nguoiDungModel[]=result.data.content
       const action = getAllUserAction(arrUser)
-      console.log(result);
-      
+      // console.log(result);
       dispatch(action)
-      console.log(action);
+      // console.log(action);
       
     }catch(err){
       console.log(err);
@@ -83,18 +73,30 @@ export const deleteUserApi=(id:number,user:any)=>{
   return async (dispatch:AppDispatch)=>{
     try{
       const result=await http.delete(`/users?id=${id}`)
-      console.log(result);
-      // let arrUser:nguoiDungModel[]=result.data.content
-      const action = deleteUserAction(user)
-      dispatch(action)
-      console.log(action);
       alert(result.data.message)
-      // history.push('/admin')
-      window.location.reload()
-      
+      dispatch(paginationApi(id))
+      dispatch(getUserApi())
     }catch(err){
       console.log(err);
       
+    }
+  }
+}
+
+
+
+
+export const paginationApi = (number:number)=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      const result = await http.get(`/users/phan-trang-tim-kiem?pageIndex=${number}&pageSize=10`)
+      let arrUserPaginated:nguoiDungModel[]=result.data.content.data
+      const action = getUserPaginatedAction(arrUserPaginated)
+      dispatch(action)
+      console.log(arrUserPaginated);
+      
+    }catch(err){
+      console.log(err);
     }
   }
 }

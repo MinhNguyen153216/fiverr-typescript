@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import { AppDispatch } from '../../redux/configStore';
 import { useDispatch } from 'react-redux';
 import { boolean } from "yup/lib/locale";
+import { registerApi } from '../../redux/reducers/userReducer';
+import { Signin, Signup } from '../../redux/models/authModel';
 
 
 
@@ -22,6 +24,9 @@ export default function PopUpModal({}: Props) {
           password: "",
           name: "",
           phone: "",
+          gender: true,
+          birthday: "",
+          role:'ADMIN'
         },
         //check validation
         validationSchema: Yup.object().shape({
@@ -30,8 +35,10 @@ export default function PopUpModal({}: Props) {
           name:Yup.string().required('Tên không được để trống').matches(regexName,'Tên không đúng định dạng'),
           phone:Yup.string().required('Số điện thoại không được để trống').matches(regexPhone,"Số điện thoại không đúng")
         }),
-        onSubmit: (values) => {
-          // dispatch(signupApi(values));
+        onSubmit: (values:Signup) => {
+          dispatch(registerApi(values));
+          console.log(values);
+          
         },
     
       });

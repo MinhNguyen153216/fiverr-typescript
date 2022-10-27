@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import AdminService from "../../pages/Admin/AdminService/AdminService";
 import AdminTask from "../../pages/Admin/AdminTask/AdminTask";
@@ -50,6 +50,11 @@ export default function AdminTemplate({}: Props) {
     },
   ];
 
+
+  useEffect(()=>{
+    
+  })
+
   return (
     <>
       <div className="admin-page ">
@@ -69,7 +74,7 @@ export default function AdminTemplate({}: Props) {
               className="showlogout"
              
             >
-              <div className="arrow"  onClick={() => {
+              <div className="arrow_admin"  onClick={() => {
                 setActive(!active);
               }}>
                 <i className="fa-solid fa-caret-down fs-2 text-white"></i>

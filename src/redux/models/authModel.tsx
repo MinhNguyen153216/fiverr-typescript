@@ -5,6 +5,7 @@ export interface Signup {
   phone: string;
   birthday: string;
   gender: boolean;
+  role?:string
 }
 export interface Signin {
   email: string;

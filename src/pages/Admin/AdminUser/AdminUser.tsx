@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams, useSearchParams } from "react-router-dom";
@@ -7,6 +8,7 @@ import PopUpModal from "../../../components/PopUpModal/PopUpModal";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { nguoiDungModel } from "../../../redux/models/nguoiDungModel";
 import { deleteUserApi, getUserApi } from "../../../redux/reducers/nguoiDungReducer";
+import { paginationApi } from "../../../redux/reducers/nguoiDungReducer";
 import { http } from "../../../util/setting";
 
 type Props = {
@@ -15,37 +17,35 @@ type Props = {
 
 export default function AdminUser({}: Props) {
   const { arrUser } = useSelector((state: RootState) => state.nguoiDungReducer);
+  const { arrUserPaginated } = useSelector((state: RootState) => state.nguoiDungReducer);
   const dispatch: AppDispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage] = useState(10);
-  const [arrUserSearch, setArrUserSearch] = useState(arrUser);
   let [searchParams, setSearchParams] = useSearchParams();
+  const [arrUserSearch, setArrUserSearch] = useState(arrUserPaginated);
   let keywordRef = useRef("");
   let timeoutRef = useRef({});
-  const params = useParams()
-  
+
+  const pageCount = Math.ceil(arrUser.length/10)
+  let paginateArray= []
+  for (let i=1;i<=pageCount;i++){
+    paginateArray.push(i)
+  }
 
   const getUserByKeyWord = async () => {
     try {
       let keyword: any = searchParams.get("keyword");
       if (keyword !== "" && keyword !== null) {
         const result = await http.get("/users/search/" + keyword);
-        console.log(result.data.content);
-        setArrUserSearch(result.data.content);
         const timeResult:any= timeoutRef.current;
         clearTimeout(timeResult);
-      } else {
-        setArrUserSearch(arrUser);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    } 
+  }catch (err) {
+    console.log(err);
   };
-
-  // console.log(arrUserSearch);
+  }
+  console.log(arrUserSearch);
 
   useEffect(() => {
-    //call api
+    //call api 
     getUserByKeyWord();
   }, [keywordRef.current]);
 
@@ -70,18 +70,13 @@ export default function AdminUser({}: Props) {
   }
 
   useEffect(() => {
-    const actionApi = getUserApi();
+    const actionApi = paginationApi();
     dispatch(actionApi);
   }, []);
 
-  // Get current users
-  const indexOfLastUser = currentPage * userPerPage;
-  const indexOfFirstUser = indexOfLastUser - userPerPage;
-  const currentUsers = arrUserSearch.slice(indexOfFirstUser, indexOfLastUser);
-
-
+  
   const renderUser = () => {
-    return currentUsers.map((user: nguoiDungModel, index: number) => {
+    return arrUserPaginated.map((user: nguoiDungModel, index: number) => {
       // console.log(user.certification);
       
       return (
@@ -102,15 +97,11 @@ export default function AdminUser({}: Props) {
       );
     });
   };
-
-  // Change page
-  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
-
   return (
     <div className="adminuser">
       <h1><span  data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm quản trị viên</span></h1>
       <form className="search" onSubmit={handleSubmit}>
-        <input
+        <input         
           onChange={handleChange}
           type="text"
           id="search"
@@ -131,12 +122,18 @@ export default function AdminUser({}: Props) {
         </thead>
         <tbody>{renderUser()}</tbody>
       </table>
-      <Pagination
-        className="pagination"
-        userPerPage={userPerPage}
-        totalUsers={arrUserSearch.length}
-        paginate={paginate}
-      />
+      <nav>
+        <ul className="pagination">
+         {paginateArray.map((number:any,index:number)=>{
+          return(
+          <li className="page-link" onClick={()=>{
+            const actionApi = paginationApi(number);
+            dispatch(actionApi);
+          }}>{number}</li>
+          )
+         })}
+        </ul>
+      </nav>
       <PopUpModal/>
     </div>
   );
