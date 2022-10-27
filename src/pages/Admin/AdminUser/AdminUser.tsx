@@ -30,30 +30,35 @@ export default function AdminUser({}: Props) {
     paginateArray.push(i)
   }
 
-  const getUserByKeyWord = async () => {
-    try {
-      let keyword: any = searchParams.get("keyword");
-      if (keyword !== "" && keyword !== null) {
-        const result = await http.get("/users/search/" + keyword);
-        const timeResult:any= timeoutRef.current;
-        clearTimeout(timeResult);
-    } 
-  }catch (err) {
-    console.log(err);
-  };
-  }
-  console.log(arrUserSearch);
+  let keyword: any = searchParams.get("keyword");
+  console.log(keyword);
+  
 
-  useEffect(() => {
-    //call api 
-    getUserByKeyWord();
-  }, [keywordRef.current]);
+
+  // const getUserByKeyWord = async () => {
+  //   try {
+  //     if (keyword !== "" && keyword !== null) {
+  //       const result = await http.get("/users/search/" + keyword);
+  //       const timeResult:any= timeoutRef.current;
+  //       clearTimeout(timeResult);
+  //   } 
+  // }catch (err) {
+  //   console.log(err);
+  // };
+  // }
+
+  // useEffect(() => {
+  //   //call api 
+  //   getUserByKeyWord();
+  // }, [keywordRef.current]);
 
   const handleChange = (e: any) => {
     keywordRef.current = e.target.value;
-    timeoutRef.current = setTimeout(() => {
-      setSearchParams({ keyword: keywordRef.current });
-    }, 500);
+    setSearchParams({ keyword: keywordRef.current });
+
+    // timeoutRef.current = setTimeout(() => {
+    //   setSearchParams({ keyword: keywordRef.current });
+    // }, 500);
   };
 
   const handleSubmit = (e:any) => {
@@ -70,15 +75,13 @@ export default function AdminUser({}: Props) {
   }
 
   useEffect(() => {
-    const actionApi = paginationApi();
+    const actionApi = paginationApi(1);
     dispatch(actionApi);
   }, []);
 
   
   const renderUser = () => {
     return arrUserPaginated.map((user: nguoiDungModel, index: number) => {
-      // console.log(user.certification);
-      
       return (
         <tr key={user.id}>
           <td>{user.id}</td>
