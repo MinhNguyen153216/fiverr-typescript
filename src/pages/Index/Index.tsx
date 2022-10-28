@@ -94,7 +94,7 @@ export default function Index({}: Props) {
   return (
     <>
       <section className="carousel">
-        <Carousel autoplay fade>
+        <Carousel autoplay fade dots={false}>
           <div>
             <div className="carousel1" style={contentStyle}>
               <div className="row">
@@ -300,6 +300,15 @@ export default function Index({}: Props) {
                 </div>
               </div>
             </Slider>
+          </div>
+        </div>
+      </section>
+
+      <section className="wholeWorld">
+        <div className="container">
+          <div className="row">
+            <div className="col"></div>
+            <div className="col"></div>
           </div>
         </div>
       </section>

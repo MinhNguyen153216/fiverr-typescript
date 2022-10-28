@@ -50,6 +50,7 @@ export default function Header({}: Props) {
                             return (
                               <p className="job-group-detail" key={index}>
                                 {dsChiTiet.tenChiTiet}
+                                {/* add onClick */}
                               </p>
                             );
                           }
