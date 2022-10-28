@@ -1,2 +1,95 @@
 @import "../../base/base";
 @import "../../themes/variables";
+
+.register {
+  padding-top: 30px;
+  min-height: 800px;
+  background-color: rgb(247, 247, 247);
+  &-title {
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+  &-form {
+    padding-top: 30px;
+    form {
+      border-radius: 4px;
+      background-color: #fff;
+      box-shadow: 0 0 8px #95979d;
+      margin: 0 auto;
+      max-height: 90vh;
+      max-width: 400px;
+      padding: 0 36px 30px;
+      .form-title {
+        color: #404145;
+        font-weight: 700;
+        padding: 32px 0;
+        font-size: 24px;
+      }
+      .form-gr {
+        margin-top: 15px;
+        width: 100%;
+        position: relative;
+        input {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          &:focus {
+            outline-color: #1dbf73 !important;
+          }
+        }
+        label {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 1rem;
+          padding: 0 0.25rem;
+          pointer-events: none;
+          opacity: 0.5;
+          line-height: 1;
+          transition: 0.2s cubic-bezier(0.25, 0.8, 0.5, 1);
+          span {
+            color: red;
+          }
+        }
+        input:not(:placeholder-shown) ~ label,
+        input:focus ~ label {
+          opacity: 1;
+          top: 0;
+          background: #fff;
+        }
+        input[type="radio"] {
+          appearance: none;
+          width: 15px;
+          height: 15px;
+          border: 1px solid;
+          border-radius: 100%;
+          padding: 0;
+          margin-right: 3px;
+          transition: all 0.3s ease-in-out;
+          &:checked {
+            border: 5px solid #1dbf73;
+          }
+        }
+        input[type="date"]::placeholder {
+          color: red;
+        }
+      }
+
+      .submit {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background-color: #1dbf73;
+        color: #fff;
+        &:hover {
+          color: #fff;
+          background-color: rgb(25, 164, 99);
+        }
+      }
+    }
+  }
+}

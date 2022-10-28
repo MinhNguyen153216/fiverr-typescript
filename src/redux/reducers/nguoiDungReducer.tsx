@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { history } from "../../index";
 import {
   ACCESS_TOKEN,
   USER_LOGIN,
