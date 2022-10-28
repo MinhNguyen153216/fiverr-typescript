@@ -13,7 +13,8 @@ import {
 import Swal from "sweetalert2";
 import { nguoiDungModel } from "../models/nguoiDungModel";
 import { ThueCongViec } from "../models/congViecModel";
-import { getUserApi, paginationApi } from "./nguoiDungReducer";
+import { getUserApi } from "./nguoiDungReducer";
+import { history } from "../..";
 
 type InitialState = {
   userLogin: nguoiDungModel;
@@ -26,10 +27,14 @@ const initialState: InitialState = {
 const userReducer = createSlice({
   name: "userReducer",
   initialState,
-  reducers: {},
+  reducers: {
+    getProfileAction:(state,action:any)=>{
+      state.userLogin = action.payload
+    },
+  },
 });
 
-export const {} = userReducer.actions;
+export const {getProfileAction} = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -40,13 +45,14 @@ export const registerApi = (userRegister: Signup) => {
       console.log(userRegister);
       
       const result = await http.post("/auth/signup", userRegister);
+      console.log(result);
+      
 
       Swal.fire({
         icon: "success",
         title: "Đăng kí tài khoản thành công",
       });
-      dispatch(getUserApi())
-      dispatch(paginationApi(1))
+      // dispatch(getUserApi(''))
 
     } catch (err) {
       console.log(err);
@@ -62,13 +68,21 @@ export const loginApi = (values: Signin) => {
   return async (dispatch: AppDispatch) => {
     try {
       const result = await http.post("/auth/signin", values);
-      console.log(result);
+      let userLogin=result.data.content
+      console.log(userLogin.user.role);
+      const action = getProfileAction(userLogin)
+      dispatch(action)
       setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
       setStore(ACCESS_TOKEN, result.data.content.accessToken);
       Swal.fire({
         icon: "success",
         title: "Đăng nhâp tài khoản thành công",
       });
+      if(userLogin.user.role.toLowerCase()==='admin'){
+      history.push('/admin')
+      }else if(userLogin.user.role.toLowerCase()==='user'){
+        history.push('/jobdetail')
+      }
     } catch (err: any) {
       Swal.fire({
         icon: "error",

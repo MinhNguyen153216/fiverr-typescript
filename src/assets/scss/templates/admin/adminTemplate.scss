@@ -133,7 +133,7 @@
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
-      padding: 2% 0 0 2%;
+      padding: 1% 0 0 1%;
       .adminuser {
       position: relative;
         h1 {
@@ -177,16 +177,33 @@
             border: 1px solid #000;
           }
         }
-        .pagination{
+        .paginationBtn{
           padding-top: 20px;
-          // display: flex;
-          // justify-content: flex-end;
+          width: 100%;
+          height: 40px;
+          display: flex;
+          justify-content: flex-start;
           position: absolute;
-          bottom: 0%;
+          bottom: 3%;
           left: 0%;
+          user-select: none;
+       
+        }
+        .paginationBtn a{
+          padding: 10px;
+          margin: 8px;
+          border-radius: 5px;
+          border: 1.5px solid #1dbf72;
+          color: #1dbf72;
           &:hover{
-          cursor: pointer;
-         }
+            cursor: pointer;
+            background-color: #1dbf72;
+            color: #fff;
+          }
+        }
+        .paginationActive a {
+          background-color: #1dbf72;
+          color: #fff;
         }
       }
     }

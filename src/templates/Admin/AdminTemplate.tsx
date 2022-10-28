@@ -1,9 +1,13 @@
 import React, { useState,useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import AdminService from "../../pages/Admin/AdminService/AdminService";
 import AdminTask from "../../pages/Admin/AdminTask/AdminTask";
 import AdminTaskType from "../../pages/Admin/AdminTaskType/AdminTaskType";
 import AdminUser from "../../pages/Admin/AdminUser/AdminUser";
+import { RootState } from "../../redux/configStore";
+import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+import { ACCESS_TOKEN, getStore } from "../../util/setting";
 
 type Props = {};
 
@@ -12,6 +16,10 @@ export default function AdminTemplate({}: Props) {
   const [active, setActive] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const navigate = useNavigate();
+  const { userLogin } = useSelector((state: RootState) => state.userReducer);
+  console.log(userLogin);
+  
+
 
   interface menuItem {
     title: "string";
@@ -50,10 +58,20 @@ export default function AdminTemplate({}: Props) {
     },
   ];
 
+    if(!getStore(ACCESS_TOKEN)){
+    alert('Đăng nhập để vào trang này')
+    return <Navigate to='/Login' />
+  }
+    // if(userLogin.role.toLowerCase()!=='admin'||userLogin.role===null){
+    //   alert('Không có quyền truy cập')
+    //   return <Navigate to='/' />
+    // }
 
-  useEffect(()=>{
-    
-  })
+  const handleLogout=()=>{
+    logOutUserAction(userLogin)
+    localStorage.clear();
+    navigate('/')
+  }
 
   return (
     <>
@@ -67,6 +85,7 @@ export default function AdminTemplate({}: Props) {
           </div>
           <div className="nav-right ">
             <div className="face">
+              
               <span>Admin</span>
               <img src="https://i.pravatar.cc/50" alt="avatar" />
             </div>
@@ -83,7 +102,7 @@ export default function AdminTemplate({}: Props) {
               {active ? (
                 <div className="status ">
                   <p>Cập nhật thông tin</p>
-                  <p>Đăng xuất</p>
+                  <p onClick={handleLogout}>Đăng xuất</p>
                 </div>
               ) : (
                 null

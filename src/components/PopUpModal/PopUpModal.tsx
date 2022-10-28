@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { boolean } from "yup/lib/locale";
 import { registerApi } from '../../redux/reducers/userReducer';
 import { Signin, Signup } from '../../redux/models/authModel';
+import { registerAdmin } from '../../redux/reducers/nguoiDungReducer';
 
 
 
@@ -19,6 +20,7 @@ export default function PopUpModal({}: Props) {
   const regexPhone:any="^[0-9][0-9]*$"
 
     const frm = useFormik({
+
         initialValues: {
           email: "",
           password: "",
@@ -28,6 +30,7 @@ export default function PopUpModal({}: Props) {
           birthday: "",
           role:'ADMIN'
         },
+     
         //check validation
         validationSchema: Yup.object().shape({
           email: Yup.string().required("Email không được để trống").email('Email không đúng định dạng'),
@@ -36,7 +39,7 @@ export default function PopUpModal({}: Props) {
           phone:Yup.string().required('Số điện thoại không được để trống').matches(regexPhone,"Số điện thoại không đúng")
         }),
         onSubmit: (values:Signup) => {
-          dispatch(registerApi(values));
+          dispatch(registerAdmin(values));
           console.log(values);
           
         },
