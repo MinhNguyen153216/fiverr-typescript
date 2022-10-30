@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Sign } from "crypto";
 import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { history } from "../../index";
@@ -19,7 +20,17 @@ import { nguoiDungModel } from "../models/nguoiDungModel";
 const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
   arrUser:[],
-  arrUserPaginated:[]
+  arrUserEdit:[
+       {
+        email: "",
+        password: "",
+        name: "",
+        phone: "",
+        gender: true,
+        birthday: "",
+        role:'',
+       }
+  ]
 };
 
 const nguoiDungReducer = createSlice({
@@ -31,22 +42,18 @@ const nguoiDungReducer = createSlice({
       localStorage.clear();
       state.userLogin = null;
     },
-  
-    // deleteUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{     
-    // },
+
     getAllUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
       state.arrUser = action.payload
     },
-    // getUserPaginatedAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
-    //   state.arrUserPaginated = action.payload
-    // },
-
-
+    updateUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
+      state.arrUser = action.payload
+    },
     
   },
 });
 
-export const { logOutUserAction,getAllUserAction } = nguoiDungReducer.actions;
+export const { logOutUserAction,getAllUserAction,updateUserAction } = nguoiDungReducer.actions;
 
 export default nguoiDungReducer.reducer;
 
@@ -105,6 +112,32 @@ export const registerAdmin = (adminvalue: Signup) => {
       Swal.fire({
         icon: "success",
         title: "Đăng kí tài khoản thành công",
+      });
+      dispatch(getUserApi(''))
+
+    } catch (err) {
+      console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Email đã được sử dụng",
+      });
+    }
+  };
+};
+
+
+export const updateUserApi = (arrUserEditUpdate:Signup,id:number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.put("/users"+id,arrUserEditUpdate );
+      console.log(result);
+      let arrUser:nguoiDungModel[]=result.data.content
+      const action = updateUserAction(arrUser)
+      // console.log(result);
+      dispatch(action)
+      Swal.fire({
+        icon: "success",
+        title: "Cập nhật tài khoản thành công",
       });
       dispatch(getUserApi(''))
 

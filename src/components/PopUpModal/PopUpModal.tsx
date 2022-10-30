@@ -1,8 +1,8 @@
 import React from 'react'
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { AppDispatch } from '../../redux/configStore';
-import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/configStore';
+import { useDispatch, useSelector } from 'react-redux';
 import { boolean } from "yup/lib/locale";
 import { registerApi } from '../../redux/reducers/userReducer';
 import { Signin, Signup } from '../../redux/models/authModel';
@@ -14,23 +14,32 @@ import { registerAdmin } from '../../redux/reducers/nguoiDungReducer';
 type Props = {}
 
 export default function PopUpModal({}: Props) {
+  const { arrUserEdit } = useSelector((state: RootState) => state.nguoiDungReducer);
+  console.log(arrUserEdit[0].email);
+  
 
   const dispatch:AppDispatch = useDispatch();
   const regexName:any='[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$'
   const regexPhone:any="^[0-9][0-9]*$"
 
     const frm = useFormik({
-
+        enableReinitialize:true,
         initialValues: {
-          email: "",
-          password: "",
-          name: "",
-          phone: "",
+          // email: "",
+          // password: "",
+          // name: "",
+          // phone: "",
+          // gender: true,
+          // birthday: "",
+          role:'ADMIN',
+          email: arrUserEdit[0].email,
+          password: arrUserEdit[0].password,
+          name: arrUserEdit[0].name,
+          phone: arrUserEdit[0].phone,
           gender: true,
-          birthday: "",
-          role:'ADMIN'
+          birthday: arrUserEdit[0].birthday,
         },
-     
+ 
         //check validation
         validationSchema: Yup.object().shape({
           email: Yup.string().required("Email không được để trống").email('Email không đúng định dạng'),
@@ -38,7 +47,9 @@ export default function PopUpModal({}: Props) {
           name:Yup.string().required('Tên không được để trống').matches(regexName,'Tên không đúng định dạng'),
           phone:Yup.string().required('Số điện thoại không được để trống').matches(regexPhone,"Số điện thoại không đúng")
         }),
+
         onSubmit: (values:Signup) => {
+
           dispatch(registerAdmin(values));
           console.log(values);
           
@@ -67,6 +78,8 @@ export default function PopUpModal({}: Props) {
                 name="email"
                 onChange={frm.handleChange}
                 onBlur={frm.handleBlur}
+                value={frm.values.email}
+                
               />
               {frm.errors.email ? (
                 <p className="text-danger mb-3">{frm.errors.email}</p>
@@ -84,7 +97,7 @@ export default function PopUpModal({}: Props) {
                 name="password"
                 onChange={frm.handleChange}
                 onBlur={frm.handleBlur}
-                // value={values.password}
+                value={frm.values.password}
               />
              
               {/* <i
@@ -123,6 +136,7 @@ export default function PopUpModal({}: Props) {
                 name="name"
                 onChange={frm.handleChange}
                 onBlur={frm.handleBlur}
+                value={frm.values.name}
               />
                {frm.errors.name?<p className="text-danger">{frm.errors.name}</p>:''}
             </div>
@@ -136,6 +150,7 @@ export default function PopUpModal({}: Props) {
                 name="phone"
                 onChange={frm.handleChange}
                 onBlur={frm.handleBlur}
+                value={frm.values.phone}
               />
                {frm.errors.phone?<p className="text-danger">{frm.errors.phone}</p>:''}
 
