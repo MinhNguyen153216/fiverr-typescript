@@ -11,4 +11,5 @@ export interface nguoiDungModel {
     skill: string[];
     certification: string[];
     bookingJob: any[];
+    user?:any
   }

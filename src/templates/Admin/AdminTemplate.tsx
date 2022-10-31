@@ -17,7 +17,7 @@ export default function AdminTemplate({}: Props) {
   const showSidebar = () => setSidebar(!sidebar);
   const navigate = useNavigate();
   const { userLogin } = useSelector((state: RootState) => state.userReducer);
-  console.log(userLogin);
+  // console.log(userLogin.user.name
   
 
 
@@ -86,7 +86,7 @@ export default function AdminTemplate({}: Props) {
           <div className="nav-right ">
             <div className="face">
               
-              <span>Admin</span>
+              <span>{userLogin?`Hello ${userLogin.user.name}`:'Admin'}</span>
               <img src="https://i.pravatar.cc/50" alt="avatar" />
             </div>
             <div
@@ -96,13 +96,12 @@ export default function AdminTemplate({}: Props) {
               <div className="arrow_admin"  onClick={() => {
                 setActive(!active);
               }}>
-                <i className="fa-solid fa-caret-down fs-2 text-white"></i>
+                <i className="fa-solid fa-right-from-bracket fs-2 text-white"></i>
               </div>
 
               {active ? (
                 <div className="status ">
-                  <p>Cập nhật thông tin</p>
-                  <p onClick={handleLogout}>Đăng xuất</p>
+                  <p onClick={handleLogout} >Đăng xuất</p>
                 </div>
               ) : (
                 null

@@ -22,13 +22,14 @@ const initialState: any = {
   arrUser:[],
   arrUserEdit:[
        {
+        id:1,
         email: "",
-        password: "",
-        name: "",
-        phone: "",
-        gender: true,
-        birthday: "",
-        role:'',
+        name: '',
+        password:'',
+        phone: '',
+        // gender: true,
+        // birthday: "",
+        // role:'',
        }
   ]
 };
@@ -47,7 +48,7 @@ const nguoiDungReducer = createSlice({
       state.arrUser = action.payload
     },
     updateUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
-      state.arrUser = action.payload
+      state.arrUserEdit = action.payload
     },
     
   },
@@ -129,12 +130,12 @@ export const registerAdmin = (adminvalue: Signup) => {
 export const updateUserApi = (arrUserEditUpdate:Signup,id:number) => {
   return async (dispatch: AppDispatch) => {
     try {
-      const result = await http.put("/users"+id,arrUserEditUpdate );
+      const result = await http.put(`/users/${id}`,arrUserEditUpdate );
       console.log(result);
-      let arrUser:nguoiDungModel[]=result.data.content
-      const action = updateUserAction(arrUser)
+      // let arrUser:nguoiDungModel[]=result.data.content
+      // const action = updateUserAction(arrUser)
       // console.log(result);
-      dispatch(action)
+      // dispatch(action)
       Swal.fire({
         icon: "success",
         title: "Cập nhật tài khoản thành công",

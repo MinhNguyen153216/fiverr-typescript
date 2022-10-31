@@ -10,7 +10,9 @@ import { nguoiDungModel } from "../../../redux/models/nguoiDungModel";
 import {
   deleteUserApi,
   getUserApi,
+  updateUserAction,
   updateUserApi,
+  // updateUserApi,
 } from "../../../redux/reducers/nguoiDungReducer";
 import { http } from "../../../util/setting";
 
@@ -26,6 +28,8 @@ export default function AdminUser({}: Props) {
   const [arrUserSearch, setArrUserSearch] = useState(arrUser);
   let keywordRef = useRef("");
   const [pageNumber, setPageNumber] = useState(0);
+  const [editable,setEditable]=useState(false)
+
 
   const usersPerPage = 10;
   const pagesVisited = pageNumber * usersPerPage;
@@ -40,12 +44,12 @@ export default function AdminUser({}: Props) {
           <td>{user.email}</td>
           <td>{user.skill}</td>
           <td className="text-center px-5">
-            {/* <button className="btn btn-success me-2">Xem thông tin</button> */}
             <button
               className="btn btn-primary me-2"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
               onClick={() => {
+                setEditable(true)
                 handleUpdate(user.id, user);
               }}
             >
@@ -65,15 +69,10 @@ export default function AdminUser({}: Props) {
     });
 
   const handleUpdate = (id: number, user: any) => {
-    arrUserEdit[0].email = user.email;
-    arrUserEdit[0].password = user.password;
-    arrUserEdit[0].name = user.name;
-    arrUserEdit[0].phone = user.phone;
-    const arrUserEditUpdate= arrUserEdit
-    console.log(arrUserEdit);
-    
-    const actionThunk = updateUserApi(user,id)
-    dispatch(actionThunk)
+    const action =updateUserAction(user)
+    dispatch(action)
+    console.log(user);
+ 
   };
 
   const pageCount = Math.ceil(arrUser.length / usersPerPage);
@@ -107,7 +106,11 @@ export default function AdminUser({}: Props) {
   return (
     <div className="adminuser">
       <h1>
-        <span data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <span data-bs-toggle="modal" data-bs-target="#exampleModal" 
+        onClick={()=>{
+          setEditable(false)
+        }}
+        >
           Thêm quản trị viên
         </span>
       </h1>
@@ -127,7 +130,7 @@ export default function AdminUser({}: Props) {
             <th>Name</th>
             <th>Role</th>
             <th>Email</th>
-            <th>Skill</th>
+            <th>Skills</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -144,7 +147,7 @@ export default function AdminUser({}: Props) {
         disabledClassName={"paginationDisabled"}
         activeClassName={"paginationActive"}
       />
-      <PopUpModal />
+      <PopUpModal editable={editable} setEditable={setEditable}/>
     </div>
   );
 }
