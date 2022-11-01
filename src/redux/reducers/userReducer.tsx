@@ -14,6 +14,7 @@ import {
 import Swal from "sweetalert2";
 import { nguoiDungModel } from "../models/nguoiDungModel";
 import { ThueCongViec } from "../models/congViecModel";
+import { history } from "../../index";
 
 type InitialState = {
   userLogin: nguoiDungModel;
@@ -47,6 +48,7 @@ export const registerApi = (userRegister: Signup) => {
         icon: "success",
         title: "Đăng kí tài khoản thành công",
       });
+      history.push("/login");
     } catch (err) {
       console.log(err);
       Swal.fire({
@@ -70,6 +72,7 @@ export const loginApi = (values: Signin) => {
         icon: "success",
         title: "Đăng nhâp tài khoản thành công",
       });
+      history.push("/home");
     } catch (err: any) {
       Swal.fire({
         icon: "error",

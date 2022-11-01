@@ -44,19 +44,19 @@ export default function HeaderHome({}: Props) {
         setSmall(window.pageYOffset > 100)
       );
     };
-  }, []);
+  }, [userLogin]);
 
   const renderLogin = () => {
     if (!userLogin) {
       return (
         <>
           <li className="nav-item">
-            <NavLink className="nav-link" to={"/register"}>
+            <NavLink className="nav-link" to={"/login"}>
               Sign In
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to={"/login"}>
+            <NavLink to={"/register"}>
               <button
                 className={`btn ${
                   small ? "btn-outline-success" : "btn-outline-light"

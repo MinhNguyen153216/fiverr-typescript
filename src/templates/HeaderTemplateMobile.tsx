@@ -13,6 +13,8 @@ const logo1 = "./img/Fiverr-Logo.png";
 
 export default function HeaderTemplateMobile({}: Props) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  
   return (
     <>
       <div className="headerMobile">
