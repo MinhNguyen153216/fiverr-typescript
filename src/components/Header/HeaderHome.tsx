@@ -114,12 +114,7 @@ export default function HeaderHome({}: Props) {
                                 key={index}
                               >
                                 {dsChiTiet.tenChiTiet}
-<<<<<<< HEAD
-                                {/* add onClick */}
-                              </p>
-=======
                               </NavLink>
->>>>>>> 78497805b087c496fb5e9a6f2f038715fa9df746
                             );
                           }
                         )}
