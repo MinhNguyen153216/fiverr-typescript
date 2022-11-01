@@ -16,6 +16,8 @@ import { getMenuCongViecApi } from "../../redux/reducers/congViecReducer";
 library.add(fas);
 
 type Props = {};
+const logo1 = "./img/Fiverr-Logo.png";
+const logo2 = "./img/Fiverr-Logo-small.png";
 
 export default function HeaderHome({}: Props) {
   const [small, setSmall] = useState(false);
@@ -36,7 +38,7 @@ export default function HeaderHome({}: Props) {
     }
 
     return () => {
-      console.log("clean");
+      // console.log("clean");
       window.removeEventListener("scroll", () =>
         setSmall(window.pageYOffset > 100)
       );
@@ -141,12 +143,21 @@ export default function HeaderHome({}: Props) {
         <div className="navbar navbar-expand-sm navbar-light">
           <div className="container">
             <NavLink className="navbar-brand" to={""}>
-              <img
-                src="./img/Fiverr-Logo.png"
-                alt="fiverrLogo"
-                width={89}
-                height={49}
-              />
+              {small ? (
+                <img
+                  src={logo1}
+                  alt="fiverrLogo"
+                  width={89}
+                  height={49}
+                />
+              ) : (
+                <img
+                  src={logo2}
+                  alt="fiverrLogo"
+                  width={97}
+                  height={28}
+                />
+              )}
             </NavLink>
 
             <div

@@ -17,9 +17,9 @@ library.add(fas);
 
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
 type Props = {};
+const logo = "./img/Fiverr-Logo.png";
 
 export default function Header({}: Props) {
-  const logo = require("../../assets/img/Fiverr-Logo.png");
   const { userLogin } = useSelector(
     (state: RootState) => state.nguoiDungReducer
   );

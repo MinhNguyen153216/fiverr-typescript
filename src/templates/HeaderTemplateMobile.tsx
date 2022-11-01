@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { Navigation } from "react-minimal-side-navigation";
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
+import { NavLink } from "react-router-dom";
 import { history } from "../index";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+
+library.add(fas);
 type Props = {};
+const logo1 = "./img/Fiverr-Logo.png";
 
 export default function HeaderTemplateMobile({}: Props) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <>
       <div className="headerMobile">
         <div className="container">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between align-items-center h-100">
             <div className="sideBar">
               {/* Sidebar Overlay */}
               <div
                 onClick={() => setIsSidebarOpen(false)}
-                className={`test ${
+                className={`sideBar-overlay ${
                   isSidebarOpen ? "block" : "hidden"
                 }`}
               />
@@ -25,22 +32,22 @@ export default function HeaderTemplateMobile({}: Props) {
                   onClick={(): void => setIsSidebarOpen(!isSidebarOpen)}
                   type="button"
                 >
-                  <p>burger</p>
+                  <FontAwesomeIcon
+                    icon={["fas", "bars"]}
+                    className="fa"
+                    type="button"
+                  />
                 </button>
               </div>
 
               {/* Sidebar */}
               <div
-                className={`menuSideBar ${
-                  isSidebarOpen
-                    ? "block"
-                    : "hidden"
-                }`}
+                className={`menuSideBar ${isSidebarOpen ? "block" : "hidden"}`}
               >
-                <div className="flex items-center justify-center mt-10 text-center py-6">
-                  <span className="mx-2 text-2xl font-semibold text-black">
-                    react-minimal-side-navigation
-                  </span>
+                <div className="menuSideBar-join d-flex align-items-center text-center mb-4">
+                  <button className="btn btn-success">
+                    <p>Join Fiverr</p>
+                  </button>
                 </div>
 
                 {/* https://github.com/abhijithvijayan/react-minimal-side-navigation */}
@@ -54,48 +61,102 @@ export default function HeaderTemplateMobile({}: Props) {
                       title: "Home",
                       itemId: "/",
                       // Optional
-                      elemBefore: () => <p>coffee</p>,
+                      elemBefore: () => <></>,
                     },
                     {
-                      title: "About",
-                      itemId: "",
-                      elemBefore: () => <p>user</p>,
+                      title: "Sign In",
+                      itemId: "/login",
+                      // Optional
+                      elemBefore: () => <></>,
+                    },
+                    {
+                      title: "Browse Categories",
+                      itemId: "/title/1",
+                      elemBefore: () => <></>,
                       subNav: [
                         {
-                          title: "Projects",
-                          itemId: "/about/projects",
+                          title: "Graphics & Design",
+                          itemId: "/title/1",
                           // Optional
-                          elemBefore: () => <p>cloud</p>,
+                          elemBefore: () => <></>,
                         },
                         {
-                          title: "Members",
-                          itemId: "/about/members",
-                          elemBefore: () => <p>coffee</p>,
+                          title: "Digital Marketing",
+                          itemId: "/title/2",
+                          elemBefore: () => <></>,
+                        },
+                        {
+                          title: "Writing & Translation",
+                          itemId: "/title/3",
+                          elemBefore: () => <></>,
+                        },
+                        {
+                          title: "Video & Animation",
+                          itemId: "/title/4",
+                          elemBefore: () => <></>,
+                        },
+                        {
+                          title: "Music & Audio",
+                          itemId: "/title/5",
+                          elemBefore: () => <></>,
                         },
                       ],
                     },
                     {
-                      title: "Another Tab",
-                      itemId: "/another",
+                      title: "Explore",
+                      itemId: "/none/1",
                       subNav: [
                         {
-                          title: "Teams",
-                          itemId: "/another/teams",
-                          // Optional
-                          // elemBefore: () => <Icon name="calendar" />
+                          title: "Discover",
+                          itemId: "/none",
+                        },
+                        {
+                          title: "Guides",
+                          itemId: "/none",
+                        },
+                        {
+                          title: "Learn",
+                          itemId: "/none",
+                        },
+                        {
+                          title: "Logo Maker",
+                          itemId: "/none",
+                        },
+                        {
+                          title: "Community",
+                          itemId: "/none",
+                        },
+                        {
+                          title: "Podcast",
+                          itemId: "/none",
+                        },
+                        {
+                          title: "Blog",
+                          itemId: "/none",
+                        },
+                        {
+                          title: "Fiverr Workspace",
+                          itemId: "/none",
                         },
                       ],
-                    },
+                    },{
+                      title: "Fiverr Business",
+                      itemId: "/none/2",
+                    }
                   ]}
                 />
               </div>
             </div>
 
             <div className="logo">
-              <p>Logo</p>
+              <NavLink className="navbar-brand" to={""}>
+                <img src={logo1} alt="fiverrLogo" width={89} height={49} />
+              </NavLink>
             </div>
             <div className="join">
-              <p>Join</p>
+              <NavLink to={"/register"}>
+                <p>Join</p>
+              </NavLink>
             </div>
           </div>
         </div>

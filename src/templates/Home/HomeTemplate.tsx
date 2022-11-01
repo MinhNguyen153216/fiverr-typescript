@@ -10,30 +10,30 @@ type Props = {};
 
 export default function HomeTemplate({}: Props) {
   const location = useLocation();
-  const conditionalHeader = () => {
-    if (location.pathname === "/") {
-      return (
-        <ResponsiveItem
-          // Component={HeaderHome}
-          Component={HeaderTemplateMobile}
-          ComponentMobile={HeaderTemplateMobile}
-        />
-      );
-    }
-    // return <Header />;
-    return (
-      <ResponsiveItem
-        // Component={Header}
-        Component={HeaderTemplateMobile}
-        ComponentMobile={HeaderTemplateMobile}
-      />
-    );
-  };
+  // const conditionalHeader = () => {
+  //   if (location.pathname === "/") {
+  //     return (
+  //       <ResponsiveItem
+  //         // Component={HeaderHome}
+  //         Component={HeaderTemplateMobile}
+  //         ComponentMobile={HeaderTemplateMobile}
+  //       />
+  //     );
+  //   }
+  //   // return <Header />;
+  //   return (
+  //     <ResponsiveItem
+  //       // Component={Header}
+  //       Component={HeaderTemplateMobile}
+  //       ComponentMobile={HeaderTemplateMobile}
+  //     />
+  //   );
+  // };
   return (
     <>
-      {conditionalHeader()}
+      {/* {conditionalHeader()}
       <Outlet />
-      <Footer />
+      <Footer /> */}
     </>
   );
 }
