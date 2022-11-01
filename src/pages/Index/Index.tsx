@@ -1,10 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Carousel } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import Slider from "react-slick";
+import { timeout } from "../../util/setting";
 
 library.add(fas);
 
@@ -83,12 +84,15 @@ const settings = {
 };
 
 export default function Index({}: Props) {
-  const handleSearch = (e: React.SyntheticEvent) => {
+  const navigate = useNavigate();
+
+  const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const value: string | undefined = document.querySelector<HTMLInputElement>(
       'input[name="searchInputCarousel"]'
     )?.value;
-    console.log(value);
+    await timeout(1000);
+    navigate(`/result/${value}`);
   };
 
   return (

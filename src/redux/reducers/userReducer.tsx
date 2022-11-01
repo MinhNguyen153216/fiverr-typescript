@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../configStore";
 import { Signin, Signup } from "../models/authModel";
 import {
@@ -8,6 +8,7 @@ import {
   http,
   setCookie,
   setStore,
+  setStoreJson,
   USER_LOGIN,
 } from "../../util/setting";
 import Swal from "sweetalert2";
@@ -25,10 +26,14 @@ const initialState: InitialState = {
 const userReducer = createSlice({
   name: "userReducer",
   initialState,
-  reducers: {},
+  reducers: {
+    getUserProfile: (state, action: PayloadAction<nguoiDungModel>) => {
+      state.userLogin = action.payload;
+    },
+  },
 });
 
-export const {} = userReducer.actions;
+export const { getUserProfile } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -57,8 +62,10 @@ export const loginApi = (values: Signin) => {
     try {
       const result = await http.post("/auth/signin", values);
       console.log(result);
-      setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
-      setStore(ACCESS_TOKEN, result.data.content.accessToken);
+      setCookie(ACCESS_TOKEN, result.data.content.token, 30);
+      setStore(ACCESS_TOKEN, result.data.content.token);
+      setStoreJson(USER_LOGIN, result.data.content.user);
+      dispatch(getUserProfile(result.data.content.user));
       Swal.fire({
         icon: "success",
         title: "Đăng nhâp tài khoản thành công",

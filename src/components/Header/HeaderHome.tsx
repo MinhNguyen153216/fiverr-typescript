@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,7 @@ import {
   DsNhomChiTietLoai,
 } from "../../redux/models/congViecModel";
 import { getMenuCongViecApi } from "../../redux/reducers/congViecReducer";
+import { timeout } from "../../util/setting";
 
 library.add(fas);
 
@@ -28,7 +29,7 @@ export default function HeaderHome({}: Props) {
     (state: RootState) => state.congViecReducer
   );
   const dispatch: AppDispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getMenuCongViecApi());
     if (typeof window !== "undefined") {
@@ -107,10 +108,18 @@ export default function HeaderHome({}: Props) {
                         {dsNhom.dsChiTietLoai.map(
                           (dsChiTiet: DsChiTietLoai, index: number) => {
                             return (
-                              <p className="job-group-detail" key={index}>
+                              <NavLink
+                                to={`/categories/${dsChiTiet.id}`}
+                                className="job-group-detail"
+                                key={index}
+                              >
                                 {dsChiTiet.tenChiTiet}
+<<<<<<< HEAD
                                 {/* add onClick */}
                               </p>
+=======
+                              </NavLink>
+>>>>>>> 78497805b087c496fb5e9a6f2f038715fa9df746
                             );
                           }
                         )}
@@ -130,7 +139,8 @@ export default function HeaderHome({}: Props) {
     const value: string | undefined = document.querySelector<HTMLInputElement>(
       'input[name="searchInput"]'
     )?.value;
-    console.log(value);
+    timeout(1000);
+    navigate(`/result/${value}`);
   };
   const handleLogout = () => {
     console.log("logout");

@@ -34,7 +34,6 @@ export default function Register({}: Props) {
     }),
 
     onSubmit: (values: Signup) => {
-     
       dispatch(registerApi(values));
     },
   });
@@ -110,7 +109,6 @@ export default function Register({}: Props) {
                   placeholder=" "
                   type="text"
                   name="phone"
-                  
                 />
                 <label htmlFor="phone">Phone</label>
               </div>
