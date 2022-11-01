@@ -19,14 +19,10 @@ const nguoiDungReducer = createSlice({
   name: "nguoiDungReducer",
   initialState,
   reducers: {
-    logOutUserAction: (state, action: PayloadAction<nguoiDungModel>) => {
-      console.log(action.payload);
-      localStorage.clear();
-      state.userLogin = null;
-    },
+    
   },
 });
 
-export const { logOutUserAction } = nguoiDungReducer.actions;
+export const {} = nguoiDungReducer.actions;
 
 export default nguoiDungReducer.reducer;

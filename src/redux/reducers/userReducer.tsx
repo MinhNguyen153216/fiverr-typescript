@@ -31,10 +31,15 @@ const userReducer = createSlice({
     getUserProfile: (state, action: PayloadAction<nguoiDungModel>) => {
       state.userLogin = action.payload;
     },
+    logOutUserAction: (state, action: PayloadAction<nguoiDungModel>) => {
+      console.log(action.payload);
+      localStorage.clear();
+      state.userLogin = getStoreJson(USER_LOGIN);
+    },
   },
 });
 
-export const { getUserProfile } = userReducer.actions;
+export const { getUserProfile, logOutUserAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -93,3 +98,4 @@ export const rentJobApi = (rentJob: ThueCongViec) => {
     }
   };
 };
+

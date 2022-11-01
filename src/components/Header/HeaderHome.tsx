@@ -5,7 +5,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/configStore";
-import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+import { logOutUserAction } from "../../redux/reducers/userReducer";
 import {
   congViecModel,
   DsChiTietLoai,
@@ -23,20 +23,24 @@ const logo2 = "./img/Fiverr-Logo-small.png";
 export default function HeaderHome({}: Props) {
   const [small, setSmall] = useState(false);
   const { userLogin } = useSelector(
-    (state: RootState) => state.nguoiDungReducer
+    (state: RootState) => state.userReducer
   );
   const { menuCongViec } = useSelector(
     (state: RootState) => state.congViecReducer
   );
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
+    console.log("user:",userLogin);
+
     dispatch(getMenuCongViecApi());
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () =>
         setSmall(window.pageYOffset > 100)
       );
     }
+    renderLogin();
 
     return () => {
       // console.log("clean");
@@ -149,19 +153,9 @@ export default function HeaderHome({}: Props) {
           <div className="container">
             <NavLink className="navbar-brand" to={""}>
               {small ? (
-                <img
-                  src={logo1}
-                  alt="fiverrLogo"
-                  width={89}
-                  height={49}
-                />
+                <img src={logo1} alt="fiverrLogo" width={89} height={49} />
               ) : (
-                <img
-                  src={logo2}
-                  alt="fiverrLogo"
-                  width={97}
-                  height={28}
-                />
+                <img src={logo2} alt="fiverrLogo" width={97} height={28} />
               )}
             </NavLink>
 

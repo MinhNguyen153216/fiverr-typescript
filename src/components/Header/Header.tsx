@@ -11,7 +11,7 @@ import {
   DsNhomChiTietLoai,
   DsChiTietLoai,
 } from "../../redux/models/congViecModel";
-import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+import { logOutUserAction } from "../../redux/reducers/userReducer";
 import { ACCESS_TOKEN, timeout } from "../../util/setting";
 library.add(fas);
 
@@ -20,10 +20,7 @@ type Props = {};
 const logo = "./img/Fiverr-Logo.png";
 
 export default function Header({}: Props) {
-  const { userLogin } = useSelector(
-    (state: RootState) => state.nguoiDungReducer
-  );
-  console.log(userLogin);
+  const { userLogin } = useSelector((state: RootState) => state.userReducer);
   const { menuCongViec } = useSelector(
     (state: RootState) => state.congViecReducer
   );
