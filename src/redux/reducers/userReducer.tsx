@@ -98,4 +98,3 @@ export const rentJobApi = (rentJob: ThueCongViec) => {
     }
   };
 };
-
