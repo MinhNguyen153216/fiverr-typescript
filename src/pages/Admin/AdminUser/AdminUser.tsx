@@ -25,7 +25,6 @@ export default function AdminUser({}: Props) {
   );
   const dispatch: AppDispatch = useDispatch();
   let [searchParams, setSearchParams] = useSearchParams();
-  const [arrUserSearch, setArrUserSearch] = useState(arrUser);
   let keywordRef = useRef("");
   const [pageNumber, setPageNumber] = useState(0);
   const [editable,setEditable]=useState(false)
@@ -38,7 +37,7 @@ export default function AdminUser({}: Props) {
     .map((user: nguoiDungModel, index: number) => {
       return (
         <tr key={user.id}>
-          <td>{user.id}</td>
+          <td className="text-center">{user.id}</td>
           <td>{user.name}</td>
           <td>{user.role}</td>
           <td>{user.email}</td>
@@ -123,9 +122,9 @@ export default function AdminUser({}: Props) {
         />
         <button type="submit">Tìm</button>
       </form>
-      <table className="table table-striped">
+      <table className="table table-striped" >
         <thead>
-          <tr>
+          <tr className="text-center">
             <th>Id</th>
             <th>Name</th>
             <th>Role</th>

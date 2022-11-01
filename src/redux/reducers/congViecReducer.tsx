@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { http } from "../../util/setting";
 import { AppDispatch } from "../configStore";
-import { CongViecChiTiet, congViecModel } from "../models/congViecModel";
+import { CongViec, CongViecChiTiet, congViecModel } from "../models/congViecModel";
 
 type InitialState = {
   menuCongViec: congViecModel[];
   detailJob: CongViecChiTiet;
   arrResult: CongViecChiTiet[];
   arrCategory: CongViecChiTiet[];
+  arrTask:CongViec[]
 };
 
 const initialState: InitialState = {
@@ -34,6 +35,7 @@ const initialState: InitialState = {
   },
   arrResult: [],
   arrCategory: [],
+  arrTask:[],
 };
 
 const congViecReducer = createSlice({
@@ -52,10 +54,13 @@ const congViecReducer = createSlice({
     getCategory: (state, action: PayloadAction<CongViecChiTiet[]>) => {
       state.arrCategory = action.payload;
     },
+    getTaskAction: (state, action: PayloadAction<CongViec[]>) => {
+      state.arrTask = action.payload;
+    },
   },
 });
 
-export const { getMenuCongViecAction, getDetailJob, getResult, getCategory } =
+export const { getMenuCongViecAction, getDetailJob, getResult, getCategory,getTaskAction } =
   congViecReducer.actions;
 
 export default congViecReducer.reducer;
@@ -113,3 +118,28 @@ export const getCategoryApi = (id: String | number) => {
   };
 };
 
+export const getTaskApi=(keyword:number)=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      if( keyword !== null){
+        const result = await http.get("/cong-viec/" + keyword);
+        let arrTask:CongViec[]=result.data.content
+        const action = getTaskAction(arrTask)
+        console.log(result);
+        dispatch(action)
+        // console.log(action);
+      }else{
+        const result = await http.get('/cong-viec')
+        let arrTask:CongViec[]=result.data.content
+        const action = getTaskAction(arrTask)
+        // console.log(result);
+        dispatch(action)
+        // console.log(action);      
+      } 
+    }catch(err){
+      console.log(err);
+      
+    }
+  }
+
+}
