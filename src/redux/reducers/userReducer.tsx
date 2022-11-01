@@ -35,6 +35,7 @@ const userReducer = createSlice({
       console.log(action.payload);
       localStorage.clear();
       state.userLogin = getStoreJson(USER_LOGIN);
+      Swal.fire({ icon: "success", title: "Đăng xuất thành công" });
     },
   },
 });
@@ -52,8 +53,12 @@ export const registerApi = (userRegister: Signup) => {
       Swal.fire({
         icon: "success",
         title: "Đăng kí tài khoản thành công",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/login");
+        }
       });
-      history.push("/login");
     } catch (err) {
       console.log(err);
       Swal.fire({
@@ -76,8 +81,12 @@ export const loginApi = (values: Signin) => {
       Swal.fire({
         icon: "success",
         title: "Đăng nhâp tài khoản thành công",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/home");
+        }
       });
-      history.push("/home");
     } catch (err: any) {
       Swal.fire({
         icon: "error",
