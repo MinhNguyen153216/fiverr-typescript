@@ -12,7 +12,7 @@ import {
   DsChiTietLoai,
 } from "../../redux/models/congViecModel";
 import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
-import { timeout } from "../../util/setting";
+import { ACCESS_TOKEN, timeout } from "../../util/setting";
 library.add(fas);
 
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
@@ -23,6 +23,7 @@ export default function Header({}: Props) {
   const { userLogin } = useSelector(
     (state: RootState) => state.nguoiDungReducer
   );
+  console.log(userLogin);
   const { menuCongViec } = useSelector(
     (state: RootState) => state.congViecReducer
   );

@@ -52,6 +52,8 @@ export default function JobDetail({}: Props) {
   }/${current.getFullYear()}`;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     let { id } = params;
     dispatch(getDetailJobApi(id));
     dispatch(getJobCommentApi(id));
@@ -138,7 +140,7 @@ export default function JobDetail({}: Props) {
       noiDung: "",
     },
     onSubmit: (value: any) => {
-      if (!getStore(ACCESS_TOKEN)) {
+      if (userLogin === null) {
         Swal.fire({
           icon: "warning",
           title: "Đăng nhập để tiếp tục bình luận",
@@ -241,7 +243,7 @@ export default function JobDetail({}: Props) {
   };
 
   const handleCheckOut = () => {
-    if (!getStore(ACCESS_TOKEN)) {
+    if (userLogin === null) {
       Swal.fire({
         icon: "warning",
         title: "Vui lòng đăng nhập để thuê công việc",

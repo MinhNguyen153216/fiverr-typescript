@@ -16,6 +16,8 @@ export default function Categories({}: Props) {
   const params: any = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     let { id } = params;
     dispatch(getCategoryApi(id));
   }, [params.id]);
@@ -35,7 +37,7 @@ export default function Categories({}: Props) {
       <div className="container">
         <div className="categories-link">
           <ul className="d-flex algin-items-center gap-2">
-            <li >
+            <li>
               <NavLink to="/home">Fiverr</NavLink>
               <span className="XQskgrQ chevron-icon-right" aria-hidden="true">
                 <svg
@@ -49,7 +51,7 @@ export default function Categories({}: Props) {
                 </svg>
               </span>
             </li>
-            <li >
+            <li>
               <NavLink to="/">{arrCategory[0]?.tenLoaiCongViec}</NavLink>
               <span className="XQskgrQ chevron-icon-right" aria-hidden="true">
                 <svg
@@ -226,7 +228,6 @@ export default function Categories({}: Props) {
                 </li>
               </ul>
             </div>
-           
           </div>
           <div className="categories-topbar-toggle col-lg-6 d-flex justify-content-end gap-5 align-items-center">
             <div className="toggle-item d-flex align-items-center">
