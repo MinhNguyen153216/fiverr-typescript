@@ -80,8 +80,8 @@ http.interceptors.request.use(
     const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,
-      ["Authorization"]: `${token}`,
-      ["TokenCybersoft"]: TOKEN_CYBERSOFT,
+      ["token"]: `${token}`,
+      ["tokenCybersoft"]: TOKEN_CYBERSOFT,
     };
     // config.headers['Content-Type'] = 'application/json';
     return config;
