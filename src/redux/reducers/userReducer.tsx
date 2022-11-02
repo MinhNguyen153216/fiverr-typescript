@@ -103,7 +103,7 @@ export const rentJobApi = (rentJob: ThueCongViec) => {
       const result = await http.post("/thue-cong-viec", rentJob);
       Swal.fire({
         icon: "success",
-        title: result.data.content,
+        title: result.data.message,
       });
     } catch (err) {
       console.log(err);
