@@ -257,7 +257,7 @@ export default function JobDetail({}: Props) {
         ngayThue: today,
         hoanThanh: false,
       });
-      rentJobApi(rentJob);
+      dispatch(rentJobApi(rentJob));
     }
   };
 
