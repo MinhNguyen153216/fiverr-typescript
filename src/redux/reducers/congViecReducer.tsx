@@ -118,24 +118,42 @@ export const getCategoryApi = (id: String | number) => {
   };
 };
 
-export const getTaskApi=(keyword:number)=>{
+// export const getTaskApi=(keyword:any,id:any)=>{
+//   return async (dispatch:AppDispatch)=>{
+//     try{
+//       if( keyword !== null){
+//         const result = await http.get("/cong-viec/" + keyword);
+//         let arrTask:CongViec[]=result.data.content
+//         const action = getTaskAction(arrTask)
+//         console.log(result);
+//         dispatch(action)
+//         // console.log(action);
+//       }else{
+//         const result = await http.get('/cong-viec')
+//         let arrTask:CongViec[]=result.data.content
+//         const action = getTaskAction(arrTask)
+//         dispatch(action)
+//       } 
+//     }catch(err){
+//       console.log(err);
+      
+//     }
+//   }
+
+// }
+
+export const getTaskApi=(keyword:any,id:any)=>{
   return async (dispatch:AppDispatch)=>{
     try{
-      if( keyword !== null){
-        const result = await http.get("/cong-viec/" + keyword);
-        let arrTask:CongViec[]=result.data.content
+      if(!keyword&&!id){
+        
+      }
+      
+        const result = await http.get(`cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=5&keyword=${keyword}`)
+        let arrTask:CongViec[]=result.data.content.data
         const action = getTaskAction(arrTask)
-        console.log(result);
         dispatch(action)
-        // console.log(action);
-      }else{
-        const result = await http.get('/cong-viec')
-        let arrTask:CongViec[]=result.data.content
-        const action = getTaskAction(arrTask)
-        // console.log(result);
-        dispatch(action)
-        // console.log(action);      
-      } 
+      
     }catch(err){
       console.log(err);
       
