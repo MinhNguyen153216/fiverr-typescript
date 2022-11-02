@@ -84,7 +84,10 @@ export const rentJobApi = (rentJob: ThueCongViec) => {
   return async (dispatch: AppDispatch) => {
     try {
       const result = await http.post("/thue-cong-viec", rentJob);
-      console.log(result);
+      Swal.fire({
+        icon: "success",
+        title: result.data.content,
+      });
     } catch (err) {
       console.log(err);
     }
