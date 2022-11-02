@@ -38,14 +38,6 @@ export default function JobDetail({}: Props) {
     noiDung: "",
     saoBinhLuan: 2,
   });
-  const [rentJob, setRentJob] = useState<ThueCongViec>({
-    id: 0,
-    maCongViec: 0,
-    maNguoiThue: 0,
-    ngayThue: "",
-    hoanThanh: false,
-  });
-
   const current = new Date();
   const today = `${current.getDate()}/${
     current.getMonth() + 1
@@ -250,13 +242,14 @@ export default function JobDetail({}: Props) {
       });
       navigate("/login");
     } else {
-      setRentJob({
+      const rentJob = {
         id: 0,
         maCongViec: detailJob.id,
         maNguoiThue: userLogin.id,
         ngayThue: today,
         hoanThanh: false,
-      });
+      };
+
       dispatch(rentJobApi(rentJob));
     }
   };
