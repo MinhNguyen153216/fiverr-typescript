@@ -14,6 +14,7 @@ import {
 import Swal from "sweetalert2";
 import { nguoiDungModel } from "../models/nguoiDungModel";
 import { ThueCongViec } from "../models/congViecModel";
+import { history } from "../../index";
 
 type InitialState = {
   userLogin: nguoiDungModel;
@@ -30,10 +31,16 @@ const userReducer = createSlice({
     getUserProfile: (state, action: PayloadAction<nguoiDungModel>) => {
       state.userLogin = action.payload;
     },
+    logOutUserAction: (state, action: PayloadAction<nguoiDungModel>) => {
+      console.log(action.payload);
+      localStorage.clear();
+      state.userLogin = getStoreJson(USER_LOGIN);
+      Swal.fire({ icon: "success", title: "Đăng xuất thành công" });
+    },
   },
 });
 
-export const { getUserProfile } = userReducer.actions;
+export const { getUserProfile, logOutUserAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -46,6 +53,11 @@ export const registerApi = (userRegister: Signup) => {
       Swal.fire({
         icon: "success",
         title: "Đăng kí tài khoản thành công",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/login");
+        }
       });
     } catch (err) {
       console.log(err);
@@ -69,6 +81,11 @@ export const loginApi = (values: Signin) => {
       Swal.fire({
         icon: "success",
         title: "Đăng nhâp tài khoản thành công",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/home");
+        }
       });
     } catch (err: any) {
       Swal.fire({

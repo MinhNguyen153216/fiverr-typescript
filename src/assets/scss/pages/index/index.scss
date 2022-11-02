@@ -64,6 +64,9 @@
               margin-bottom: 10px;
             }
           }
+          @media screen and (max-width: 500px) {
+            display: none !important;
+          }
         }
         @media screen and(max-width:767px) {
           max-width: 90%;
@@ -153,6 +156,7 @@
       }
       @media screen and(max-width: 576px) {
         margin-right: 15px;
+        max-width: 15%;
       }
     }
   }
@@ -187,7 +191,7 @@
             position: absolute;
             top: 0;
             left: 5%;
-            width: 100%;
+            max-width: 100%;
             margin: 16px 16px;
             p {
               @include text-config(500, 14px, 1.2, white);
@@ -205,6 +209,16 @@
             @media screen and (max-width: 600px) {
               left: 30%;
             }
+            @media screen and (max-width: 576px) {
+              left: 50%;
+              transform: translateX(-60%);
+              text-align: center;
+              p,
+              h3 {
+                display: block;
+                width: 100%;
+              }
+            }
           }
         }
       }
@@ -218,6 +232,9 @@
         margin-left: 0;
         margin-right: 0;
       }
+    }
+    @media screen and (max-width: 576px) {
+      text-align: center;
     }
   }
 }
@@ -308,4 +325,99 @@
 .left {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
+}
+
+.wholeWorld {
+  background-color: #f1fdf7;
+  .container {
+    height: 100%;
+    .row {
+      @media screen and (max-width: 600px) {
+        --bs-gutter-x: 0;
+        padding: 0px 15px;
+      }
+      .wholeWorld-left {
+        height: 100%;
+        max-width: 100%;
+        @media screen and (max-width: 900px) {
+          flex: 0 0 auto;
+        }
+        padding-right: 12%;
+        h1 {
+          @include text-config(700, 32px, 1.2, #404145);
+          padding-bottom: 24px;
+          margin: 0;
+        }
+        h3 {
+          @include text-config(600, 18px, 1.2, #404145);
+          P {
+            display: inline-block;
+            @include text-config(600, 18px, 1.2, #404145);
+            padding-bottom: 8px;
+            margin: 0;
+            margin-left: 10px;
+          }
+        }
+        p {
+          @include text-config(500, 18px, 1.2, #62646a);
+          padding-bottom: 24px;
+          margin: 0;
+        }
+      }
+      .wholeWorld-right {
+        height: 100%;
+        max-width: 100%;
+        @media screen and (max-width: 900px) {
+          flex: 0 0 auto;
+        }
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.marketplace {
+  .container {
+    h1 {
+      @include text-config(600, 32px, 1.2, #404145);
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+    }
+    .d-flex {
+      flex-wrap: wrap;
+      .item {
+        width: 20%;
+        .content {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          padding-bottom: 45px;
+          img {
+            width: 48px;
+            height: 53px;
+            border-bottom: 2px solid #c5c6c9;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+          }
+          p {
+            @include text-config(500, 16px, 1.2, #404145);
+          }
+        }
+        @media screen and(max-width:1200px) {
+          width: 25%;
+        }
+        @media screen and(max-width:900px) {
+          width: 33%;
+        }
+        @media screen and(max-width:768px) {
+          width: 50%;
+        }
+      }
+    }
+  }
 }

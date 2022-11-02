@@ -12,21 +12,19 @@ import {
 import { nguoiDungModel } from "../models/nguoiDungModel";
 
 const initialState: any = {
-  userLogin: getStoreJson(USER_LOGIN),
+  userLogin1: getStoreJson(USER_LOGIN),
 };
 
 const nguoiDungReducer = createSlice({
   name: "nguoiDungReducer",
   initialState,
   reducers: {
-    logOutUserAction: (state, action: PayloadAction<nguoiDungModel>) => {
-      console.log(action.payload);
-      localStorage.clear();
-      state.userLogin = null;
+    testingAction:(state, action: PayloadAction<nguoiDungModel>) => {
+      state.userLogin1 = action.payload;
     },
   },
 });
 
-export const { logOutUserAction } = nguoiDungReducer.actions;
+export const {testingAction} = nguoiDungReducer.actions;
 
 export default nguoiDungReducer.reducer;

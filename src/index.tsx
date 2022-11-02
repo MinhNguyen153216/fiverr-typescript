@@ -24,6 +24,8 @@ import ResponsiveItem from "./HOC/Responsive/ResponsiveItem";
 import AdminTemplate from "./templates/Admin/AdminTemplate";
 import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
 import Login from "./pages/Login/Login";
+import JobTitle from "./pages/JobTitle/JobTitle";
+import UserDetail from "./pages/UserDetail/UserDetail";
 //
 
 
@@ -48,6 +50,10 @@ root.render(
           <Route path="/jobdetail">
             <Route path=":id" element={<JobDetail />}></Route>
           </Route>
+          <Route path="/title">
+            <Route path=":id" element={<JobTitle />}></Route>
+          </Route>
+          <Route path="/userdetail"  element={<UserDetail/>}></Route>
           <Route path="*" element={<Navigate to="" />}></Route>
         </Route>
        
