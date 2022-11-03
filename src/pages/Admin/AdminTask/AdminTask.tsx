@@ -16,27 +16,28 @@ type Props = {};
 
 export default function AdminTask({}: Props) {
   const { arrTask } = useSelector((state: RootState) => state.congViecReducer);
+  const { arrRow } = useSelector((state: RootState) => state.congViecReducer);
   const dispatch: AppDispatch = useDispatch();
 
   let keywordRef = useRef("");
   let [searchParams, setSearchParams] = useSearchParams();
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
   const [editable, setEditable] = useState(false);
   const [active, setActive] = useState(false);
-  console.log(arrTask);
+  console.log(arrRow);
   // console.log(Number(keywordRef.current));
 
   const tasksPerPage = 5;
-  const pageCount = Math.ceil(arrTask.length / tasksPerPage);
+  // const pageCount = Math.ceil(arrTask.length / tasksPerPage);
+  const pageCount = Math.ceil(arrRow/ tasksPerPage);
   const changePage = ({ selected }: any) => {
-    setPageNumber(selected);
+    setPageNumber(selected+1);
     // return selected
   };
   // console.log({selected})
 
-  const pagesVisited = pageNumber * tasksPerPage;
+  // const pagesVisited = pageNumber * tasksPerPage;
   let displayTasks = arrTask
-    .slice(pagesVisited, pagesVisited + tasksPerPage)
     .map((task: CongViec, index: number) => {
       return (
         <tr key={task.id}>
@@ -97,8 +98,8 @@ export default function AdminTask({}: Props) {
   };
 
   useEffect(() => {
-    dispatch(getTaskApi(keyword));
-  }, [keywordRef.current]);
+    dispatch(getTaskApi(keyword,pageNumber));
+  }, [keywordRef.current,pageNumber]);
 
   return (
     <div className="adminuser">

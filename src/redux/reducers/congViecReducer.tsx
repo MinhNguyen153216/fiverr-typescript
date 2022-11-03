@@ -10,6 +10,7 @@ type InitialState = {
   arrResult: CongViecChiTiet[];
   arrCategory: CongViecChiTiet[];
   arrTask:CongViec[]
+  arrRow:any
 };
 
 const initialState: InitialState = {
@@ -37,6 +38,7 @@ const initialState: InitialState = {
   arrResult: [],
   arrCategory: [],
   arrTask:[],
+  arrRow:[]
 };
 
 const congViecReducer = createSlice({
@@ -58,10 +60,14 @@ const congViecReducer = createSlice({
     getTaskAction: (state, action: PayloadAction<CongViec[]>) => {
       state.arrTask = action.payload;
     },
+    getTotalRowAction: (state, action: PayloadAction<any>) => {
+      state.arrRow = action.payload;
+    },
+  
   },
 });
 
-export const { getMenuCongViecAction, getDetailJob, getResult, getCategory,getTaskAction } =
+export const { getTotalRowAction,getMenuCongViecAction, getDetailJob, getResult, getCategory,getTaskAction } =
   congViecReducer.actions;
 
 export default congViecReducer.reducer;
@@ -119,45 +125,22 @@ export const getCategoryApi = (id: String | number) => {
   };
 };
 
-export const getTaskApi=(keyword:any)=>{
-  return async (dispatch:AppDispatch)=>{
-    try{
-      if(keyword!=='' && keyword !== null){
-        const result = await http.get("/cong-viec/lay-danh-sach-cong-viec-theo-ten/" + keyword);
-        let arrTask:CongViec[]=result.data.content
-        const action = getTaskAction(arrTask)
-        console.log(result);
-        dispatch(action)
-        // console.log(action);
-      }else{
-        const result = await http.get('/cong-viec')
-        let arrTask:CongViec[]=result.data.content
-        const action = getTaskAction(arrTask)
-        dispatch(action)
-      } 
-    }catch(err){
-      console.log(err);
-      
-    }
-  }
-
-}
-
-// export const getTaskApi=(keyword:any,id:any)=>{
+// export const getTaskApi=(keyword:any)=>{
 //   return async (dispatch:AppDispatch)=>{
 //     try{
-//       if(!keyword||keyword===''){
+//       if(keyword!=='' && keyword !== null){
+//         const result = await http.get("/cong-viec/lay-danh-sach-cong-viec-theo-ten/" + keyword);
+//         let arrTask:CongViec[]=result.data.content
+//         const action = getTaskAction(arrTask)
+//         console.log(result);
+//         dispatch(action)
+//         // console.log(action);
+//       }else{
 //         const result = await http.get('/cong-viec')
-//                 let arrTask:CongViec[]=result.data.content
-//                 const action = getTaskAction(arrTask)
-//                 dispatch(action)
-//       }else if(keyword!==''){
-//         console.log(keyword,id);
-//         const result = await http.get(`cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=5&keyword=${keyword}`)
-//         let arrTask:CongViec[]=result.data.content.data
+//         let arrTask:CongViec[]=result.data.content
 //         const action = getTaskAction(arrTask)
 //         dispatch(action)
-//       }   
+//       } 
 //     }catch(err){
 //       console.log(err);
       
@@ -165,6 +148,36 @@ export const getTaskApi=(keyword:any)=>{
 //   }
 
 // }
+
+export const getTaskApi=(keyword:any,id:number)=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      // if(!keyword||keyword===''){
+      //   const result = await http.get('/cong-viec')
+        
+      //           let arrTask:CongViec[]=result.data.content
+      //           const action = getTaskAction(arrTask)
+      //           dispatch(action)
+      // }else if(keyword!==''){
+        console.log(keyword,id);
+        const result = await http.get(`/cong-viec/phan-trang-tim-kiem?pageIndex=${id}&pageSize=5&keyword=${keyword}`)
+        console.log(result);
+        
+        let arrTask:CongViec[]=result.data.content.data
+        let totalRow:any = result.data.content.totalRow
+        const action = getTaskAction(arrTask)
+        const actionRow = getTotalRowAction(totalRow)
+        
+        
+        dispatch(action)
+        dispatch(actionRow)
+      // }   
+    }catch(err){
+      console.log(err);
+      
+    }
+  }
+}
 
 
 export const deleteTaskApi=(id:number,task:any)=>{
@@ -175,7 +188,7 @@ export const deleteTaskApi=(id:number,task:any)=>{
         icon: "success",
         title: "Xóa tài khoản thành công",
       });
-      dispatch(getTaskApi(''))
+      // dispatch(getTaskApi(''))
     }catch(err){
       console.log(err);
       Swal.fire({
