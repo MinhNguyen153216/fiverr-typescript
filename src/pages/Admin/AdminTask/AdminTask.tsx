@@ -3,38 +3,40 @@ import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { number } from "yup/lib/locale";
+import PopUpModal from "../../../components/PopUpModal/PopUpModal";
+import PopUpTask from "../../../components/PopUpModal/PopUpTask";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { CongViec } from "../../../redux/models/congViecModel";
-import { getTaskApi } from "../../../redux/reducers/congViecReducer";
+import {
+  deleteTaskApi,
+  getTaskApi,
+} from "../../../redux/reducers/congViecReducer";
 
 type Props = {};
 
 export default function AdminTask({}: Props) {
   const { arrTask } = useSelector((state: RootState) => state.congViecReducer);
+  const dispatch: AppDispatch = useDispatch();
 
   let keywordRef = useRef("");
   let [searchParams, setSearchParams] = useSearchParams();
-  const dispatch: AppDispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(0);
   const [editable, setEditable] = useState(false);
   const [active, setActive] = useState(false);
   console.log(arrTask);
   // console.log(Number(keywordRef.current));
 
-   const tasksPerPage = 5;
-    const pageCount = Math.ceil(arrTask.length / tasksPerPage);
-    const changePage = ({ selected }: any) => {
-      setPageNumber(selected);
-        return selected
-    };
-      // console.log({selected})
+  const tasksPerPage = 5;
+  const pageCount = Math.ceil(arrTask.length / tasksPerPage);
+  const changePage = ({ selected }: any) => {
+    setPageNumber(selected);
+    // return selected
+  };
+  // console.log({selected})
 
-
-
-
-  // const pagesVisited = pageNumber * tasksPerPage;
+  const pagesVisited = pageNumber * tasksPerPage;
   let displayTasks = arrTask
-    // .slice(pagesVisited, pagesVisited + tasksPerPage)
+    .slice(pagesVisited, pagesVisited + tasksPerPage)
     .map((task: CongViec, index: number) => {
       return (
         <tr key={task.id}>
@@ -63,9 +65,9 @@ export default function AdminTask({}: Props) {
             </button>
             <button
               className="btn btn-danger"
-              // onClick={() => {
-              //   handleDelete(user.id, user);
-              // }}
+              onClick={() => {
+                handleDelete(task.id, task);
+              }}
             >
               Xóa
             </button>
@@ -73,6 +75,13 @@ export default function AdminTask({}: Props) {
         </tr>
       );
     });
+
+  const handleDelete = (id: number, task: any) => {
+    const actionThunk = deleteTaskApi(id, task);
+    console.log(id);
+    dispatch(actionThunk);
+  };
+  // console.log(displayTasks);
 
   let keyword: any = searchParams.get("keyword");
   // console.log(keyword);
@@ -88,7 +97,7 @@ export default function AdminTask({}: Props) {
   };
 
   useEffect(() => {
-    dispatch(getTaskApi(keyword,1));
+    dispatch(getTaskApi(keyword));
   }, [keywordRef.current]);
 
   return (
@@ -97,11 +106,11 @@ export default function AdminTask({}: Props) {
         <span
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
-          // onClick={()=>{
-          //   setEditable(false)
-          // }}
+          onClick={() => {
+            setEditable(false);
+          }}
         >
-          Thêm quản trị viên
+          Thêm công việc
         </span>
       </h1>
       <form className="search" onSubmit={handleSubmit}>
@@ -128,17 +137,18 @@ export default function AdminTask({}: Props) {
       </table>
 
       <ReactPaginate
-      previousLabel={"Prev"}
-      nextLabel={"Next"}
-      pageCount={pageCount}
-      onPageChange={changePage}
-      containerClassName={"paginationBtn"}
-      previousLinkClassName={"previousBtn"}
-      nextLinkClassName={"nextBtn"}
-      disabledClassName={"paginationDisabled"}
-      activeClassName={"paginationActive"}
-    />
-      {/* <PopUpModal editable={editable} setEditable={setEditable}/> */}
+        previousLabel={"Prev"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName={"paginationBtn"}
+        previousLinkClassName={"previousBtn"}
+        nextLinkClassName={"nextBtn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
+      />
+      <PopUpModal editable={editable} setEditable={setEditable} />
+      
     </div>
   );
 }

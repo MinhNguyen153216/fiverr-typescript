@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import { http } from "../../util/setting";
 import { AppDispatch } from "../configStore";
 import { CongViec, CongViecChiTiet, congViecModel } from "../models/congViecModel";
@@ -118,22 +119,45 @@ export const getCategoryApi = (id: String | number) => {
   };
 };
 
+export const getTaskApi=(keyword:any)=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      if(keyword!=='' && keyword !== null){
+        const result = await http.get("/cong-viec/lay-danh-sach-cong-viec-theo-ten/" + keyword);
+        let arrTask:CongViec[]=result.data.content
+        const action = getTaskAction(arrTask)
+        console.log(result);
+        dispatch(action)
+        // console.log(action);
+      }else{
+        const result = await http.get('/cong-viec')
+        let arrTask:CongViec[]=result.data.content
+        const action = getTaskAction(arrTask)
+        dispatch(action)
+      } 
+    }catch(err){
+      console.log(err);
+      
+    }
+  }
+
+}
+
 // export const getTaskApi=(keyword:any,id:any)=>{
 //   return async (dispatch:AppDispatch)=>{
 //     try{
-//       if( keyword !== null){
-//         const result = await http.get("/cong-viec/" + keyword);
-//         let arrTask:CongViec[]=result.data.content
-//         const action = getTaskAction(arrTask)
-//         console.log(result);
-//         dispatch(action)
-//         // console.log(action);
-//       }else{
+//       if(!keyword||keyword===''){
 //         const result = await http.get('/cong-viec')
-//         let arrTask:CongViec[]=result.data.content
+//                 let arrTask:CongViec[]=result.data.content
+//                 const action = getTaskAction(arrTask)
+//                 dispatch(action)
+//       }else if(keyword!==''){
+//         console.log(keyword,id);
+//         const result = await http.get(`cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=5&keyword=${keyword}`)
+//         let arrTask:CongViec[]=result.data.content.data
 //         const action = getTaskAction(arrTask)
 //         dispatch(action)
-//       } 
+//       }   
 //     }catch(err){
 //       console.log(err);
       
@@ -142,22 +166,22 @@ export const getCategoryApi = (id: String | number) => {
 
 // }
 
-export const getTaskApi=(keyword:any,id:any)=>{
+
+export const deleteTaskApi=(id:number,task:any)=>{
   return async (dispatch:AppDispatch)=>{
     try{
-      if(!keyword&&!id){
-        
-      }
-      
-        const result = await http.get(`cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=5&keyword=${keyword}`)
-        let arrTask:CongViec[]=result.data.content.data
-        const action = getTaskAction(arrTask)
-        dispatch(action)
-      
+      const result=await http.delete(`/cong-viec/${id}`)
+      Swal.fire({
+        icon: "success",
+        title: "Xóa tài khoản thành công",
+      });
+      dispatch(getTaskApi(''))
     }catch(err){
       console.log(err);
-      
+      Swal.fire({
+        icon: "error",
+        title: "Không có quyền xóa",
+      });
     }
   }
-
 }

@@ -29,6 +29,7 @@ import ResponsiveItem from "./HOC/Responsive/ResponsiveItem";
 import AdminTemplate from "./templates/Admin/AdminTemplate";
 import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
 import Login from "./pages/Login/Login";
+import Test from "./pages/Test";
 //
 
 
@@ -40,6 +41,7 @@ root.render(
   <Provider store={store}>
     <HistoryRouter history={history}>
       <Routes>
+        <Route path="/test" element={<Test/>}/>
         <Route path="" element={<HeaderTemplate />}>
           <Route index element={<Index />}></Route>
           <Route path="/register"  element={<Register />}></Route>

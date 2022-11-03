@@ -17,7 +17,7 @@ type Props = {
   setEditable: any;
 };
 
-export default function PopUpModal({ editable, setEditable }: Props) {
+export default function PopUpTask({ editable, setEditable }: Props) {
   const { arrUserEdit } = useSelector(
     (state: RootState) => state.nguoiDungReducer
   );
@@ -31,20 +31,20 @@ export default function PopUpModal({ editable, setEditable }: Props) {
   const frm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      email: "",
-      password: "",
-      name: "",
-      phone: "",
-      gender: true,
-      birthday: "",
-      role: "ADMIN",
-      // email: arrUserEdit.email,
-      // password: arrUserEdit.password,
-      // name: arrUserEdit.name,
-      // phone: arrUserEdit.phone,
+      // email: "",
+      // password: "",
+      // name: "",
+      // phone: "",
       // gender: true,
-      // birthday: arrUserEdit.birthday,
-      // id: arrUserEdit.id,
+      // birthday: "",
+      role: "ADMIN",
+      email: arrUserEdit.email,
+      password: arrUserEdit.password,
+      name: arrUserEdit.name,
+      phone: arrUserEdit.phone,
+      gender: true,
+      birthday: arrUserEdit.birthday,
+      id: arrUserEdit.id,
     },
 
     //check validation
@@ -76,11 +76,12 @@ export default function PopUpModal({ editable, setEditable }: Props) {
 
   return (
     <div
-      className="modal fade popupmodal"
-      id="exampleModal"
+      className="modal popupmodal fade "
+      id=" exampleModalTask "
       tabIndex={-1}
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
+    //   data-bs-backdrop="static"
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -147,24 +148,7 @@ export default function PopUpModal({ editable, setEditable }: Props) {
                     }
                   />
 
-                  {/* <i
-                class="fa fa-eye"
-                id="togglePassword"
-                onClick={() => {
-                  const type =
-                    document.querySelector("#password").getAttribute("type") ===
-                    "password"
-                      ? "text"
-                      : "password";
-                  document
-                    .querySelector("#password")
-                    .setAttribute("type", type);
-                  // toggle the eye / eye slash icon
-                  document
-                    .querySelector("#togglePassword")
-                    .classList.toggle("fa fa-eye-slash");
-                }}
-              ></i> */}
+              
                 </div>
                 {frm.errors.password ? (
                   <p

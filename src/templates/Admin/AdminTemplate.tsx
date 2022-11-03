@@ -1,12 +1,13 @@
 import React, { useState,useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import AdminService from "../../pages/Admin/AdminService/AdminService";
 import AdminTask from "../../pages/Admin/AdminTask/AdminTask";
 import AdminTaskType from "../../pages/Admin/AdminTaskType/AdminTaskType";
 import AdminUser from "../../pages/Admin/AdminUser/AdminUser";
-import { RootState } from "../../redux/configStore";
+import { AppDispatch, RootState } from "../../redux/configStore";
 import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+import { getProfileAction, loginApi } from "../../redux/reducers/userReducer";
 import { ACCESS_TOKEN, getStore } from "../../util/setting";
 
 type Props = {};
@@ -17,7 +18,11 @@ export default function AdminTemplate({}: Props) {
   const showSidebar = () => setSidebar(!sidebar);
   const navigate = useNavigate();
   const { userLogin } = useSelector((state: RootState) => state.userReducer);
+  const dispatch:AppDispatch = useDispatch();
+
   // console.log(userLogin.user.name
+  console.log(userLogin);
+  
   
 
 
@@ -62,16 +67,17 @@ export default function AdminTemplate({}: Props) {
     alert('Đăng nhập để vào trang này')
     return <Navigate to='/Login' />
   }
-    // if(userLogin.role.toLowerCase()!=='admin'||userLogin.role===null){
-    //   alert('Không có quyền truy cập')
-    //   return <Navigate to='/' />
-    // }
+    
 
   const handleLogout=()=>{
-    logOutUserAction(userLogin)
+    // logOutUserAction(userLogin)
     localStorage.clear();
     navigate('/')
   }
+
+  // useEffect(()=>{
+  //   dispatch(getProfileAction(userLogin))
+  // },[])
 
   return (
     <>

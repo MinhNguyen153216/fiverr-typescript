@@ -145,6 +145,7 @@ export default function AdminUser({}: Props) {
         nextLinkClassName={"nextBtn"}
         disabledClassName={"paginationDisabled"}
         activeClassName={"paginationActive"}
+        // renderOnZeroPageCount={null}
       />
       <PopUpModal editable={editable} setEditable={setEditable}/>
     </div>

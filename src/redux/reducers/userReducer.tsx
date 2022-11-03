@@ -69,11 +69,11 @@ export const loginApi = (values: Signin) => {
     try {
       const result = await http.post("/auth/signin", values);
       let userLogin=result.data.content
-      console.log(userLogin.user.role);
+      console.log(result);
       const action = getProfileAction(userLogin)
       dispatch(action)
-      setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
-      setStore(ACCESS_TOKEN, result.data.content.accessToken);
+      setCookie(ACCESS_TOKEN, result.data.content.token, 30);
+      setStore(ACCESS_TOKEN, result.data.content.token);
       Swal.fire({
         icon: "success",
         title: "Đăng nhâp tài khoản thành công",
