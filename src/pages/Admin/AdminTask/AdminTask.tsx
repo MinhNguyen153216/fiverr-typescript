@@ -98,6 +98,10 @@ export default function AdminTask({}: Props) {
   };
 
   useEffect(() => {
+    dispatch(getTaskApi('',1));
+  }, []);
+
+  useEffect(() => {
     dispatch(getTaskApi(keyword,pageNumber));
   }, [keywordRef.current,pageNumber]);
 
