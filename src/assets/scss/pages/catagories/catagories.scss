@@ -198,3 +198,13 @@
     }
   }
 }
+@media screen and (max-width: 765px) {
+  .categories {
+    &-topbar {
+      display:none;
+    }
+    &-title{
+      text-align: center;
+    }
+  }
+}
