@@ -203,15 +203,16 @@ export const addTaskAdminApi=(values:any)=>{
 export const updateTaskAdminApi=(values:any,id:number)=>{
   return async (dispatch:AppDispatch)=>{
     try{
-      const result = await http.put('/cong-viec/'+id,values)
-      console.log(id);
-
+      const result = await http.put(`/cong-viec/${id}`,values)
+      console.log(result);
+      let arrTask:CongViec[]=result.data.content
+      dispatch(updateTaskAction(arrTask))
       Swal.fire({
         icon: "success",
         title: "Cập nhật công việc thành công",
       });
+      dispatch(getTaskApi('',8))
       
-      // dispatch(getTaskApi('',0))
     }catch(err){
       console.log(err);
       Swal.fire({

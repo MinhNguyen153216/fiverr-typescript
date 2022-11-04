@@ -40,6 +40,7 @@ export default function PopUpTask({ editable, setEditable }: Props) {
       giaTien: arrTaskEdit.giaTien,
       tenCongViec: arrTaskEdit.tenCongViec,
       moTaNgan: arrTaskEdit.moTaNgan,
+      id:arrTaskEdit.id
       // hinhAnh:'',
       // giaTien:1,
       // tenCongViec:'',
@@ -211,11 +212,14 @@ export default function PopUpTask({ editable, setEditable }: Props) {
                 </div>
                 <button
                   className="my-5 me-2 update-button "
+                  type="button"
                   onClick={() => {
                     const actionThunk = updateTaskAdminApi(
                       frm.values,
                       arrTaskEdit.id
                     );
+                    console.log(frm.values);
+                    
                     console.log(arrTaskEdit.id);
 
                     dispatch(actionThunk);
