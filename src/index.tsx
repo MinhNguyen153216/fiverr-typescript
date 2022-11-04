@@ -28,7 +28,6 @@ import JobTitle from "./pages/JobTitle/JobTitle";
 import UserDetail from "./pages/UserDetail/UserDetail";
 //
 
-
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -39,8 +38,8 @@ root.render(
       <Routes>
         <Route path="" element={<HeaderTemplate />}>
           <Route index element={<Index />}></Route>
-          <Route path="/register"  element={<Register />}></Route>
-          <Route path="/login"  element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/result">
             <Route path=":name" element={<Result />}></Route>
           </Route>
@@ -52,11 +51,11 @@ root.render(
           </Route>
           <Route path="/title">
             <Route path=":id" element={<JobTitle />}></Route>
+            <Route path="*" element={<Navigate to={"/home"} />}></Route>
           </Route>
-          <Route path="/userdetail"  element={<UserDetail/>}></Route>
+          <Route path="/userdetail" element={<UserDetail />}></Route>
           <Route path="*" element={<Navigate to="" />}></Route>
         </Route>
-       
 
         {/* Admin Route */}
         <Route

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { history } from "../../index";
 import { http } from "../../util/setting";
 import { AppDispatch } from "../configStore";
 import { CongViecChiTiet, congViecModel } from "../models/congViecModel";
@@ -8,6 +9,7 @@ type InitialState = {
   detailJob: CongViecChiTiet;
   arrResult: CongViecChiTiet[];
   arrCategory: CongViecChiTiet[];
+  jobTitleDetail: congViecModel;
 };
 
 const initialState: InitialState = {
@@ -34,6 +36,24 @@ const initialState: InitialState = {
   },
   arrResult: [],
   arrCategory: [],
+  jobTitleDetail: {
+    id: 0,
+    tenLoaiCongViec: "",
+    dsNhomChiTietLoai: [
+      {
+        id: 0,
+        tenNhom: "",
+        hinhAnh: "",
+        maLoaiCongViec: 0,
+        dsChiTietLoai: [
+          {
+            id: 0,
+            tenChiTiet: "",
+          },
+        ],
+      },
+    ],
+  },
 };
 
 const congViecReducer = createSlice({
@@ -52,11 +72,19 @@ const congViecReducer = createSlice({
     getCategory: (state, action: PayloadAction<CongViecChiTiet[]>) => {
       state.arrCategory = action.payload;
     },
+    getJobTitleDetailAction: (state, action: PayloadAction<congViecModel>) => {
+      state.jobTitleDetail = action.payload;
+    },
   },
 });
 
-export const { getMenuCongViecAction, getDetailJob, getResult, getCategory } =
-  congViecReducer.actions;
+export const {
+  getMenuCongViecAction,
+  getDetailJob,
+  getResult,
+  getCategory,
+  getJobTitleDetailAction,
+} = congViecReducer.actions;
 
 export default congViecReducer.reducer;
 //---------------------API--------------------------
@@ -113,3 +141,17 @@ export const getCategoryApi = (id: String | number) => {
   };
 };
 
+export const getJobTitleDetailApi = (id: String | number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get(
+        `/cong-viec/lay-chi-tiet-loai-cong-viec/${id}`
+      );
+      // const jobTitleDetail: congViecModel = result.data.content;
+      dispatch(getJobTitleDetailAction(result.data.content[0]));
+    } catch (err) {
+      console.log(err);
+      history.push("/");
+    }
+  };
+};
