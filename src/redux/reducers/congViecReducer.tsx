@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { values } from "lodash";
 import Swal from "sweetalert2";
 import { http } from "../../util/setting";
 import { AppDispatch } from "../configStore";
@@ -10,7 +11,8 @@ type InitialState = {
   arrResult: CongViecChiTiet[];
   arrCategory: CongViecChiTiet[];
   arrTask:CongViec[]
-  arrRow:any
+  arrRow:any,
+  arrTaskEdit:any
 };
 
 const initialState: InitialState = {
@@ -38,7 +40,16 @@ const initialState: InitialState = {
   arrResult: [],
   arrCategory: [],
   arrTask:[],
-  arrRow:[]
+  arrRow:[],
+  arrTaskEdit:[
+    {
+      id:1,
+      hinhAnh:'',
+      giaTien:0,
+      tenCongViec:'',
+      moTaNgan:''
+    }
+  ],
 };
 
 const congViecReducer = createSlice({
@@ -63,11 +74,13 @@ const congViecReducer = createSlice({
     getTotalRowAction: (state, action: PayloadAction<any>) => {
       state.arrRow = action.payload;
     },
-  
+    updateTaskAction:(state,action:PayloadAction<CongViec[]>)=>{
+      state.arrTaskEdit = action.payload
+    },
   },
 });
 
-export const { getTotalRowAction,getMenuCongViecAction, getDetailJob, getResult, getCategory,getTaskAction } =
+export const { updateTaskAction,getTotalRowAction,getMenuCongViecAction, getDetailJob, getResult, getCategory,getTaskAction } =
   congViecReducer.actions;
 
 export default congViecReducer.reducer;
@@ -125,50 +138,16 @@ export const getCategoryApi = (id: String | number) => {
   };
 };
 
-// export const getTaskApi=(keyword:any)=>{
-//   return async (dispatch:AppDispatch)=>{
-//     try{
-//       if(keyword!=='' && keyword !== null){
-//         const result = await http.get("/cong-viec/lay-danh-sach-cong-viec-theo-ten/" + keyword);
-//         let arrTask:CongViec[]=result.data.content
-//         const action = getTaskAction(arrTask)
-//         console.log(result);
-//         dispatch(action)
-//         // console.log(action);
-//       }else{
-//         const result = await http.get('/cong-viec')
-//         let arrTask:CongViec[]=result.data.content
-//         const action = getTaskAction(arrTask)
-//         dispatch(action)
-//       } 
-//     }catch(err){
-//       console.log(err);
-      
-//     }
-//   }
-
-// }
-
 export const getTaskApi=(keyword:any,id:number)=>{
   return async (dispatch:AppDispatch)=>{
     try{
-      // if(!keyword||keyword===''){
-      //   const result = await http.get('/cong-viec')
-        
-      //           let arrTask:CongViec[]=result.data.content
-      //           const action = getTaskAction(arrTask)
-      //           dispatch(action)
-      // }else if(keyword!==''){
         console.log(keyword,id);
         const result = await http.get(`/cong-viec/phan-trang-tim-kiem?pageIndex=${id}&pageSize=5&keyword=${keyword}`)
-        console.log(result);
-        
+        // console.log(result);        
         let arrTask:CongViec[]=result.data.content.data
         let totalRow:any = result.data.content.totalRow
         const action = getTaskAction(arrTask)
         const actionRow = getTotalRowAction(totalRow)
-        
-        
         dispatch(action)
         dispatch(actionRow)
       // }   
@@ -188,13 +167,58 @@ export const deleteTaskApi=(id:number,task:any)=>{
         icon: "success",
         title: "Xóa tài khoản thành công",
       });
-      // dispatch(getTaskApi(''))
+      dispatch(getTaskApi('',1))
     }catch(err){
       console.log(err);
       Swal.fire({
         icon: "error",
         title: "Không có quyền xóa",
       });
+    }
+  }
+}
+
+export const addTaskAdminApi=(values:any)=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      const result = await http.post('/cong-viec',values)
+      Swal.fire({
+        icon: "success",
+        title: "Thêm công việc thành công",
+      });
+      dispatch(getTaskApi('',1))
+    }catch(err){
+      console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Thêm công việc thất bại",
+      });
+      
+    }
+  }
+}
+
+
+
+export const updateTaskAdminApi=(values:any,id:number)=>{
+  return async (dispatch:AppDispatch)=>{
+    try{
+      const result = await http.put('/cong-viec/'+id,values)
+      console.log(id);
+
+      Swal.fire({
+        icon: "success",
+        title: "Cập nhật công việc thành công",
+      });
+      
+      // dispatch(getTaskApi('',0))
+    }catch(err){
+      console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Cập nhật công việc thất bại",
+      });
+      
     }
   }
 }

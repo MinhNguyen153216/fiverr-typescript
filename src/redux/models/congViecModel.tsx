@@ -27,16 +27,16 @@ export interface CongViecChiTiet {
 }
 
 export interface CongViec {
-  id: number;
+  id?: number;
   tenCongViec: string;
-  danhGia: number;
+  danhGia?: any;
   giaTien: number;
-  nguoiTao: number;
-  hinhAnh: string;
-  moTa: string;
-  maChiTietLoaiCongViec: number;
+  nguoiTao?: number;
+  hinhAnh?: string;
+  moTa?: string;
+  maChiTietLoaiCongViec?: number;
   moTaNgan: string;
-  saoCongViec: number;
+  saoCongViec?: number;
 }
 // Thue Cong viec
 export interface ThueCongViec {

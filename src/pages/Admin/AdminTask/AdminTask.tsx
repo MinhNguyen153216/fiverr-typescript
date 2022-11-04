@@ -5,11 +5,14 @@ import { useSearchParams } from "react-router-dom";
 import { number } from "yup/lib/locale";
 import PopUpModal from "../../../components/PopUpModal/PopUpModal";
 import PopUpTask from "../../../components/PopUpModal/PopUpTask";
+// import PopUpTask from "../../../components/PopUpModal/PopUpTask";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { CongViec } from "../../../redux/models/congViecModel";
 import {
   deleteTaskApi,
   getTaskApi,
+  updateTaskAction,
+  updateTaskAdminApi,
 } from "../../../redux/reducers/congViecReducer";
 
 type Props = {};
@@ -24,7 +27,7 @@ export default function AdminTask({}: Props) {
   const [pageNumber, setPageNumber] = useState(1);
   const [editable, setEditable] = useState(false);
   const [active, setActive] = useState(false);
-  console.log(arrRow);
+  // console.log(arrRow);
   // console.log(Number(keywordRef.current));
 
   const tasksPerPage = 5;
@@ -56,11 +59,11 @@ export default function AdminTask({}: Props) {
             <button
               className="btn btn-primary "
               data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              // onClick={() => {
-              //   setEditable(true)
-              //   handleUpdate(user.id, user);
-              // }}
+              data-bs-target="#exampleModalTask"
+              onClick={() => {
+                setEditable(true)
+                handleUpdate(task.id, task);
+              }}
             >
               Sửa
             </button>
@@ -77,7 +80,14 @@ export default function AdminTask({}: Props) {
       );
     });
 
-  const handleDelete = (id: number, task: any) => {
+    const handleUpdate = (id: any, task: any) => {
+      const action =updateTaskAction(task)
+      dispatch(action)
+      console.log(task);
+   
+    };
+
+  const handleDelete = (id: any, task: any) => {
     const actionThunk = deleteTaskApi(id, task);
     console.log(id);
     dispatch(actionThunk);
@@ -97,20 +107,22 @@ export default function AdminTask({}: Props) {
     setSearchParams({ keyword: keywordRef.current });
   };
 
-  useEffect(() => {
-    dispatch(getTaskApi('',1));
-  }, []);
 
   useEffect(() => {
     dispatch(getTaskApi(keyword,pageNumber));
   }, [keywordRef.current,pageNumber]);
+
+  useEffect(() => {
+    dispatch(getTaskApi('a',1));
+  }, []);
+
 
   return (
     <div className="adminuser">
       <h1>
         <span
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#exampleModalTask"
           onClick={() => {
             setEditable(false);
           }}
@@ -123,7 +135,7 @@ export default function AdminTask({}: Props) {
           onChange={handleChange}
           type="text"
           id="search"
-          placeholder="Nhập vào id công việc cần tìm"
+          placeholder="Nhập vào tên công việc cần tìm"
         />
         <button type="submit">Tìm</button>
       </form>
@@ -152,7 +164,10 @@ export default function AdminTask({}: Props) {
         disabledClassName={"paginationDisabled"}
         activeClassName={"paginationActive"}
       />
-      <PopUpModal editable={editable} setEditable={setEditable} />
+      <PopUpTask editable={editable} setEditable={setEditable} />
+
+
+  
       
     </div>
   );

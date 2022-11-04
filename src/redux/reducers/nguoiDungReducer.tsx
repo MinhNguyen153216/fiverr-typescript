@@ -27,9 +27,6 @@ const initialState: any = {
         name: '',
         password:'',
         phone: '',
-        // gender: true,
-        // birthday: "",
-        // role:'',
        }
   ]
 };

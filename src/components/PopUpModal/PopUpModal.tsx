@@ -31,20 +31,20 @@ export default function PopUpModal({ editable, setEditable }: Props) {
   const frm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      email: "",
-      password: "",
-      name: "",
-      phone: "",
-      gender: true,
-      birthday: "",
-      role: "ADMIN",
-      // email: arrUserEdit.email,
-      // password: arrUserEdit.password,
-      // name: arrUserEdit.name,
-      // phone: arrUserEdit.phone,
+      // email: "",
+      // password: "",
+      // name: "",
+      // phone: "",
       // gender: true,
-      // birthday: arrUserEdit.birthday,
-      // id: arrUserEdit.id,
+      // birthday: "",
+      role: "ADMIN",
+      email: arrUserEdit.email,
+      password: arrUserEdit.password,
+      name: arrUserEdit.name,
+      phone: arrUserEdit.phone,
+      gender: true,
+      birthday: arrUserEdit.birthday,
+      id: arrUserEdit.id,
     },
 
     //check validation
@@ -76,11 +76,11 @@ export default function PopUpModal({ editable, setEditable }: Props) {
 
   return (
     <div
-      className="modal fade popupmodal"
+      className="modal fade "
       id="exampleModal"
-      tabIndex={-1}
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
+      // tabIndex={-1}
+      // aria-labelledby="exampleModalLabel"
+      // aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -139,6 +139,7 @@ export default function PopUpModal({ editable, setEditable }: Props) {
                     type="password"
                     placeholder="password"
                     name="password"
+                    
                     onChange={frm.handleChange}
                     onBlur={frm.handleBlur}
                     value={frm.values.password}

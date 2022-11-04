@@ -11,6 +11,11 @@ import {
   updateUserApi,
 } from "../../redux/reducers/nguoiDungReducer";
 import { values } from "lodash";
+import { CongViec } from "../../redux/models/congViecModel";
+import {
+  addTaskAdminApi,
+  updateTaskAdminApi,
+} from "../../redux/reducers/congViecReducer";
 
 type Props = {
   editable: any;
@@ -18,78 +23,69 @@ type Props = {
 };
 
 export default function PopUpTask({ editable, setEditable }: Props) {
-  const { arrUserEdit } = useSelector(
-    (state: RootState) => state.nguoiDungReducer
+  const { arrTaskEdit } = useSelector(
+    (state: RootState) => state.congViecReducer
   );
-  console.log(arrUserEdit);
+  // console.log(arrTask);
 
   const dispatch: AppDispatch = useDispatch();
   const regexName: any =
     "[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹs]+$";
-  const regexPhone: any = "^[0-9][0-9]*$";
+  const regexNumber: any = "^[0-9][0-9]*$";
 
   const frm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      // email: "",
-      // password: "",
-      // name: "",
-      // phone: "",
-      // gender: true,
-      // birthday: "",
-      role: "ADMIN",
-      email: arrUserEdit.email,
-      password: arrUserEdit.password,
-      name: arrUserEdit.name,
-      phone: arrUserEdit.phone,
-      gender: true,
-      birthday: arrUserEdit.birthday,
-      id: arrUserEdit.id,
+      hinhAnh: arrTaskEdit.hinhAnh,
+      giaTien: arrTaskEdit.giaTien,
+      tenCongViec: arrTaskEdit.tenCongViec,
+      moTaNgan: arrTaskEdit.moTaNgan,
+      // hinhAnh:'',
+      // giaTien:1,
+      // tenCongViec:'',
+      // moTaNgan:''
     },
 
     //check validation
     validationSchema: Yup.object().shape({
-      email: Yup.string()
-        .required("Email không được để trống")
-        .email("Email không đúng định dạng"),
-      password: Yup.string().required("Password không được bỏ trống"),
-      name: Yup.string()
-        .required("Tên không được để trống")
-        .matches(regexName, "Tên không đúng định dạng"),
-      phone: Yup.string()
-        .required("Số điện thoại không được để trống")
-        .matches(regexPhone, "Số điện thoại không đúng"),
+      hinhAnh: Yup.string().required("Hình ảnh không được để trống"),
+      giaTien: Yup.string()
+        .required("Giá tiền không được bỏ trống")
+        .matches(regexNumber, "Giá tiền không hợp lệ"),
+      tenCongViec: Yup.string().required("Tên công việc không được để trống"),
+      moTaNgan: Yup.string().required("Mô tả không được để trống"),
     }),
 
-    onSubmit: (values: Signup,{resetForm}) => {
-      dispatch(registerAdmin(values));
-      // console.log(values);
+    onSubmit: (values: CongViec, { resetForm }) => {
+      dispatch(addTaskAdminApi(values));
+      console.log(values);
       resetForm({
-      // email: "",
-      // password: "",
-      // name: "",
-      // phone: "",
-      })
+        // email: "",
+        // password: "",
+        // name: "",
+        // phone: "",
+      });
     },
-   
   });
 
   return (
     <div
-      className="modal popupmodal fade "
-      id=" exampleModalTask "
-      tabIndex={-1}
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    //   data-bs-backdrop="static"
+      className="modal fade "
+      id="exampleModalTask"
+      // tabIndex={-1}
+      // aria-labelledby="exampleModalLabel"
+      // aria-hidden="true"
+      //   data-bs-backdrop="static"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel"
-              style={editable?{color:'#0d6efd'}:{color:'#1dbf72'}}
+            <h1
+              className="modal-title fs-5"
+              id="exampleModalLabel"
+              style={editable ? { color: "#0d6efd" } : { color: "#1dbf72" }}
             >
-              {editable ? "CẬP NHẬT NGƯỜI DÙNG": "THÊM QUẢN TRỊ VIÊN"}
+              {editable ? "CẬP NHẬT CÔNG VIỆC" : "THÊM CÔNG VIỆC"}
             </h1>
             <button
               type="button"
@@ -97,9 +93,9 @@ export default function PopUpTask({ editable, setEditable }: Props) {
               data-bs-dismiss="modal"
               aria-label="Close"
               // onClick={() => frm.({
-                
+
               // })}
-            
+
               //  type="reset"
               // onClick={()=>{
               //   setEditable(!editable)
@@ -107,57 +103,56 @@ export default function PopUpTask({ editable, setEditable }: Props) {
             />
           </div>
           <div className="modal-body">
-            <form className="row" onSubmit={frm.handleSubmit} >
+            <form className="row" onSubmit={frm.handleSubmit}>
               <div className="col-6">
                 <div className="form-group">
-                  <p>Email</p>
+                  <p>Img</p>
                   <input
                     className="from-control"
-                    type="email"
-                    placeholder="email"
-                    name="email"
+                    type="text"
+                    placeholder="Hình Ảnh"
+                    name="hinhAnh"
                     onChange={frm.handleChange}
                     onBlur={frm.handleBlur}
-                    value={frm.values.email}
+                    value={frm.values.hinhAnh}
                   />
-                  {frm.errors.email ? (
-                    <p className="text-danger mb-3">{frm.errors.email}</p>
+                  {frm.errors.hinhAnh ? (
+                    <p className="text-danger mb-3">{frm.errors.hinhAnh}</p>
                   ) : (
                     ""
                   )}
                 </div>
                 <div className="form-group ">
                   <p
-                    style={
-                      editable ? { display: "none" } : { display: "block" }
-                    }
+                  // style={
+                  //   editable ? { display: "none" } : { display: "block" }
+                  // }
                   >
-                    Password
+                    Giá tiền
                   </p>
                   <input
                     className="from-control"
-                    id="password"
-                    type="password"
-                    placeholder="password"
-                    name="password"
+                    id="giaTien"
+                    type="number"
+                    placeholder="Giá tiền"
+                    inputMode="numeric"
+                    name="giaTien"
                     onChange={frm.handleChange}
                     onBlur={frm.handleBlur}
-                    value={frm.values.password}
-                    style={
-                      editable ? { display: "none" } : { display: "block" }
-                    }
+                    value={frm.values.giaTien}
+                    // style={
+                    //   editable ? { display: "none" } : { display: "block" }
+                    // }
                   />
-
-              
                 </div>
-                {frm.errors.password ? (
+                {frm.errors.giaTien ? (
                   <p
                     className="text-danger mb-3"
-                    style={
-                      editable ? { display: "none" } : { display: "block" }
-                    }
+                    // style={
+                    //   editable ? { display: "none" } : { display: "block" }
+                    // }
                   >
-                    {frm.errors.password}
+                    {frm.errors.giaTien}
                   </p>
                 ) : (
                   ""
@@ -165,51 +160,50 @@ export default function PopUpTask({ editable, setEditable }: Props) {
               </div>
               <div className="col-6">
                 <div className="form-group">
-                  <p>Name</p>
+                  <p>Tên công việc</p>
                   <input
                     className="from-control"
                     type="text"
-                    placeholder="name"
-                    name="name"
+                    placeholder="Tên công việc"
+                    name="tenCongViec"
                     onChange={frm.handleChange}
                     onBlur={frm.handleBlur}
-                    value={frm.values.name}
+                    value={frm.values.tenCongViec}
                   />
-                  {frm.errors.name ? (
-                    <p className="text-danger">{frm.errors.name}</p>
+                  {frm.errors.tenCongViec ? (
+                    <p className="text-danger">{frm.errors.tenCongViec}</p>
                   ) : (
                     ""
                   )}
                 </div>
                 <div className="form-group">
                   <p
-                    style={
-                      editable ? { display: "none" } : { display: "block" }
-                    }
+                  // style={
+                  //   editable ? { display: "none" } : { display: "block" }
+                  // }
                   >
-                    Phone
+                    Mô tả ngắn
                   </p>
                   <input
                     className="from-control"
                     type="text"
-                    inputMode="numeric"
-                    placeholder="phone"
-                    name="phone"
+                    placeholder="Mô tả ngắn"
+                    name="moTaNgan"
                     onChange={frm.handleChange}
                     onBlur={frm.handleBlur}
-                    value={frm.values.phone}
-                    style={
-                      editable ? { display: "none" } : { display: "block" }
-                    }
+                    value={frm.values.moTaNgan}
+                    // style={
+                    //   editable ? { display: "none" } : { display: "block" }
+                    // }
                   />
-                  {frm.errors.phone ? (
+                  {frm.errors.moTaNgan ? (
                     <p
                       className="text-danger"
-                      style={
-                        editable ? { display: "none" } : { display: "block" }
-                      }
+                      // style={
+                      //   editable ? { display: "none" } : { display: "block" }
+                      // }
                     >
-                      {frm.errors.phone}
+                      {frm.errors.moTaNgan}
                     </p>
                   ) : (
                     ""
@@ -218,10 +212,12 @@ export default function PopUpTask({ editable, setEditable }: Props) {
                 <button
                   className="my-5 me-2 update-button "
                   onClick={() => {
-                    const actionThunk = updateUserApi(
+                    const actionThunk = updateTaskAdminApi(
                       frm.values,
-                      arrUserEdit.id
+                      arrTaskEdit.id
                     );
+                    console.log(arrTaskEdit.id);
+
                     dispatch(actionThunk);
                   }}
                   style={!editable ? { display: "none" } : { display: "block" }}
