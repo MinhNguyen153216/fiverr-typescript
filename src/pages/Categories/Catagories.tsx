@@ -12,6 +12,7 @@ export default function Categories({}: Props) {
   const { arrCategory } = useSelector(
     (state: RootState) => state.congViecReducer
   );
+  console.log(arrCategory);
   const dispatch: AppDispatch = useDispatch();
   const params: any = useParams();
 
