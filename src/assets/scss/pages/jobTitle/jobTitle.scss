@@ -42,13 +42,54 @@
 }
 
 .popular-job-title {
+  .container {
+    h1 {
+      @include text-config(600, 24px, 1.2, #404145);
+    }
+    .content {
+      display: flex;
+      overflow: hidden;
+      justify-content: flex-start;
+      align-items: center;
+      height: 94px;
+      padding: 10px;
+      margin-left: -10px;
+      margin-right: 0px;
+      .item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        height: 100%;
+        padding: 12px;
+        margin-right: 12px;
+        box-shadow: 0 0.14px 2.29266px rgba(0, 0, 0, 0.032),
+          0 0.37px 4.42626px rgba(0, 0, 0, 0.048), 0 3px 7px rgba(0, 0, 0, 0.09);
+        img {
+          height: 100%;
+          margin-right: 10px;
+        }
+        span {
+          @include text-config(600, 16px, 1.2, #404145);
+          margin-right: 10px;
+          white-space: nowrap;
+        }
+      }
+      @media screen and(max-width:576px) {
+        margin-right: 30px;
+      }
+    }
+    @media screen and(max-width:576px) {
+      padding-left: 15px;
+    }
+  }
 }
 
 .explore-job-title {
   .container {
     h1 {
       @include text-config(600, 24px, 1.2, #404145);
-      @media screen and (max-width:576px) {
+      @media screen and (max-width: 576px) {
         margin-left: 15px;
       }
     }
@@ -125,7 +166,7 @@
   .container {
     h1 {
       @include text-config(700, 24px, 1.2, #404145);
-      @media screen and (max-width:576px) {
+      @media screen and (max-width: 576px) {
         margin-left: 15px;
       }
     }

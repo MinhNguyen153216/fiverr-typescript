@@ -68,8 +68,39 @@ export default function JobTitle({}: Props) {
       </section>
 
       <section className="popular-job-title">
-        <div className="container">
-          
+        <div className="container mt-lg-5 mt-sm-3 mb-lg-5 mb-sm-3">
+          <h1>Most popular in {jobTitleDetail.tenLoaiCongViec}</h1>
+          <div className="content">
+            <div className="item">
+              <img src="./img/Logo design_2x.webp" alt="..." />
+              <span>Minimalist Logo Design</span>
+              <FontAwesomeIcon icon={["fas", "arrow-right"]} className="fa" />
+            </div>
+
+            <div className="item">
+              <img src="./img/Architecture _ Interior Design_2x.webp" alt="..." />
+              <span>Architecture & Interior Design</span>
+              <FontAwesomeIcon icon={["fas", "arrow-right"]} className="fa" />
+            </div>
+
+            <div className="item">
+              <img src="./img/Photoshop Editing_2x.webp" alt="..." />
+              <span>Image Editing</span>
+              <FontAwesomeIcon icon={["fas", "arrow-right"]} className="fa" />
+            </div>
+
+            <div className="item">
+              <img src="./img/Nft Art.webp" alt="..." />
+              <span>NFT Art</span>
+              <FontAwesomeIcon icon={["fas", "arrow-right"]} className="fa" />
+            </div>
+
+            <div className="item">
+              <img src="./img/T-Shirts _ Merchandise_2x.webp" alt="..." />
+              <span>T-Shirts & Merchandise</span>
+              <FontAwesomeIcon icon={["fas", "arrow-right"]} className="fa" />
+            </div>
+          </div>
         </div>
       </section>
 
