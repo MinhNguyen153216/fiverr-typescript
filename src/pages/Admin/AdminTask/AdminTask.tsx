@@ -55,9 +55,9 @@ export default function AdminTask({}: Props) {
           </td>
           <td className="text-center">{task.giaTien}</td>
           <td>{task.moTaNgan}</td>
-          <td className="text-center px-5">
+          <td className="text-center px-5" style={{verticalAlign:'middle',width:'150px'}}>
             <button
-              className="btn btn-primary "
+              className="btn btn-primary m-1"
               data-bs-toggle="modal"
               data-bs-target="#exampleModalTask"
               onClick={() => {

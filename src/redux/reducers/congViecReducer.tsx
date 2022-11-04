@@ -167,7 +167,7 @@ export const deleteTaskApi=(id:number,task:any)=>{
         icon: "success",
         title: "Xóa tài khoản thành công",
       });
-      dispatch(getTaskApi('',1))
+      dispatch(getTaskApi('',8))
     }catch(err){
       console.log(err);
       Swal.fire({
@@ -217,7 +217,7 @@ export const updateTaskAdminApi=(values:any,id:number)=>{
       console.log(err);
       Swal.fire({
         icon: "error",
-        title: "Cập nhật công việc thất bại",
+        title: "Không có quyền cập nhật",
       });
       
     }
