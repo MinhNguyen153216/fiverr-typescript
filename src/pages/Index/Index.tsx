@@ -1,10 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Carousel, Slider } from "antd";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Carousel } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-
+import Slider from "react-slick";
+import { timeout } from "../../util/setting";
 
 library.add(fas);
 
@@ -83,18 +84,21 @@ const settings = {
 };
 
 export default function Index({}: Props) {
-  const handleSearch = (e: React.SyntheticEvent) => {
+  const navigate = useNavigate();
+
+  const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const value: string | undefined = document.querySelector<HTMLInputElement>(
       'input[name="searchInputCarousel"]'
     )?.value;
-    console.log(value);
+    await timeout(1000);
+    navigate(`/result/${value}`);
   };
 
   return (
     <>
       <section className="carousel">
-        <Carousel autoplay fade>
+        <Carousel autoplay fade dots={false}>
           <div>
             <div className="carousel1" style={contentStyle}>
               <div className="row">
@@ -300,6 +304,132 @@ export default function Index({}: Props) {
                 </div>
               </div>
             </Slider>
+          </div>
+        </div>
+      </section>
+
+      <section className="wholeWorld pt-lg-5 pt-md-4 pt-sm-2 pb-lg-5 pb-md-4 pb-sm-2">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="wholeWorld-left col text-left">
+              <h1>A whole world of freelance talent at your fingertips</h1>
+              <h3>
+                <FontAwesomeIcon
+                  icon={["far", "circle-check"]}
+                  className="fa"
+                />{" "}
+                <p>The best for every budget</p>
+              </h3>
+              <p>
+                Find high-quality services at every price point. No hourly
+                rates, just project-based pricing.
+              </p>
+
+              <h3>
+                <FontAwesomeIcon
+                  icon={["far", "circle-check"]}
+                  className="fa"
+                />{" "}
+                <p>Quality work done quickly</p>
+              </h3>
+              <p>
+                Find the right freelancer to begin working on your project
+                within minutes.
+              </p>
+
+              <h3>
+                <FontAwesomeIcon
+                  icon={["far", "circle-check"]}
+                  className="fa"
+                />{" "}
+                <p>Protected payments, every time</p>
+              </h3>
+              <p>
+                Always know what you'll pay upfront. Your payment isn't released
+                until you approve the work.
+              </p>
+
+              <h3>
+                <FontAwesomeIcon
+                  icon={["far", "circle-check"]}
+                  className="fa"
+                />{" "}
+                <p>24/7 support</p>
+              </h3>
+              <p>
+                Questions? Our round-the-clock support team is available to help
+                anytime, anywhere.
+              </p>
+            </div>
+            <div className="wholeWorld-right col">
+              <img
+                src="./img/selling-proposition-still-1400-x1.webp"
+                alt="selling"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="marketplace mt-lg-5 mt-md-4 mt-sm-2 mb-lg-5 mb-md-4 mb-sm-2">
+        <div className="container">
+          <h1>Explore the marketplace</h1>
+          <div className="d-flex jsutify-content-center align-items-center">
+            <div className="item">
+              <div className="content">
+                <img src="./img/graphics-design.svg" alt="graphic-design" />
+                <p>Graphic & Design</p>
+              </div>
+            </div>
+
+            <div className="item">
+              <div className="content">
+                <img src="./img/online-marketing.svg" alt="online-marketing" />
+                <p>Digital Marketing</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="content">
+                <img src="./img/writing-translation.svg" alt="writing-translation" />
+                <p>Writing & Translation</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="content">
+                <img src="./img/video-animation.svg" alt="video-animation" />
+                <p>Video & Animation</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="content">
+                <img src="./img/music-audio.svg" alt="music-audio" />
+                <p>Music & Audio</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="content">
+                <img src="./img/programming.svg" alt="programming" />
+                <p>Programming</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="content">
+                <img src="./img/business.svg" alt="business" />
+                <p>Business</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="content">
+                <img src="./img/lifestyle.svg" alt="lifestyle" />
+                <p>Lifestyle</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="content">
+                <img src="./img/data.svg" alt="data" />
+                <p>Data</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

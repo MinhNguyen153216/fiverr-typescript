@@ -1,2 +1,418 @@
 @import "../../base/base";
 @import "../../themes/variables";
+
+.profile {
+  background-color: #f7f7f7;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .profile-left {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .avatar {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 30px;
+        position: relative;
+        &-status {
+          position: absolute;
+          top: 30px;
+          right: 30px;
+          p {
+            @include text-config(500, 14px, 1.2, #1dbf73);
+            padding: 0 6px;
+            margin: 0;
+            border: 1px solid #1dbf73;
+            border-radius: 100px;
+            span {
+              display: inline-block;
+              margin-right: 5px;
+              font-weight: 800;
+              vertical-align: 3px;
+            }
+          }
+          @media screen and (max-width: 768px) {
+            top: 10px;
+            right: 10px;
+          }
+        }
+        &-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 150px;
+            height: 150px;
+            @media screen and (max-width: 768px) {
+              width: 50px;
+              height: 50px;
+            }
+          }
+          span {
+            text-align: center;
+            display: inline-block;
+            @include text-config(600, 42px, 150px, #fff);
+            height: 150px;
+            width: 150px;
+            background-color: #e4e5e7;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            @media screen and (max-width: 768px) {
+              width: 100px;
+              height: 100px;
+              line-height: 100px;
+            }
+          }
+          p {
+            @include text-config(600, 20px, 1.2, #222325);
+            margin-bottom: 5px;
+          }
+          svg {
+            color: #62646a;
+            font-size: 12px;
+            margin-bottom: 15px;
+          }
+          button {
+            width: 100%;
+            @include text-config(600, 14px, 1.2, #62646a);
+            padding: 10px 0;
+            &:hover {
+              color: white;
+            }
+          }
+        }
+        &-footer {
+          margin-top: 24px;
+          padding-top: 20px;
+          border-top: 1px solid #dadbdd;
+          &-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            p {
+              @include text-config(500, 14px, 1.2, #62646a);
+              margin: 0;
+              svg {
+                color: #62646a;
+                margin-right: 12px;
+                @media screen and (max-width: 768px) {
+                  margin-right: 5px;
+                }
+              }
+            }
+            span {
+              @include text-config(700, 14px, 1.2, #62646a);
+            }
+            @media screen and (max-width: 768px) {
+              flex-wrap: wrap;
+              justify-content: center;
+              text-align: center;
+            }
+          }
+        }
+        @media screen and (max-width: 990px) {
+          padding: 15px;
+          text-align: start;
+        }
+        @media screen and (max-width: 768px) {
+          padding: 10px;
+        }
+      }
+      .information {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 30px;
+        margin-top: 25px;
+        .description {
+          padding-bottom: 20px;
+          border-bottom: 1px solid #ddd;
+          margin-bottom: 25px;
+          &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            p {
+              @include text-config(600, 16px, 1.2, #0e0e0f);
+              margin: 0;
+            }
+            span {
+              @include text-config(500, 14px, 1.2, #00698c);
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+          &-content {
+            p {
+              @include text-config(500, 14px, 1.2, #62646a);
+              margin-top: 15px;
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+        }
+        .language {
+          padding-bottom: 20px;
+          border-bottom: 1px solid #ddd;
+          margin-bottom: 25px;
+          &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            p {
+              @include text-config(600, 16px, 1.2, #0e0e0f);
+              margin: 0;
+            }
+            span {
+              @include text-config(500, 14px, 1.2, #00698c);
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+          &-content {
+            p {
+              @include text-config(500, 14px, 1.2, #62646a);
+              margin-top: 15px;
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+        }
+        .linked {
+          padding-bottom: 20px;
+          border-bottom: 1px solid #ddd;
+          margin-bottom: 25px;
+          &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            p {
+              @include text-config(600, 16px, 1.2, #0e0e0f);
+              margin: 0;
+            }
+            span {
+              @include text-config(500, 14px, 1.2, #00698c);
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+          &-content {
+            p {
+              @include text-config(600, 14px, 1.2, #00698c);
+              margin-top: 18px;
+              svg {
+                margin-right: 15px;
+                @media screen and (max-width: 768px) {
+                  margin-right: 5px;
+                }
+              }
+            }
+            @media screen and (max-width: 990px) {
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: flex-start;
+              text-align: left;
+            }
+          }
+        }
+        .skill {
+          padding-bottom: 20px;
+          border-bottom: 1px solid #ddd;
+          margin-bottom: 25px;
+          &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            p {
+              @include text-config(600, 16px, 1.2, #0e0e0f);
+              margin: 0;
+            }
+            span {
+              @include text-config(500, 14px, 1.2, #00698c);
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              display: block;
+              text-align: center;
+            }
+          }
+          &-content {
+            p {
+              @include text-config(500, 14px, 1.2, #62646a);
+              margin-top: 15px;
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              display: block;
+              text-align: center;
+            }
+          }
+        }
+        .education {
+          padding-bottom: 20px;
+          border-bottom: 1px solid #ddd;
+          margin-bottom: 25px;
+          &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            p {
+              @include text-config(600, 16px, 1.2, #0e0e0f);
+              margin: 0;
+            }
+            span {
+              @include text-config(500, 14px, 1.2, #00698c);
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              display: block;
+              text-align: center;
+            }
+          }
+          &-content {
+            p {
+              @include text-config(500, 14px, 1.2, #62646a);
+              margin-top: 15px;
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+        }
+        .certification {
+          &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            p {
+              @include text-config(600, 16px, 1.2, #0e0e0f);
+              margin: 0;
+            }
+            span {
+              @include text-config(500, 14px, 1.2, #00698c);
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+          &-content {
+            p {
+              @include text-config(500, 14px, 1.2, #62646a);
+              margin-top: 15px;
+            }
+            @media screen and (max-width: 990px) {
+              flex-wrap: wrap;
+            }
+            @media screen and (max-width: 768px) {
+              justify-content: center;
+              text-align: center;
+            }
+          }
+        }
+        @media screen and (max-width: 990px) {
+          padding: 15px;
+        }
+        @media screen and (max-width: 768px) {
+          padding: 10px;
+        }
+      }
+    }
+    .profile-right {
+      width: 60%;
+      .gigs-banner {
+        width: 100%;
+        height: 66px;
+        padding-left: 25px;
+        padding-right: 25px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 40px;
+        h1 {
+          display: inline-block;
+          @include text-config(600, 14px, 1.2, #0e0e0f);
+          padding-top: 25px;
+          padding-bottom: 20px;
+          border-bottom: 3px solid #1dbf73;
+        }
+      }
+      .gigs {
+        &-notfound {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding-top: 120px;
+          padding-bottom: 120px;
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          img {
+            max-width: 100%;
+          }
+          span {
+            margin: 24px 0;
+            @include text-config(600, 18px, 1.2, #404145);
+            @media screen and (max-width: 990px) {
+              text-align: center;
+              padding-right: 10px;
+              margin-left: 10px;
+            }
+          }
+          button {
+            @include text-config(600, 16px, 1.2, #fff);
+            padding: 12px 24px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding-top: 100px !important;
+  }
+}

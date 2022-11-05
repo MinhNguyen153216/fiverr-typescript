@@ -337,6 +337,16 @@
           margin-right: 6px;
         }
       }
+      .reviewer-comment-del {
+        svg{
+          font-size: 20px;
+          transition: all 0.3s;
+          cursor: pointer;
+        }
+        svg:hover {
+          color: red;
+        }
+      }
       .reviewer-country {
         margin-bottom: 20px;
         .country-name {
@@ -524,6 +534,21 @@
             padding-left: 0;
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .job-detail {
+    padding-top: 100px;
+    &-link {
+      display: none;
+    }
+    .comment-rating {
+      display: block !important;
+      .d-flex {
+        padding-top: 20px;
       }
     }
   }

@@ -1,2 +1,92 @@
 @import "../base/base";
 @import "../themes/variables";
+
+.headerMobile {
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  position: fixed;
+  z-index: 4;
+  .container {
+    height: 100%;
+    .sideBar {
+      &-overlay {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(128, 128, 128, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+      }
+      .btn-menu {
+        background-color: white;
+        border: none;
+        font-size: 30px;
+      }
+      .menuSideBar {
+        background-color: white;
+        position: absolute;
+        width: 250px;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        padding: 15px;
+        &-join {
+          p {
+            margin: 5px 10px;
+            @include text-config(500, 18px, 1.2, #fff);
+          }
+        }
+        .side-navigation-panel {
+          width: 100%;
+          &-select {
+            width: 100%;
+            &-wrap {
+              .side-navigation-panel-select-option {
+                padding: 0;
+                &-wrap {
+                  margin: 0 5px;
+                  .side-navigation-panel-select-option-text {
+                    margin: 10px 0;
+                    @include text-config(500, 16px, 1.2, #95979d);
+                  }
+                }
+              }
+            }
+            &-inner {
+              &-wrap {
+                .side-navigation-panel-select-inner-option {
+                  padding: 8px 0 8px 20px;
+                  &-wrap {
+                    .side-navigation-panel-select-inner-option-text {
+                      margin: 0 7px !important;
+                      font-weight: 500 !important;
+                      font-size: 16px !important;
+                      line-height: 1.2 !important;
+                      color: #95979d !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .logo {
+      display: block;
+    }
+    .join {
+      p {
+        display: block;
+        margin: 0;
+        @include text-config(600, 17px, 1.2, #62646a);
+      }
+    }
+    @media screen and (max-width: 576px) {
+      padding: 0 15px;
+    }
+  }
+}

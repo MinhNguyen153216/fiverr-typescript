@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginApi } from "../../redux/reducers/userReducer";
 import * as Yup from "yup";
@@ -22,12 +22,16 @@ export default function Login({}: Props) {
         .email("Email không đúng định dạng"),
       password: Yup.string().required("Password không được bỏ trống"),
     }),
-    onSubmit: (values:any) => {
-        console.log(values);
-      const action:any = loginApi(values)
+    onSubmit: (values: any) => {
+      console.log(values);
+      const action: any = loginApi(values);
       dispatch(action);
     },
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="login-content ">
@@ -43,7 +47,7 @@ export default function Login({}: Props) {
             onChange={frm.handleChange}
             onBlur={frm.handleBlur}
           />
-            {frm.errors.email ? (
+          {frm.errors.email ? (
             <p className="text-danger mb-3">{frm.errors.email}</p>
           ) : (
             ""
@@ -59,11 +63,11 @@ export default function Login({}: Props) {
             onChange={frm.handleChange}
             onBlur={frm.handleBlur}
           />
-           {frm.errors.password ? (
-          <p className="text-danger text-start mb-3">{frm.errors.password}</p>
-        ) : (
-          ""
-        )}
+          {frm.errors.password ? (
+            <p className="text-danger text-start mb-3">{frm.errors.password}</p>
+          ) : (
+            ""
+          )}
         </div>
         <div className="form-button">
           {/* <button >Register</button> */}

@@ -30,8 +30,9 @@ import AdminTemplate from "./templates/Admin/AdminTemplate";
 import AdminTemplateMobile from "./templates/Admin/AdminTemplateMobile";
 import Login from "./pages/Login/Login";
 import Test from "./pages/Test";
+import JobTitle from "./pages/JobTitle/JobTitle";
+// import UserDetail from "./pages/UserDetail/UserDetail";
 //
-
 
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
@@ -44,8 +45,8 @@ root.render(
         <Route path="/test" element={<Test/>}/>
         <Route path="" element={<HeaderTemplate />}>
           <Route index element={<Index />}></Route>
-          <Route path="/register"  element={<Register />}></Route>
-          <Route path="/login"  element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/result">
             <Route path=":name" element={<Result />}></Route>
           </Route>
@@ -55,6 +56,11 @@ root.render(
           <Route path="/jobdetail">
             <Route path=":id" element={<JobDetail />}></Route>
           </Route>
+          <Route path="/title">
+            <Route path=":id" element={<JobTitle />}></Route>
+            <Route path="*" element={<Navigate to={"/home"} />}></Route>
+          </Route>
+          <Route path="/userdetail" element={<UserDetail />}></Route>
           <Route path="*" element={<Navigate to="" />}></Route>
         </Route>
 

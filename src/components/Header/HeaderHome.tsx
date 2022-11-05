@@ -1,59 +1,66 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/configStore";
-import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+import { logOutUserAction } from "../../redux/reducers/userReducer";
 import {
   congViecModel,
   DsChiTietLoai,
   DsNhomChiTietLoai,
 } from "../../redux/models/congViecModel";
 import { getMenuCongViecApi } from "../../redux/reducers/congViecReducer";
+import { timeout } from "../../util/setting";
 
 library.add(fas);
 
 type Props = {};
+const logo1 = "./img/Fiverr-Logo.png";
+const logo2 = "./img/Fiverr-Logo-small.png";
 
 export default function HeaderHome({}: Props) {
   const [small, setSmall] = useState(false);
   const { userLogin } = useSelector(
-    (state: RootState) => state.nguoiDungReducer
+    (state: RootState) => state.userReducer
   );
   const { menuCongViec } = useSelector(
     (state: RootState) => state.congViecReducer
   );
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("user:",userLogin);
+
     dispatch(getMenuCongViecApi());
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () =>
         setSmall(window.pageYOffset > 100)
       );
     }
+    renderLogin();
 
     return () => {
-      console.log("clean");
+      // console.log("clean");
       window.removeEventListener("scroll", () =>
         setSmall(window.pageYOffset > 100)
       );
     };
-  }, []);
+  }, [userLogin]);
 
   const renderLogin = () => {
     if (!userLogin) {
       return (
         <>
           <li className="nav-item">
-            <NavLink className="nav-link" to={"/register"}>
+            <NavLink className="nav-link" to={"/login"}>
               Sign In
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to={"/login"}>
+            <NavLink to={"/register"}>
               <button
                 className={`btn ${
                   small ? "btn-outline-success" : "btn-outline-light"
@@ -105,9 +112,13 @@ export default function HeaderHome({}: Props) {
                         {dsNhom.dsChiTietLoai.map(
                           (dsChiTiet: DsChiTietLoai, index: number) => {
                             return (
-                              <p className="job-group-detail" key={index}>
+                              <NavLink
+                                to={`/categories/${dsChiTiet.id}`}
+                                className="job-group-detail"
+                                key={index}
+                              >
                                 {dsChiTiet.tenChiTiet}
-                              </p>
+                              </NavLink>
                             );
                           }
                         )}
@@ -127,7 +138,8 @@ export default function HeaderHome({}: Props) {
     const value: string | undefined = document.querySelector<HTMLInputElement>(
       'input[name="searchInput"]'
     )?.value;
-    console.log(value);
+    timeout(1000);
+    navigate(`/result/${value}`);
   };
   const handleLogout = () => {
     console.log("logout");
@@ -140,12 +152,11 @@ export default function HeaderHome({}: Props) {
         <div className="navbar navbar-expand-sm navbar-light">
           <div className="container">
             <NavLink className="navbar-brand" to={""}>
-              <img
-                src="./img/Fiverr-Logo.png"
-                alt="fiverrLogo"
-                width={89}
-                height={49}
-              />
+              {small ? (
+                <img src={logo1} alt="fiverrLogo" width={89} height={49} />
+              ) : (
+                <img src={logo2} alt="fiverrLogo" width={97} height={28} />
+              )}
             </NavLink>
 
             <div

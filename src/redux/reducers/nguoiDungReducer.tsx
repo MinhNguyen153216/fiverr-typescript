@@ -28,17 +28,16 @@ const initialState: any = {
         password:'',
         phone: '',
        }
-  ]
+  ],
+  userLogin1: getStoreJson(USER_LOGIN),
 };
 
 const nguoiDungReducer = createSlice({
   name: "nguoiDungReducer",
   initialState,
   reducers: {
-    logOutUserAction: (state, action: PayloadAction<nguoiDungModel>) => {
-      console.log(action.payload);
-      localStorage.clear();
-      state.userLogin = null;
+    testingAction:(state, action: PayloadAction<nguoiDungModel>) => {
+      state.userLogin1 = action.payload;
     },
 
     getAllUserAction:(state,action:PayloadAction<nguoiDungModel[]>)=>{
@@ -51,7 +50,8 @@ const nguoiDungReducer = createSlice({
   },
 });
 
-export const { logOutUserAction,getAllUserAction,updateUserAction } = nguoiDungReducer.actions;
+export const { getAllUserAction,updateUserAction } = nguoiDungReducer.actions;
+export const {testingAction} = nguoiDungReducer.actions;
 
 export default nguoiDungReducer.reducer;
 

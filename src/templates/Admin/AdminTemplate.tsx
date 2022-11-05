@@ -6,7 +6,7 @@ import AdminTask from "../../pages/Admin/AdminTask/AdminTask";
 import AdminTaskType from "../../pages/Admin/AdminTaskType/AdminTaskType";
 import AdminUser from "../../pages/Admin/AdminUser/AdminUser";
 import { AppDispatch, RootState } from "../../redux/configStore";
-import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
+// import { logOutUserAction } from "../../redux/reducers/nguoiDungReducer";
 import { getProfileAction, loginApi } from "../../redux/reducers/userReducer";
 import { ACCESS_TOKEN, getStore } from "../../util/setting";
 
@@ -92,7 +92,7 @@ export default function AdminTemplate({}: Props) {
           <div className="nav-right ">
             <div className="face">
               
-              <span>{userLogin?`Hello ${userLogin.user.name}`:'Admin'}</span>
+              <span>{userLogin?`Hello ${userLogin.name}`:'Admin'}</span>
               <img src="https://i.pravatar.cc/50" alt="avatar" />
             </div>
             <div

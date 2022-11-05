@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../configStore";
 import { Signin, Signup } from "../models/authModel";
 import {
@@ -8,20 +8,24 @@ import {
   http,
   setCookie,
   setStore,
+  setStoreJson,
   USER_LOGIN,
 } from "../../util/setting";
 import Swal from "sweetalert2";
 import { nguoiDungModel } from "../models/nguoiDungModel";
 import { ThueCongViec } from "../models/congViecModel";
 import { getUserApi } from "./nguoiDungReducer";
-import { history } from "../..";
+// import { history } from "../..";
+import { history } from "../../index";
 
 type InitialState = {
   userLogin: nguoiDungModel;
+  bookingJobs: string[];
 };
 
 const initialState: InitialState = {
   userLogin: getStoreJson(USER_LOGIN),
+  bookingJobs: [],
 };
 
 const userReducer = createSlice({
@@ -31,10 +35,23 @@ const userReducer = createSlice({
     getProfileAction:(state,action:any)=>{
       state.userLogin = action.payload
     },
+    getUserProfile: (state, action: PayloadAction<nguoiDungModel>) => {
+      state.userLogin = action.payload;
+    },
+    logOutUserAction: (state, action: PayloadAction<nguoiDungModel>) => {
+      console.log(action.payload);
+      localStorage.clear();
+      state.userLogin = getStoreJson(USER_LOGIN);
+      Swal.fire({ icon: "success", title: "Đăng xuất thành công" });
+    },
+    getBookingJobAction:(state, action: PayloadAction<string[]>) => {
+      state.bookingJobs = action.payload;
+    },
   },
 });
 
 export const {getProfileAction} = userReducer.actions;
+export const { getUserProfile, logOutUserAction, getBookingJobAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -51,6 +68,11 @@ export const registerApi = (userRegister: Signup) => {
       Swal.fire({
         icon: "success",
         title: "Đăng kí tài khoản thành công",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/login");
+        }
       });
       // dispatch(getUserApi(''))
 
@@ -70,19 +92,24 @@ export const loginApi = (values: Signin) => {
       const result = await http.post("/auth/signin", values);
       let userLogin=result.data.content
       console.log(result);
-      const action = getProfileAction(userLogin)
-      dispatch(action)
       setCookie(ACCESS_TOKEN, result.data.content.token, 30);
       setStore(ACCESS_TOKEN, result.data.content.token);
+      setStoreJson(USER_LOGIN, result.data.content.user);
+      dispatch(getUserProfile(result.data.content.user));
       Swal.fire({
         icon: "success",
         title: "Đăng nhâp tài khoản thành công",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed && userLogin.user.role.toLowerCase()==='user') {
+          history.push("/home");
+        }else if(userLogin.user.role.toLowerCase()==='admin'){
+          history.push('/admin')
+        }
       });
-      if(userLogin.user.role.toLowerCase()==='admin'){
-      history.push('/admin')
-      }else if(userLogin.user.role.toLowerCase()==='user'){
-        history.push('/jobdetail')
-      }
+      // if(userLogin.user.role.toLowerCase()==='admin'){
+      // history.push('/admin')
+      // }
     } catch (err: any) {
       Swal.fire({
         icon: "error",
@@ -97,7 +124,23 @@ export const rentJobApi = (rentJob: ThueCongViec) => {
   return async (dispatch: AppDispatch) => {
     try {
       const result = await http.post("/thue-cong-viec", rentJob);
-      console.log(result);
+      Swal.fire({
+        icon: "success",
+        title: "Thuê công việc thành công",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getBookingJobApi = (
+  accessToken: string | null = getStore(ACCESS_TOKEN)
+) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get("/thue-cong-viec/lay-danh-sach-da-thue");
+      dispatch(getBookingJobAction(result.data.content));
     } catch (err) {
       console.log(err);
     }

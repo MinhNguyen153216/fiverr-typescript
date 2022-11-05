@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { values } from "lodash";
 import Swal from "sweetalert2";
+import { history } from "../../index";
 import { http } from "../../util/setting";
 import { AppDispatch } from "../configStore";
 import { CongViec, CongViecChiTiet, congViecModel, LoaiCongViec, ThueCongViec } from "../models/congViecModel";
@@ -19,6 +20,7 @@ type InitialState = {
   arrTaskTypeEdit:any,
   arrService:ThueCongViec[],
   arrServiceEdit:any,
+  jobTitleDetail: congViecModel;
 };
 
 const initialState: InitialState = {
@@ -70,7 +72,25 @@ const initialState: InitialState = {
     maNguoiThue:1,
     ngayThue:'1/1/1997',
     hoanThanh:true
-  }]
+  }],
+  jobTitleDetail: {
+    id: 0,
+    tenLoaiCongViec: "",
+    dsNhomChiTietLoai: [
+      {
+        id: 0,
+        tenNhom: "",
+        hinhAnh: "",
+        maLoaiCongViec: 0,
+        dsChiTietLoai: [
+          {
+            id: 0,
+            tenChiTiet: "",
+          },
+        ],
+      },
+    ],
+  },
 };
 
 const congViecReducer = createSlice({
@@ -116,11 +136,21 @@ const congViecReducer = createSlice({
     updateServiceAction:(state,action:PayloadAction<ThueCongViec[]>)=>{
       state.arrServiceEdit = action.payload
     },
+    getJobTitleDetailAction: (state, action: PayloadAction<congViecModel>) => {
+      state.jobTitleDetail = action.payload;
+    },
   },
 });
 
 export const {updateServiceAction,getTotalRowServiceAction,getServiceAction,updateTaskTypeAction,getTotalRowTypeAction, getTaskTypeAction,updateTaskAction,getTotalRowAction,getMenuCongViecAction, getDetailJob, getResult, getCategory,getTaskAction } =
   congViecReducer.actions;
+export const {
+  // getMenuCongViecAction,
+  // getDetailJob,
+  // getResult,
+  // getCategory,
+  getJobTitleDetailAction,
+} = congViecReducer.actions;
 
 export default congViecReducer.reducer;
 //---------------------API--------------------------
@@ -437,3 +467,18 @@ export const deleteServiceApi=(id:number,task:any)=>{
     }
   }
 }
+export const getJobTitleDetailApi = (id: String | number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get(
+        `/cong-viec/lay-chi-tiet-loai-cong-viec/${id}`
+      );
+      // const jobTitleDetail: congViecModel = result.data.content;
+      dispatch(getJobTitleDetailAction(result.data.content[0]));
+    } catch (err) {
+      console.log(err);
+      history.push("/");
+
+    }
+  };
+};
