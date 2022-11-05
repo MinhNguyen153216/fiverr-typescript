@@ -55,7 +55,7 @@ export default function AdminTask({}: Props) {
           </td>
           <td className="text-center">{task.giaTien}</td>
           <td>{task.moTaNgan}</td>
-          <td className="text-center px-5 d-flex flex-row justify-content-center  align-items-stretch " style={{width:'150px'}}>
+          <td className="text-center px-5 " style={{width:'150px'}}>
             <button
               className="btn btn-primary "
               data-bs-toggle="modal"

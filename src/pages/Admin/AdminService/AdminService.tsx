@@ -55,9 +55,9 @@ export default function AdminTask({}: Props) {
           </td>
           <td className="text-center">{task.ngayThue}</td>
           <td className="fs-4 text-center">{task.hoanThanh?<i className="fa-solid fa-square-check text-success"></i>:<i className="fa-solid fa-square-xmark text-danger"></i>}</td>
-          <td className="text-center  d-flex justify-content-center  align-items-center" >
+          <td className="text-center " >
             <button
-              className="btn btn-primary "
+              className="btn btn-primary me-1"
               data-bs-toggle="modal"
               data-bs-target="#exampleModalService"
               onClick={() => {
