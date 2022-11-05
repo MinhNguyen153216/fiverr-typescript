@@ -44,5 +44,11 @@ export interface ThueCongViec {
   maCongViec: number;
   maNguoiThue: number;
   ngayThue: string;
-  hoanThanh: boolean;
+  hoanThanh?: boolean;
+}
+
+
+export interface LoaiCongViec {
+  id?:number,
+  tenLoaiCongViec?:string,
 }
