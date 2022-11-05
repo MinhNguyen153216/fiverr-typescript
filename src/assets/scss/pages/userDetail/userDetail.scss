@@ -398,8 +398,10 @@
           span {
             margin: 24px 0;
             @include text-config(600, 18px, 1.2, #404145);
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 990px) {
               text-align: center;
+              padding-right: 10px;
+              margin-left: 10px;
             }
           }
           button {
