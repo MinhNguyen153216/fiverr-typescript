@@ -18,10 +18,12 @@ import { history } from "../../index";
 
 type InitialState = {
   userLogin: nguoiDungModel;
+  bookingJobs: string[];
 };
 
 const initialState: InitialState = {
   userLogin: getStoreJson(USER_LOGIN),
+  bookingJobs: [],
 };
 
 const userReducer = createSlice({
@@ -37,10 +39,13 @@ const userReducer = createSlice({
       state.userLogin = getStoreJson(USER_LOGIN);
       Swal.fire({ icon: "success", title: "Đăng xuất thành công" });
     },
+    getBookingJobAction:(state, action: PayloadAction<string[]>) => {
+      state.bookingJobs = action.payload;
+    },
   },
 });
 
-export const { getUserProfile, logOutUserAction } = userReducer.actions;
+export const { getUserProfile, logOutUserAction, getBookingJobAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -105,6 +110,19 @@ export const rentJobApi = (rentJob: ThueCongViec) => {
         icon: "success",
         title: "Thuê công việc thành công",
       });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getBookingJobApi = (
+  accessToken: string | null = getStore(ACCESS_TOKEN)
+) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get("/thue-cong-viec/lay-danh-sach-da-thue");
+      dispatch(getBookingJobAction(result.data.content));
     } catch (err) {
       console.log(err);
     }
