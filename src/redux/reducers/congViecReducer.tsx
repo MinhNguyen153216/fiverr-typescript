@@ -211,7 +211,7 @@ export const getTaskApi=(keyword:any,id:number)=>{
   return async (dispatch:AppDispatch)=>{
     try{
         console.log(keyword,id);
-        const result = await http.get(`/cong-viec/phan-trang-tim-kiem?pageIndex=${id}&pageSize=5&keyword=${keyword}`)
+        const result = await http.get(`/cong-viec/phan-trang-tim-kiem?pageIndex=${id}&pageSize=3&keyword=${keyword}`)
         // console.log(result);        
         let arrTask:CongViec[]=result.data.content.data
         let totalRow:any = result.data.content.totalRow

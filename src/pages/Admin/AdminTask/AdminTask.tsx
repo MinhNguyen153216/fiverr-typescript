@@ -30,7 +30,7 @@ export default function AdminTask({}: Props) {
   // console.log(arrRow);
   // console.log(Number(keywordRef.current));
 
-  const tasksPerPage = 5;
+  const tasksPerPage = 3;
   // const pageCount = Math.ceil(arrTask.length / tasksPerPage);
   const pageCount = Math.ceil(arrRow/ tasksPerPage);
   const changePage = ({ selected }: any) => {
