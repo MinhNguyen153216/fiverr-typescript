@@ -30,7 +30,7 @@ export default function AdminUser({}: Props) {
   const [editable,setEditable]=useState(false)
 
 
-  const usersPerPage = 10;
+  const usersPerPage = 5;
   const pagesVisited = pageNumber * usersPerPage;
   const displayUsers = arrUser
     .slice(pagesVisited, pagesVisited + usersPerPage)
@@ -42,7 +42,7 @@ export default function AdminUser({}: Props) {
           <td>{user.role}</td>
           <td>{user.email}</td>
           <td>{user.skill}</td>
-          <td className="text-center px-5">
+          <td className="text-center px-5 ">
             <button
               className="btn btn-primary me-2"
               data-bs-toggle="modal"

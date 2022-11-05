@@ -50,7 +50,7 @@ export default function AdminTaskType({}: Props) {
         <tr key={task.id}>
           <td>{task.id}</td>
           <td>{task.tenLoaiCongViec}</td>
-          <td className="text-center px-5" style={{verticalAlign:'middle',width:'150px'}}>
+          <td className="text-center px-5 d-flex flex-row justify-content-center  align-items-center" style={{verticalAlign:'middle'}}>
             <button
               className="btn btn-primary m-1"
               data-bs-toggle="modal"

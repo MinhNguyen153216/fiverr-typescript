@@ -50,14 +50,14 @@ export default function AdminTask({}: Props) {
             <img
               src={task.hinhAnh}
               alt="..."
-              style={{ width: "60px", height: "60px" }}
+              style={{ width: "40px", height: "40px" }}
             />
           </td>
           <td className="text-center">{task.giaTien}</td>
           <td>{task.moTaNgan}</td>
-          <td className="text-center px-5" style={{verticalAlign:'middle',width:'100px'}}>
+          <td className="text-center px-5 d-flex flex-row justify-content-center  align-items-stretch " style={{width:'150px'}}>
             <button
-              className="btn btn-primary m-1"
+              className="btn btn-primary "
               data-bs-toggle="modal"
               data-bs-target="#exampleModalTask"
               onClick={() => {
