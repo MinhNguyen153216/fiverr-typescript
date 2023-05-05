@@ -31,7 +31,7 @@ export default function Header({}: Props) {
     dispatch(getMenuCongViecApi());
   }, []);
 
-  const renderTitle = () => {
+  const renderTitle = ():JSX.Element[] => {
     return menuCongViec.map((loaiCongViec: congViecModel, index: number) => {
       return (
         <div className="navbar-brand" key={index}>
